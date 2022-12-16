@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HARDWARIO Visual Editor</title>
+
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <div class="grid-container" id="blockly-container">
+    <div>
+      <div id="blocklyArea" class="area"></div>
+      <div id="blocklyDiv" style="position: absolute"></div>
+      <!--CATEGORIES-->
+    </div>
+    <div style="overflow-y: scroll; height:90vh; background-color:grey" id="code-div">
+      <div id="code" style="color:white; font-size:15px; font-weight: bold;">
+      </div>
+    </div>
+  </div>
+
+  <!--<button class="btn btn-primary" id="connectButton" type="button">Flash</button>
+<button class="btn btn-primary" onclick="connectDevices()">Connect Device</button>-->
+
+  <script type="module" src="/js/flasher.js"></script>
+
+  <script>
+    function parse_code() {
+      $.ajax({
+        url: "/parse_code",
+        type: "GET",
+        data: {
+          Code: exportJSON(),
+        },
+
+      }).done(function () {
+        window.location = "/download_code";
+      });
+    }
+  </script>
+
+  <script src="https://unpkg.com/blockly"></script>
+  <script type="module" src="/js/blocks-json.js"></script>
+  <!--<script src="{% static 'js/blocks.js' %}"></script>-->
+  <script src="/js/main.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <input id="compileAndDownload" type="button" class="btn btn-success" value="Compile And Download"
+    onclick="parse_code();" />
+
+  <button class="btn btn-warning" onclick="save()">Save Workspace</button>
+  <button class="btn btn-warning" onclick="restore()">Load Workspace</button>
+
+  <button class="btn btn-warning" onclick="exportWorkspace()">Export Workspace</button>
+  <button class="btn btn-info" id="switch_code_button" onclick="switch_code();">Show Code</button>
+  <input class="form-control form-control-sm" id="importFile" type="file" onchange="importWorkspace()" />
+
+</body>
+
+</html>
