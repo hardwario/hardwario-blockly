@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HARDWARIO Visual Editor</title>
+
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <div class="grid-container" id="blockly-container">
+      <div>
+        <div id="blocklyArea" class="area"></div>
+        <div id="blocklyDiv" style="position: absolute"></div>
+        <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+          
+  <category name="Initialization" colour="#000000">
+    <block type="hio_application_initialize"></block>
+  <block type="hio_battery_initialize"></block>
+  <block type="hio_button_initialize"></block>
+  <block type="hio_climate_initialize"></block>
+  <block type="hio_co2_initialize"></block>
+  <block type="hio_coreTmp112_initialize"></block>
+  <block type="hio_lcd_initialize"></block>
+  <block type="hio_led_initialize"></block>
+  <block type="hio_ledStrip_initialize"></block>
+  <block type="hio_logging_initialize"></block>
+  <block type="hio_pir_initialize"></block>
+  <block type="hio_power_initialize"></block>
+  <block type="hio_radio_initialize"></block>
+  <block type="hio_relay_initialize"></block>
+  </category>
+<category name="Task" colour="#000000">
+    <block type="hio_application_task"></block>
+  </category>
+<category name="Button" colour="#000000">
+    <block type="hio_button_event"></block>
+  <block type="hio_button_publish_click_count"></block>
+  <block type="hio_button_publish_hold_count"></block>
+  </category>
+<category name="Radio" colour="#000000">
+    <block type="hio_radio_send_string"></block>
+  <block type="hio_radio_send_integer"></block>
+  <block type="hio_radio_send_float"></block>
+  <block type="hio_radio_send_boolean"></block>
+  </category>
+<category name="LED" colour="#000000">
+    <block type="hio_led_blink"></block>
+  <block type="hio_led_pulse"></block>
+  <block type="hio_led_set_mode"></block>
+  </category>
+<category name="Logging" colour="#000000">
+    <block type="hio_logging_info"></block>
+  <block type="hio_logging_debug"></block>
+  <block type="hio_logging_error"></block>
+  <block type="hio_logging_warning"></block>
+  </category>
+<category name="Core Temperature" colour="#000000">
+    <block type="hio_coreTmp112_event"></block>
+  <block type="hio_coreTmp112_publish_temperature_value"></block>
+  </category>
+<category name="Motion Detector" colour="#000000">
+    <block type="hio_pir_event"></block>
+  <block type="hio_pir_publish_motion_count"></block>
+  </category>
+<category name="Power Module" colour="#000000">
+    <block type="hio_power_relay_state_set"></block>
+  </category>
+<category name="LCD Module" colour="#000000">
+    <block type="hio_lcd_event"></block>
+  <block type="hio_lcd_draw_string"></block>
+  <block type="hio_lcd_draw_circle"></block>
+  <block type="hio_lcd_draw_line"></block>
+  <block type="hio_lcd_draw_rectangle"></block>
+  <block type="hio_lcd_draw_pixel"></block>
+  <block type="hio_lcd_set_power_state"></block>
+  <block type="hio_lcd_clear"></block>
+  <block type="hio_lcd_update"></block>
+  <block type="hio_lcd_set_font"></block>
+  <block type="hio_lcd_printf"></block>
+  <block type="hio_lcd_led_blink"></block>
+  <block type="hio_lcd_led_pulse"></block>
+  <block type="hio_lcd_led_set_mode"></block>
+  </category>
+<category name="Climate Module" colour="#000000">
+    <block type="hio_climate_event"></block>
+  <block type="hio_climate_publish_temperature"></block>
+  <block type="hio_climate_publish_humidity"></block>
+  <block type="hio_climate_publish_luminosity"></block>
+  <block type="hio_climate_publish_barometer"></block>
+  </category>
+<category name="Battery Module" colour="#000000">
+    <block type="hio_battery_event"></block>
+  <block type="hio_battery_publish_voltage"></block>
+  <block type="hio_battery_publish_voltage_minus_three"></block>
+  </category>
+<category name="Logic" colour="#000000">
+    <block type="controls_if"></block>
+  <block type="logic_compare"></block>
+  <block type="logic_operation"></block>
+  <block type="logic_negate"></block>
+  <block type="logic_boolean"></block>
+  </category>
+<category name="Math" colour="#000000">
+    <block type="math_number"></block>
+  <block type="math_arithmetic"></block>
+  </category>
+<category name="Loops" colour="#000000">
+    <block type="controls_repeat_ext"></block>
+  <block type="controls_whileUntil"></block>
+  <block type="controls_for"></block>
+  </category>
+<category name="Integer Variables" colour="#000000" custom="INTEGER_PALETTE"></category>
+<category name="Float Variables" colour="#000000" custom="FLOAT_PALETTE"></category>
+<category name="Relay Module" colour="#000000">
+    <block type="hio_relay_set_state"></block>
+  <block type="hio_relay_pulse"></block>
+  <block type="hio_relay_toggle"></block>
+  </category>
+<category name="CO2 Module" colour="#000000">
+    <block type="hio_co2_event"></block>
+  <block type="hio_co2_publish_co2"></block>
+  </category>
+
+
+        </xml>
+    </div>
+    <div style="overflow-y: scroll; height:90vh; background-color:grey" id="code-div">
+      <div id="code" style="color:white; font-size:15px; font-weight: bold;">
+      </div>
+    </div>
+  </div>
+
+<!--<button class="btn btn-primary" id="connectButton" type="button">Flash</button>
+<button class="btn btn-primary" onclick="connectDevices()">Connect Device</button>-->
+
+<script type="module" src="/js/flasher.js"></script>
+
+<script>
+  function parse_code(){
+    $.ajax({
+      url: "/parse_code",
+      type: "GET",
+          data: {
+          Code: exportJSON(),
+      },
+  
+    }).done(function() {
+      window.location = "/download_code";
+    });
+  }
+</script>
+
+<script src="https://unpkg.com/blockly"></script>  
+<script type="module" src="/js/blocks-json.js"></script>
+<!--<script src="{% static 'js/blocks.js' %}"></script>-->
+<script src="/js/main.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+<input id="compileAndDownload" type="button" class="btn btn-success" value="Compile And Download" onclick="parse_code();" />
+
+<button class="btn btn-warning" onclick="save()">Save Workspace</button>
+<button class="btn btn-warning" onclick="restore()">Load Workspace</button>
+
+<button class="btn btn-warning" onclick="exportWorkspace()">Export Workspace</button>
+<button class="btn btn-info" id="switch_code_button" onclick="switch_code();">Show Code</button>
+<input class="form-control form-control-sm" id="importFile" type="file" onchange="importWorkspace()" />
+
+</body>
+</html>
