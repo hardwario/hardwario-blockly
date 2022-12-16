@@ -1,0 +1,42 @@
+---
+coreTmp112:
+  category:
+    - Core Temperature
+  global_variable:
+    - twr_tmp112_t core_tmp112;
+  application_init:
+    block:
+      text:
+        - Initialize Core Module Temperature Sensor %1
+        - With Update interval %2 ms
+      arguments:
+        NEW_LINE:
+          type: new_line
+        UPDATE_INTERVAL:
+          type: number
+          min: 1
+          max: 1000000
+          value: 5000
+    code:
+      - twr_tmp112_init(&core_tmp112, TWR_I2C_I2C0, 0x49);
+      - twr_tmp112_set_event_handler(&core_tmp112, core_tmp112_event_handler, NULL);
+      - twr_tmp112_set_update_interval(&core_tmp112, {UPDATE_INTERVAL});
+  handler:
+    block:
+      text: On Core Temperature %1
+    declaration: void core_tmp112_event_handler(twr_tmp112_t *self, twr_tmp112_event_t event, void *event_param)
+    events:
+      prefix: TWR_TMP112_EVENT_
+      enum:
+        UPDATE:
+          - float value;
+          - if (twr_tmp112_get_temperature_celsius(self, &value)) {
+          - core_tmp112_value = value;
+          - "}"
+  action:
+    publish_temperature_value:
+      block:
+        text:
+          - Publish Core Temperature Over the Radio
+      code:
+        - twr_radio_pub_temperature(TWR_RADIO_PUB_CHANNEL_R1_I2C0_ADDRESS_ALTERNATE, &core_tmp112_value);

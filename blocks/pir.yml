@@ -1,0 +1,42 @@
+---
+pir:
+  category:
+    - Motion Detector
+  global_variable:
+    - twr_module_pir_t pir;
+    - uint16_t pir_event_count = 0;
+  application_init:
+    block:
+      text:
+        - Initialize Motion Detector %1
+        - With Sensitivity %2
+      arguments:
+        NEW_LINE:
+          type: new_line
+        SENSITIVITY:
+          type: dropdown
+          options:
+            - ["TWR_MODULE_PIR_SENSITIVITY_LOW", "TWR_MODULE_PIR_SENSITIVITY_LOW"]
+            - ["TWR_MODULE_PIR_SENSITIVITY_MEDIUM", "TWR_MODULE_PIR_SENSITIVITY_MEDIUM"]
+            - ["TWR_MODULE_PIR_SENSITIVITY_HIGH", "TWR_MODULE_PIR_SENSITIVITY_HIGH"]
+            - ["TWR_MODULE_PIR_SENSITIVITY_VERY_HIGH", "TWR_MODULE_PIR_SENSITIVITY_VERY_HIGH"]
+    code:
+      - twr_module_pir_init(&pir);
+      - twr_module_pir_set_sensitivity(&pir, {SENSITIVITY});
+      - twr_module_pir_set_event_handler(&pir, pir_event_handler, NULL);
+  handler:
+    block:
+      text: On %1 Detected
+    declaration: void pir_event_handler(twr_module_pir_t *self, twr_module_pir_event_t event, void *event_param)
+    events:
+      prefix: TWR_MODULE_PIR_EVENT_
+      enum:
+        MOTION:
+          - pir_event_count++;
+  action:
+    publish_motion_count:
+      block:
+        text:
+          - Publish Motion Event Count Over the Radio
+      code:
+        - twr_radio_pub_event_count(TWR_RADIO_PUB_EVENT_PIR_MOTION, &pir_event_count);

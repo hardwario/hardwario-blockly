@@ -1,0 +1,85 @@
+---
+climate:
+  category:
+    - Climate Module
+  application_init:
+    block:
+      text:
+        - Initialize Climate Module %1
+        - With Update Interval %2 ms
+      arguments:
+        NEW_LINE:
+          type: new_line
+        UPDATE_INTERVAL:
+          type: number
+          min: 1
+          max: 1000000
+          value: 5000
+    code:
+      - twr_module_climate_init();
+      - twr_module_climate_set_event_handler(climate_module_event_handler, NULL);
+      - twr_module_climate_set_update_interval_thermometer({UPDATE_INTERVAL});
+      - twr_module_climate_set_update_interval_hygrometer({UPDATE_INTERVAL});
+      - twr_module_climate_set_update_interval_lux_meter({UPDATE_INTERVAL});
+      - twr_module_climate_set_update_interval_barometer({UPDATE_INTERVAL});
+      - twr_module_climate_measure_all_sensors();
+  handler:
+    block:
+      text: On Climate Module %1 Update
+    declaration: void climate_module_event_handler(twr_module_climate_event_t event, void *event_param)
+    events:
+      prefix: TWR_MODULE_CLIMATE_EVENT_UPDATE_
+      enum:
+        THERMOMETER:
+          - float value;
+          - if (twr_module_climate_get_temperature_celsius(&value)) {
+          - climate_temperature_value = value;
+          - "}"
+        HYGROMETER:
+          - float value;
+          - if (twr_module_climate_get_humidity_percentage(&value)) {
+          - climate_humidity_value = value;
+          - "}"
+        LUX_METER:
+          - float value;
+          - if (twr_module_climate_get_illuminance_lux(&value)) {
+          - if (value < 1) {
+          - value = 0;
+          - "}"
+          - climate_illuminance_value = value;
+          - "}"
+        BAROMETER:
+          - float value;
+          - if (twr_module_climate_get_pressure_pascal(&value)) {
+          - float meter;
+          - if (!twr_module_climate_get_altitude_meter(&meter)) {
+          - return;
+          - "}"
+          - climate_pressure_value = value;
+          - climate_altitude_value = meter;
+          - "}"
+  action:
+    publish_temperature:
+      block:
+        text:
+          - Publish Climate Temperature Over the Radio
+      code:
+        - twr_radio_pub_temperature(TWR_RADIO_PUB_CHANNEL_R1_I2C0_ADDRESS_DEFAULT, &climate_temperature_value);
+    publish_humidity:
+      block:
+        text:
+          - Publish Climate Humidity Over the Radio
+      code:
+        - twr_radio_pub_humidity(TWR_RADIO_PUB_CHANNEL_R3_I2C0_ADDRESS_DEFAULT, &climate_humidity_value);
+    publish_luminosity:
+      block:
+        text:
+          - Publish Climate Luminosity Over the Radio
+      code:
+        - twr_radio_pub_luminosity(TWR_RADIO_PUB_CHANNEL_R1_I2C0_ADDRESS_DEFAULT, &climate_illuminance_value);
+    publish_barometer:
+      block:
+        text:
+          - Publish Climate Pressure and Altitude Over the Radio
+      code:
+        - twr_radio_pub_barometer(TWR_RADIO_PUB_CHANNEL_R1_I2C0_ADDRESS_DEFAULT, &climate_pressure_value, &climate_altitude_value);

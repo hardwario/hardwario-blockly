@@ -1,0 +1,38 @@
+---
+categories:
+  Initialization:
+    colour: '#000000'
+  Task:
+    colour: '#000000'
+  Button:
+    colour: '#000000'
+  Radio:
+    colour: '#000000'
+  LED:
+    colour: '#000000'
+  Logging:
+    colour: '#000000'
+  Core Temperature:
+    colour: '#000000'
+  Motion Detector:
+    colour: '#000000'
+  Power Module:
+    colour: '#000000'
+  LCD Module:
+    colour: '#000000'
+  Climate Module:
+    colour: '#000000'
+  Battery Module:
+    colour: '#000000'
+  Logic:
+    colour: '#000000'
+  Math:
+    colour: '#000000'
+  Loops:
+    colour: '#000000'
+  Integer Variables:
+    colour: '#000000'
+  Float Variables:
+    colour: '#000000'
+  Relay Module:
+  CO2 Module:

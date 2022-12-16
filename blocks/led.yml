@@ -1,0 +1,55 @@
+---
+led:
+  category:
+    - LED
+  global_variable:
+    - twr_led_t led;
+  application_init:
+    block:
+      text:
+        - Initialize LED
+    code:
+      - twr_led_init(&led, TWR_GPIO_LED, false, 0);
+      - twr_led_pulse(&led, 2000);
+  action:
+    blink:
+      block:
+        text:
+          - LED Blink %1 Times
+        arguments:
+          COUNT:
+            type: number
+            min: 1
+            max: 50
+            value: 5
+      code:
+        - twr_led_blink(&led, {COUNT});
+    pulse:
+      block:
+        text:
+          - LED Pulse For %1 ms
+        arguments:
+          DURATION:
+            type: number
+            min: 1
+            max: 1000000
+            value: 1000
+      code:
+        - twr_led_pulse(&led, {DURATION});
+    set_mode:
+      block:
+        text:
+          - Set LED Mode To %1
+        arguments:
+          MODE:
+            type: dropdown
+            options:
+              - ["TWR_LED_MODE_BLINK", "TWR_LED_MODE_BLINK"]
+              - ["TWR_LED_MODE_BLINK_FAST", "TWR_LED_MODE_BLINK_FAST"]
+              - ["TWR_LED_MODE_BLINK_SLOW", "TWR_LED_MODE_BLINK_SLOW"]
+              - ["TWR_LED_MODE_FLASH", "TWR_LED_MODE_FLASH"]
+              - ["TWR_LED_MODE_OFF", "TWR_LED_MODE_OFF"]
+              - ["TWR_LED_MODE_ON", "TWR_LED_MODE_ON"]
+              - ["TWR_LED_MODE_TOGGLE", "TWR_LED_MODE_TOGGLE"]
+      code:
+        - twr_led_set_mode(&led, {MODE});

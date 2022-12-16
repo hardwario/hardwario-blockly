@@ -1,0 +1,84 @@
+---
+logging:
+  category:
+    - Logging
+  application_init:
+    block:
+      text:
+        - Initialize Logging
+    code:
+      - twr_log_init(TWR_LOG_LEVEL_DUMP, TWR_LOG_TIMESTAMP_ABS);
+      - twr_log_info("APPLICATION START");
+  action:
+    info:
+      block:
+        text:
+          - Log Info %1
+          - 'Message: %2 %3'
+          - 'Variable %4'
+        arguments:
+          X:
+            type: new_line
+          MESSAGE:
+            type: text
+            value: Info
+          Y:
+            type: new_line
+          VARIABLE:
+            type: input
+      code:
+        - twr_log_info("{MESSAGE}");
+    debug:
+      block:
+        text:
+          - Log Debug %1
+          - 'Message: %2 %3'
+          - 'Variable %4'
+        arguments:
+          X:
+            type: new_line
+          MESSAGE:
+            type: text
+            value: Debug
+          Y:
+            type: new_line
+          VARIABLE:
+            type: input
+      code:
+        - twr_log_debug("{MESSAGE}");
+    error:
+      block:
+        text:
+          - Log Error %1
+          - 'Message: %2 %3'
+          - 'Variable %4'
+        arguments:
+          X:
+            type: new_line
+          MESSAGE:
+            type: text
+            value: Error
+          Y:
+            type: new_line
+          VARIABLE:
+            type: input
+      code:
+        - twr_log_error("{MESSAGE}");
+    warning:
+      block:
+        text:
+          - Log Warning %1
+          - 'Message: %2 %3'
+          - 'Variable %4'
+        arguments:
+          X:
+            type: new_line
+          MESSAGE:
+            type: text
+            value: Warning
+          Y:
+            type: new_line
+          VARIABLE:
+            type: input
+      code:
+        - twr_log_warning("{MESSAGE}");

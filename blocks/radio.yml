@@ -1,0 +1,92 @@
+---
+radio:
+  category:
+    - Radio
+  application_init:
+    block:
+      text:
+        - Initialize Radio %1
+        - Radio Mode %2 %3
+        - Firmware Name %4
+      arguments:
+        X:
+          type: new_line
+        RADIO_MODE:
+          type: dropdown
+          options:
+            - ["TWR_RADIO_MODE_NODE_SLEEPING", "TWR_RADIO_MODE_NODE_SLEEPING"]
+            - ["TWR_RADIO_MODE_NODE_LISTENING", "TWR_RADIO_MODE_NODE_LISTENING"]
+        Y:
+          type: new_line
+        FIRMWARE_NAME:
+          type: text
+          value: twr-blockly-firmware
+    code:
+      - twr_radio_init({RADIO_MODE});
+      - twr_radio_pairing_request("{FIRMWARE_NAME}", "1.0.0");
+  action:
+    send_string:
+      block:
+        text:
+          - Send string %1 Over the Radio %2
+          - with Subtopic %3
+        arguments:
+          STRING_TO_BE_SEND:
+            type: text
+            value: STRING
+          X:
+            type: new_line
+          SUBTOPIC:
+            type: text
+            value: string
+      code:
+        - twr_radio_pub_string("{SUBTOPIC}", "{STRING_TO_BE_SEND}");
+    send_integer:
+      block:
+        text:
+          - Send Integer %1 Over the Radio %2
+          - with Subtopic %3
+        arguments:
+          INT_TO_BE_SEND:
+            type: input
+          X:
+            type: new_line
+          SUBTOPIC:
+            type: text
+            value: integer
+      code:
+        - int {RANDOM_VARIABLE} = (int)({INT_TO_BE_SEND});
+        - twr_radio_pub_int("{SUBTOPIC}", &{RANDOM_VARIABLE});
+    send_float:
+      block:
+        text:
+          - Send Float %1 Over the Radio %2
+          - with Subtopic %3
+        arguments:
+          INT_TO_BE_SEND:
+            type: input
+          X:
+            type: new_line
+          SUBTOPIC:
+            type: text
+            value: float
+      code:
+        - float {RANDOM_VARIABLE} = (float)({FLOAT_TO_BE_SEND});
+        - twr_radio_pub_float("{SUBTOPIC}", &{RANDOM_VARIABLE});
+    send_boolean:
+      block:
+        text:
+          - Send Boolean %1 Over the Radio %2
+          - with Subtopic %3
+        arguments:
+          BOOL_TO_BE_SEND:
+            INT_TO_BE_SEND:
+            type: input
+          X:
+            type: new_line
+          SUBTOPIC:
+            type: text
+            value: string
+      code:
+        - bool {RANDOM_VARIABLE} = (bool)({BOOL_TO_BE_SEND});
+        - twr_radio_pub_bool("{SUBTOPIC}", &{RANDOM_VARIABLE});

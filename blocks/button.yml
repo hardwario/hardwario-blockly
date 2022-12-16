@@ -1,0 +1,66 @@
+---
+button:
+  category:
+    - Button
+  global_variable:
+    - twr_button_t button;
+    - uint16_t button_click_count = 0;
+    - uint16_t button_hold_count = 0;
+  application_init:
+    block:
+      text:
+        - Initialize Button %1
+        - Button GPIO %2 %3
+        - Button Pull %4 %5
+        - Default State %6
+      arguments:
+        X:
+          type: new_line
+        GPIO:
+          type: dropdown
+          options:
+            - ["TWR_GPIO_BUTTON", "TWR_GPIO_BUTTON"]
+        Y:
+          type: new_line
+        PULL:
+          type: dropdown
+          options:
+            - ["TWR_GPIO_PULL_DOWN", "TWR_GPIO_PULL_DOWN"]
+            - ["TWR_GPIO_PULL_NONE", "TWR_GPIO_PULL_NONE"]
+            - ["TWR_GPIO_PULL_UP", "TWR_GPIO_PULL_UP"]
+        Z:
+          type: new_line
+        DEFAULT_STATE:
+          type: dropdown
+          options:
+            - ["TRUE", "TRUE"]
+            - ["FALSE", "FALSE"]
+    code:
+      - twr_button_init(&button, {GPIO}, {PULL}, 0);
+      - twr_button_set_event_handler(&button, button_event_handler, NULL);
+  handler:
+    block:
+      text: On Button %1
+    declaration: void button_event_handler(twr_button_t *self, twr_button_event_t event, void *event_param)
+    events:
+      prefix: TWR_BUTTON_EVENT_
+      enum:
+        PRESS:
+        RELEASE:
+        CLICK:
+          - button_click_count++;
+        HOLD:
+          - button_hold_count++;
+  action:
+    publish_click_count:
+      block:
+        text:
+          - Publish Button Click Count Over the Radio
+      code:
+        - twr_radio_pub_push_button(&button_click_count);
+    publish_hold_count:
+      block:
+        text:
+          - Publish Button Hold Count Over the Radio
+      code:
+        - twr_radio_pub_event_count(TWR_RADIO_PUB_EVENT_HOLD_BUTTON, &button_hold_count);

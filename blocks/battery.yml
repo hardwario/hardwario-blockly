@@ -1,0 +1,48 @@
+---
+battery:
+  category:
+    - Battery Module
+  application_init:
+    block:
+      text:
+        - Initialize Battery Module %1
+        - With Update Interval %2 ms
+      arguments:
+        NEW_LINE:
+          type: new_line
+        UPDATE_INTERVAL:
+          type: number
+          min: 1
+          max: 1000000
+          value: 5000
+    code:
+      - twr_module_battery_init();
+      - twr_module_battery_set_event_handler(battery_event_handler, NULL);
+      - twr_module_battery_set_update_interval({UPDATE_INTERVAL});
+  handler:
+    colour: '#FE45DD'
+    block:
+      text: On Battery Module %1
+    declaration: void battery_event_handler(twr_module_battery_event_t event, void *event_param)
+    events:
+      prefix: TWR_MODULE_BATTERY_EVENT_
+      enum:
+        UPDATE:
+          - float voltage;
+          - if (twr_module_battery_get_voltage(&voltage)) {
+          - battery_voltage_value = voltage;
+          - "}"
+  action:
+    publish_voltage:
+      block:
+        text:
+          - Publish Battery Voltage Over the Radio
+      code:
+        - twr_radio_pub_battery(&battery_voltage_value);
+    publish_voltage_minus_three:
+      block:
+        text:
+          - Publish Battery Voltage minus 3 over the radio
+      code:
+        - battery_voltage_value -= 3;
+        - twr_radio_pub_battery(&battery_voltage_value);

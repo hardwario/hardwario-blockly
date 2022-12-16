@@ -1,0 +1,66 @@
+---
+relay:
+  category:
+    - Relay Module
+  global_variable:
+    - twr_module_relay_t relay;
+  application_init:
+    block:
+      text:
+        - Initialize Relay Module on address %1 %2
+        - With defult state %3
+      arguments:
+        ADDRESS:
+          type: dropdown
+          options:
+            - ['TWR_MODULE_RELAY_I2C_ADDRESS_DEFAULT', 'TWR_MODULE_RELAY_I2C_ADDRESS_DEFAULT']
+            - ['TWR_MODULE_RELAY_I2C_ADDRESS_ALTERNATE', 'TWR_MODULE_RELAY_I2C_ADDRESS_ALTERNATE']
+        X:
+          type: new_line
+        DEFAULT_STATE:
+          type: dropdown
+          options:
+            - ['TRUE', 'true']
+            - ['FALSE', 'false']
+    code:
+      - twr_module_relay_init(&relay, {ADDRESS});
+      - twr_module_relay_set_state(&relay, {DEFAULT_STATE});
+  action:
+    set_state:
+      block:
+        text:
+          - Set Relay State %1
+        arguments:
+          STATE:
+            type: dropdown
+            options:
+              - ['TRUE', 'true']
+              - ['FALSE', 'false']
+      code:
+        - twr_module_relay_set_state (&relay, {STATE})
+    pulse:
+      block:
+        text:
+          - Relay Send Pulse with Direction %1 %2
+          - For %3 ms
+        arguments:
+          DIRECTION:
+            type: dropdown
+            options:
+              - ['TRUE', 'true']
+              - ['FALSE', 'false']
+          X:
+            type: new_line
+          DURATION:
+            type: number
+            min: 0
+            max: 5000
+            value: 100
+      code:
+        - twr_module_relay_pulse (&relay, {DIRECTION}, {DURATION})
+    toggle:
+      block:
+        text:
+          - Relay Toggle
+      code:
+        - twr_module_relay_toggle (&relay)
