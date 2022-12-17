@@ -15,13 +15,17 @@ app.get('/parse_code', (req, res) => {
     res.send("No code to parse");
   }
   else{
-    code_generator.generate_code(req.query.Code);
+    code_generator.generate_code(req.query.Code, true);
     res.send("Code parsed");
   }
 });
 
 app.get('/download_code', (req, res) => {
   res.send('Download');
+});
+
+app.get('/update_code', (req, res) => {
+  res.send(code_generator.generate_code(req.query.Code, false));
 });
 
 app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));

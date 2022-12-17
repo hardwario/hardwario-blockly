@@ -167,14 +167,6 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": ""
     },
     {
-        "type": "hio_battery_publish_voltage_minus_three",
-        "message0": "Publish Battery Voltage minus 3 over the radio",
-        "previousStatement": "null",
-        "nextStatement": "null",
-        "tooltip": "",
-        "helpUrl": ""
-    },
-    {
         "type": "hio_button_initialize",
         "message0": "Initialize Button %1 Button GPIO %2 %3 Button Pull %4 %5 Default State %6",
         "args0": [

@@ -23,8 +23,6 @@ class BlockGenerator {
 
         this.generate_categories_xml();
         this.generate_blocks_json();
-
-        console.log(this.categories);
     }
 
     generate_blocks_json() {
@@ -39,10 +37,8 @@ class BlockGenerator {
         fs.readdirSync(this.modules_path).forEach(file => {
             let file_name = file.split('.')[0];
             let module = yaml.load(fs.readFileSync(path.join(this.modules_path, file), 'utf8'));
-            console.log(file_name);
             this.modules[file_name] = module[file_name];
         });
-        console.log(this.modules);
     }
 
     load_categories() {
@@ -57,8 +53,15 @@ class BlockGenerator {
     generate_categories_xml() {
         let xml = '<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">';
         for (const [category, _] of Object.entries(this.categories)) {
+            let colour = '#000000';
             if(this.categories[category]['configuration'] !== null && 'colour' in this.categories[category]['configuration']) {
-                xml += `<category name="${category}" colour="${this.categories[category]['configuration']['colour']}">`;
+                colour = this.categories[category]['configuration']['colour'];
+            }
+            if(category == 'Integer Variables') {
+                xml += `<category name="${category}" colour="${colour}" custom="INTEGER_PALETTE">`;
+            }
+            else if(category == 'Float Variables') {
+                xml += `<category name="${category}" colour="${colour}" custom="FLOAT_PALETTE">`;
             }
             else {
                 xml += `<category name="${category}" colour="#000000">`;
@@ -224,7 +227,6 @@ class BlockGenerator {
 
     generate_dynamic_blocks() {
         for (const [module_name, module_content] of Object.entries(this.modules)) {
-            console.log(module_content);
             this.generate_module_initialization(module_content, module_name);
             if ('handler' in module_content) {
                 this.generate_module_event_handler(module_content, module_name);

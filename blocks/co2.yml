@@ -29,9 +29,9 @@ co2:
       prefix: TWR_MODULE_CO2_EVENT_
       enum:
         UPDATE:
-          - float value
+          - float value;
           - if (twr_module_co2_get_concentration_ppm(&value)) {
-          - co2_value = value
+          - co2_value = value;
           - "}"
   action:
     publish_co2:

@@ -30,6 +30,7 @@ lcd:
       prefix: TWR_MODULE_LCD_EVENT_
       enum:
         LEFT_PRESS:
+          - 'int lcd_left_press_count = 0;'
         LEFT_RELEASE:
         LEFT_CLICK:
         LEFT_HOLD:

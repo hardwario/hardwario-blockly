@@ -39,10 +39,3 @@ battery:
           - Publish Battery Voltage Over the Radio
       code:
         - twr_radio_pub_battery(&battery_voltage_value);
-    publish_voltage_minus_three:
-      block:
-        text:
-          - Publish Battery Voltage minus 3 over the radio
-      code:
-        - battery_voltage_value -= 3;
-        - twr_radio_pub_battery(&battery_voltage_value);
