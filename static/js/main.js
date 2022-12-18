@@ -340,6 +340,8 @@ workspace.addChangeListener(onBlockEvent);
 function save() {
   if (typeof (Storage) !== "undefined") {
     var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+    /**Popup for text input and confirmation */
+    
     localStorage.setItem("workspace", Blockly.Xml.domToText(xml));
   }
 }
