@@ -63,7 +63,7 @@ radio:
           - Send Float %1 Over the Radio %2
           - with Subtopic %3
         arguments:
-          INT_TO_BE_SEND:
+          FLOAT_TO_BE_SEND:
             type: input
           X:
             type: new_line

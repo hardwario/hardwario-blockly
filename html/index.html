@@ -40,6 +40,7 @@
     </category>
     <category name="Task" colour="#000000">
         <block type="hio_application_task"></block>
+        <block type="hio_task_run_application_task"></block>
     </category>
     <category name="Button" colour="#000000">
         <block type="hio_button_event"></block>
@@ -173,6 +174,11 @@
   <button class="btn btn-warning" onclick="exportWorkspace()">Export Workspace</button>
   <button class="btn btn-info" id="switch_code_button" onclick="switch_code();">Show Code</button>
   <input class="form-control form-control-sm" id="importFile" type="file" onchange="importWorkspace()" />
+
+  <h3>Saved Projects</h3>
+  <div id="list" class="list-group">
+  </div>
+  <button class="btn btn-danger" onclick="deleteSavedProjects();">Delete All Projects</button>
 
 </body>
 

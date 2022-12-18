@@ -1,0 +1,11 @@
+---
+task:
+  category: 
+    - Task
+  action:
+    run_application_task:
+      block:
+        text: 
+          - Run Application Task now
+      code:
+        - twr_scheduler_plan_now(0);

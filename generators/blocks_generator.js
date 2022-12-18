@@ -54,36 +54,35 @@ class BlockGenerator {
         let xml = '<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">';
         for (const [category, _] of Object.entries(this.categories)) {
             let colour = '#000000';
-            if(this.categories[category]['configuration'] !== null && 'colour' in this.categories[category]['configuration']) {
+            if (this.categories[category]['configuration'] !== null && 'colour' in this.categories[category]['configuration']) {
                 colour = this.categories[category]['configuration']['colour'];
             }
-            if(category == 'Integer Variables') {
+            if (category == 'Integer Variables') {
                 xml += `<category name="${category}" colour="${colour}" custom="INTEGER_PALETTE">`;
             }
-            else if(category == 'Float Variables') {
+            else if (category == 'Float Variables') {
                 xml += `<category name="${category}" colour="${colour}" custom="FLOAT_PALETTE">`;
             }
             else {
                 xml += `<category name="${category}" colour="#000000">`;
             }
-            if(category === 'Logic') {
+            if (category === 'Logic') {
                 xml += `<block type="controls_if"></block>`;
                 xml += `<block type="logic_compare"></block>`;
                 xml += `<block type="logic_operation"></block>`;
                 xml += `<block type="logic_negate"></block>`;
                 xml += `<block type="logic_boolean"></block>`;
             }
-            else if(category === 'Loops') {
+            else if (category === 'Loops') {
                 xml += `<block type="controls_repeat_ext"></block>`;
                 xml += `<block type="controls_whileUntil"></block>`;
                 xml += `<block type="controls_for"></block>`;
             }
-            else if(category === 'Math') {
+            else if (category === 'Math') {
                 xml += `<block type="math_number"></block>`;
                 xml += `<block type="math_arithmetic"></block>`;
             }
-            else
-            {
+            else {
                 for (const block of this.categories[category]['blocks']) {
                     xml += `<block type="${block}"></block>`;
                 }
@@ -94,7 +93,7 @@ class BlockGenerator {
 
         xml = format(xml);
 
-        fs.readFile(path.join(__dirname, '..', 'html', 'index.html.template'), 'utf8', function (err,data) {
+        fs.readFile(path.join(__dirname, '..', 'html', 'index.html.template'), 'utf8', function (err, data) {
             if (err) {
                 return console.log(err);
             }
@@ -227,7 +226,9 @@ class BlockGenerator {
 
     generate_dynamic_blocks() {
         for (const [module_name, module_content] of Object.entries(this.modules)) {
-            this.generate_module_initialization(module_content, module_name);
+            if ('application_init' in module_content) {
+                this.generate_module_initialization(module_content, module_name);
+            }
             if ('handler' in module_content) {
                 this.generate_module_event_handler(module_content, module_name);
             }

@@ -19,6 +19,7 @@ var options = {
 
 // On page load function
 window.addEventListener('load', switch_code);
+window.addEventListener('load', list);
 
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
@@ -153,7 +154,6 @@ function checkUniqueBlock(block_type, event) {
 
 function checkCategories() {
   var categories = {
-    'blockly-1': false,
     'blockly-2': false,
     'blockly-3': false,
     'blockly-4': false,
@@ -340,22 +340,76 @@ workspace.addChangeListener(onBlockEvent);
 function save() {
   if (typeof (Storage) !== "undefined") {
     var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
-    /**Popup for text input and confirmation */
-    
-    localStorage.setItem("workspace", Blockly.Xml.domToText(xml));
+    var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
+    localStorage.setItem(nameOfTheProject, Blockly.Xml.domToText(xml));
+    list();
   }
 }
 
 function restore() {
   Blockly.getMainWorkspace().clear();
-  var nameOfTheProject = "workspace";
   if (typeof (Storage) !== "undefined") {
     if (localStorage.length > 0) {
-      console.log("NOT NULL");
+      var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
       var xml = Blockly.Xml.textToDom(localStorage.getItem(nameOfTheProject));
-      console.log(xml);
       Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
-      console.log("restored");
+    }
+  }
+}
+
+function loadProject(name) {
+  Blockly.getMainWorkspace().clear();
+  if (typeof (Storage) !== "undefined") {
+    if (localStorage.length > 0) {
+      var xml = Blockly.Xml.textToDom(localStorage.getItem(name));
+      Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+    }
+  }
+}
+
+/**List of the project as clickable list */
+function list() {
+  if (typeof (Storage) !== "undefined") {
+    if (localStorage.length > 0) {
+      var list = document.getElementById("list");
+      list.innerHTML = "";
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if(key !== "null" && key !== "undefined" && key != "debug")
+        {
+          var value = localStorage.getItem(key);
+          var li = document.createElement("a");
+          li.appendChild(document.createTextNode(key));
+          li.setAttribute("onclick", "loadProject('" + key + "')");
+          li.setAttribute("class", "list-group-item list-group-item-action");
+          list.appendChild(li);  
+        }
+      }
+    }
+  }
+}
+
+function deleteSavedProjects() {
+  if (typeof (Storage) !== "undefined") {
+    if (localStorage.length > 0) {
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if(key !== "null" && key !== "undefined" && key != "debug")
+        {
+          localStorage.removeItem(key);
+        }
+      }
+      list();
+    }
+  }
+}
+
+function clear() {
+  if (typeof (Storage) !== "undefined") {
+    if (localStorage.length > 0) {
+      var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
+      localStorage.removeItem(nameOfTheProject);
+      list();
     }
   }
 }

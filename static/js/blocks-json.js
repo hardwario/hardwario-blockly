@@ -1390,7 +1390,7 @@ Blockly.defineBlocksWithJsonArray([
         "args0": [
             {
                 "type": "input_value",
-                "name": "INT_TO_BE_SEND"
+                "name": "FLOAT_TO_BE_SEND"
             },
             {
                 "type": "input_dummy"
@@ -1530,6 +1530,14 @@ Blockly.defineBlocksWithJsonArray([
     {
         "type": "hio_relay_toggle",
         "message0": "Relay Toggle",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_task_run_application_task",
+        "message0": "Run Application Task now",
         "previousStatement": "null",
         "nextStatement": "null",
         "tooltip": "",
