@@ -60,4 +60,4 @@ app.get('/update_code', (req, res) => {
   res.send(code_generator.generate_code(req.query.Code, false));
 });
 
-app.listen(PORT, '127.0.0.1', () => console.log(`Server listening on port: ${PORT}`));
+app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
