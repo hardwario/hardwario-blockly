@@ -53,7 +53,8 @@ app.get('/parse_code', (req, res) => {
 });
 
 app.get('/download_code', (req, res) => {
-  res.send('Download');
+  const file = `${__dirname}/skeleton/out/debug/firmware.bin`;
+  res.download(file);
 });
 
 app.get('/update_code', (req, res) => {

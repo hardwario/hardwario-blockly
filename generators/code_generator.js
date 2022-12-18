@@ -97,19 +97,18 @@ class CodeGenerator {
     }
 
     compile_code(output) {
-        shell.cd(path.join(__dirname));
-        if(!(path.join(__dirname, 'skeleton'))) {
+        shell.cd(path.join(__dirname, '..'));
+        if(!fs.existsSync((path.join(__dirname, '..', 'skeleton')))) {
             shell.rm('-rf', './skeleton');
             shell.exec('git clone --recursive https://github.com/hardwario/twr-skeleton.git ./skeleton');
         }
-        fs.writeFile(path.join(__dirname, 'skeleton', 'src', 'application.c'), output, 'utf8', function (err) {
+        fs.writeFile(path.join(__dirname, '..', 'skeleton', 'src', 'application.c'), output, 'utf8', function (err) {
             if (err) return console.log(err);
         });
         shell.cd('./skeleton');
         shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug');
         shell.exec('ninja -C obj/debug');
         console.log('done');
-
     }
 
     print_code() {
