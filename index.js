@@ -1,11 +1,12 @@
 const express = require('express');
+const path = require('path');
 
 /*exports.init = function() {
   const blocks_generator = require("./generators/blocks_generator.js");
   const code_generator = require("./generators/code_generator.js");
   const app = express();
   const PORT = 3000;
-  app.use(express.static('static'));
+  app.use(express.static(path.join(__dirname, 'static')));
 
   app.get('/', (req, res) => {
     res.sendFile('/html/index.html', { root: __dirname });
@@ -36,7 +37,7 @@ const blocks_generator = require("./generators/blocks_generator.js");
 const code_generator = require("./generators/code_generator.js");
 const app = express();
 const PORT = 3000;
-app.use(express.static('static'));
+app.use(express.static(path.join(__dirname, 'static')));
 
 app.get('/', (req, res) => {
   res.sendFile('/html/index.html', { root: __dirname });

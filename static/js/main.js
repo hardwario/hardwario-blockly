@@ -341,7 +341,7 @@ function save() {
   if (typeof (Storage) !== "undefined") {
     var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
     var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
-    localStorage.setItem(nameOfTheProject, Blockly.Xml.domToText(xml));
+    localStorage.setItem("hio_project_" + nameOfTheProject, Blockly.Xml.domToText(xml));
     list();
   }
 }
@@ -351,7 +351,7 @@ function restore() {
   if (typeof (Storage) !== "undefined") {
     if (localStorage.length > 0) {
       var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
-      var xml = Blockly.Xml.textToDom(localStorage.getItem(nameOfTheProject));
+      var xml = Blockly.Xml.textToDom(localStorage.getItem("hio_project_" + nameOfTheProject));
       Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
     }
   }
@@ -361,7 +361,7 @@ function loadProject(name) {
   Blockly.getMainWorkspace().clear();
   if (typeof (Storage) !== "undefined") {
     if (localStorage.length > 0) {
-      var xml = Blockly.Xml.textToDom(localStorage.getItem(name));
+      var xml = Blockly.Xml.textToDom(localStorage.getItem("hio_project_" + name));
       Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
     }
   }
@@ -375,11 +375,11 @@ function list() {
       list.innerHTML = "";
       for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
-        if(key !== "null" && key !== "undefined" && key != "debug")
+        if(key.startsWith("hio_project_"))
         {
           var value = localStorage.getItem(key);
           var li = document.createElement("a");
-          li.appendChild(document.createTextNode(key));
+          li.appendChild(document.createTextNode(key.slice("hio_project_".length)));
           li.setAttribute("onclick", "loadProject('" + key + "')");
           li.setAttribute("class", "list-group-item list-group-item-action");
           list.appendChild(li);  
@@ -394,7 +394,7 @@ function deleteSavedProjects() {
     if (localStorage.length > 0) {
       for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
-        if(key !== "null" && key !== "undefined" && key != "debug")
+        if(key.startsWith("hio_project_"))
         {
           localStorage.removeItem(key);
         }
@@ -408,7 +408,7 @@ function clear() {
   if (typeof (Storage) !== "undefined") {
     if (localStorage.length > 0) {
       var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
-      localStorage.removeItem(nameOfTheProject);
+      localStorage.removeItem("hio_project_" + nameOfTheProject);
       list();
     }
   }
@@ -424,21 +424,4 @@ function exportJSON() {
   var json = JSON.stringify(jsonOriginal);
 
   return json;
-
-  /*json = [json];
-  var blob1 = new Blob(json, { type: "text/plain;charset=utf-8" });
-
-  var isIE = false || !!document.documentMode;
-  if (isIE) {
-      window.navigator.msSaveBlob(blob1, "code.json");
-  } else {
-      var url = window.URL || window.webkitURL;
-      link = url.createObjectURL(blob1);
-      var a = document.createElement("a");
-      a.download = "code.json";
-      a.href = link;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-  }*/
 }
