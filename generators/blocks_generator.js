@@ -410,4 +410,6 @@ class BlockGenerator {
     }
 }
 
-module.exports = new BlockGenerator();
+module.exports.generate_blocks = function () {
+    let block_generator = new BlockGenerator();
+}
