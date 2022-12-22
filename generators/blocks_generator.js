@@ -64,7 +64,7 @@ class BlockGenerator {
                 xml += `<category name="${category}" colour="${colour}" custom="FLOAT_PALETTE">`;
             }
             else {
-                xml += `<category name="${category}" colour="#000000">`;
+                xml += `<category name="${category}" colour="${colour}">`;
             }
             if (category === 'Logic') {
                 xml += `<block type="controls_if"></block>`;
@@ -296,6 +296,13 @@ class BlockGenerator {
         if ('colour' in block_yaml) {
             block["colour"] = block_yaml['colour'];
         }
+        else {
+            let colour = '#000000';
+            if (this.categories['Initialization']['configuration'] !== null && 'colour' in this.categories['Initialization']['configuration']) {
+                colour = this.categories['Initialization']['configuration']['colour'];
+            }
+            block["colour"] = colour;
+        }
         block["tooltip"] = "";
         block["helpUrl"] = "";
         this.blocks.push(block);
@@ -332,6 +339,13 @@ class BlockGenerator {
         ];
         if ('colour' in handler_yaml) {
             block["colour"] = handler_yaml['colour'];
+        }
+        else {
+            let colour = '#000000';
+            if (this.categories[category]['configuration'] !== null && 'colour' in this.categories[category]['configuration']) {
+                colour = this.categories[category]['configuration']['colour'];
+            }
+            block["colour"] = colour;
         }
         block["tooltip"] = "";
         block["helpUrl"] = "";
@@ -401,6 +415,13 @@ class BlockGenerator {
             block["nextStatement"] = 'null';
             if ('colour' in block_yaml) {
                 block["colour"] = block_yaml['colour'];
+            }
+            else {
+                let colour = '#000000';
+                if (this.categories[category]['configuration'] !== null && 'colour' in this.categories[category]['configuration']) {
+                    colour = this.categories[category]['configuration']['colour'];
+                }
+                block["colour"] = colour;
             }
             block["tooltip"] = "";
             block["helpUrl"] = "";

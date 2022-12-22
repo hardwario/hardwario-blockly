@@ -129,6 +129,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -163,6 +164,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Battery Voltage Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -224,6 +226,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -261,6 +264,7 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "BLOCKS"
             }
         ],
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -269,6 +273,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Button Click Count Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -277,6 +282,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Button Hold Count Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -297,6 +303,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -334,6 +341,7 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "BLOCKS"
             }
         ],
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -342,6 +350,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Climate Temperature Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -350,6 +359,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Climate Humidity Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -358,6 +368,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Climate Luminosity Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -366,6 +377,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Climate Pressure and Altitude Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -386,6 +398,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -411,6 +424,7 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "BLOCKS"
             }
         ],
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -419,6 +433,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish CO2 Value Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -439,6 +454,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -464,6 +480,7 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "BLOCKS"
             }
         ],
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -472,6 +489,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Core Temperature Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -480,6 +498,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Initialize LCD Module",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -537,6 +556,7 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "BLOCKS"
             }
         ],
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -572,6 +592,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -609,6 +630,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -653,6 +675,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -697,6 +720,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -727,6 +751,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -751,6 +776,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -759,6 +785,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Clear LCD",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -767,6 +794,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Update LCD",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -807,6 +835,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -844,6 +873,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -879,6 +909,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -914,6 +945,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -976,6 +1008,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -984,6 +1017,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Initialize LED",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1001,6 +1035,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1018,6 +1053,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1062,6 +1098,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1093,6 +1130,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1101,6 +1139,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Initialize Logging",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1126,6 +1165,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1151,6 +1191,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1176,6 +1217,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1201,6 +1243,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1236,6 +1279,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1261,6 +1305,7 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "BLOCKS"
             }
         ],
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1269,6 +1314,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Motion Event Count Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1277,6 +1323,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Initialize Power Module",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1301,6 +1348,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1336,6 +1384,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1359,6 +1408,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1381,6 +1431,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1403,6 +1454,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1425,6 +1477,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1466,6 +1519,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1490,6 +1544,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1524,6 +1579,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1532,6 +1588,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Relay Toggle",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1540,6 +1597,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Run Application Task now",
         "previousStatement": "null",
         "nextStatement": "null",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     }
