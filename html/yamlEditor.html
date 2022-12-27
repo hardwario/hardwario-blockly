@@ -1,29 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>ACE in Action</title>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block Module Editor</title>
 <style type="text/css" media="screen">
-    #editor { 
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
+  #editor { 
+    height: 100%;
+    width: 100%;
+  }
+  html, body
+  {
+    height: 100%;
+    width: 100%;
+  }
 </style>
 </head>
 <body>
 
-<div id="editor">function foo(items) {
-    var x = "All this is syntax highlighted";
-    return x;
-}</div>
-    
+<h1>
+  Block Module Editor
+</h1>
+
+<div style="display: block; height: 100%;">
+
+<div id="editor">---
+battery:
+  category:
+    - Battery Module
+  application_init:
+    block:
+      text:
+        - Initialize Battery Module %1
+        - With Update Interval %2 ms
+      arguments:
+        NEW_LINE:
+          type: new_line
+        UPDATE_INTERVAL:
+          type: number
+          min: 1
+          max: 1000000
+          value: 5000
+    code:
+      - twr_module_battery_init();
+      - twr_module_battery_set_event_handler(battery_event_handler, NULL);
+      - twr_module_battery_set_update_interval({UPDATE_INTERVAL});
+  handler:
+    block:
+      text: On Battery Module %1
+    declaration: void battery_event_handler(twr_module_battery_event_t event, void *event_param)
+    events:
+      prefix: TWR_MODULE_BATTERY_EVENT_
+      enum:
+        UPDATE:
+          - float voltage;
+          - if (twr_module_battery_get_voltage(&voltage)) {
+          - battery_voltage_value = voltage;
+          - "}"
+  action:
+    publish_voltage:
+      block:
+        text:
+          - Publish Battery Voltage Over the Radio
+      code:
+        - twr_radio_pub_battery(&battery_voltage_value);
+      </div>
+  </div>
 <script src="/js/code-editor/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/c_cpp");
+    editor.session.setMode("ace/mode/yaml");
 </script>
+
+<button onclick="save()">Save</button>
 </body>
 </html>

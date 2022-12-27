@@ -40,8 +40,6 @@ var onresize = function (e) {
   blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
   blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
   Blockly.svgResize(workspace);
-  editor.setAutoScrollEditorIntoView(true);
-  editor.resize();
 };
 window.addEventListener('resize', onresize, false);
 onresize();
