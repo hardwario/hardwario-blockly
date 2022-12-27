@@ -131,10 +131,13 @@
     </category>
 </xml>
     </div>
-    <div style="overflow-y: scroll; height:90vh; background-color:grey" id="code-div">
-      <div id="code" style="color:white; font-size:15px; font-weight: bold;">
-      </div>
-    </div>
+    <div id="code"></div>
+    <script src="/js/code-editor/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("code");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/c_cpp");
+    </script>
   </div>
 
   <!--<button class="btn btn-primary" id="connectButton" type="button">Flash</button>
@@ -159,7 +162,6 @@
 
   <script src="https://unpkg.com/blockly"></script>
   <script type="module" src="/js/blocks-json.js"></script>
-  <!--<script src="{% static 'js/blocks.js' %}"></script>-->
   <script src="/js/main.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

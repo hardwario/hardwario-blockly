@@ -40,6 +40,8 @@ var onresize = function (e) {
   blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
   blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
   Blockly.svgResize(workspace);
+  editor.setAutoScrollEditorIntoView(true);
+  editor.resize();
 };
 window.addEventListener('resize', onresize, false);
 onresize();
@@ -263,7 +265,7 @@ function onBlockEvent(event) {
 
 function switch_code() {
   var switch_button = document.getElementById("switch_code_button");
-  var code_div = document.getElementById("code-div");
+  var code_div = document.getElementById("code");
   if (code_div.style.display === "none") {
     switch_button.innerText = "Hide Code";
     code_div.style.display = "block";
@@ -273,20 +275,8 @@ function switch_code() {
     code_div.style.display = "none";
     $(".grid-container").css("display","grid").css("grid-template-columns","1fr");
   }
+
   onresize();
-
-  var text, parser, xmlDoc;
-
-  text = "<bookstore><book>" +
-  "<title>Everyday Italian</title>" +
-  "<author>Giada De Laurentiis</author>" +
-  "<year>2005</year>" +
-  "</book></bookstore>";
-
-  parser = new DOMParser();
-  xmlDoc = parser.parseFromString(text,"text/xml");
-
-  document.getElementById("toolbox").innerHTML = xmlDoc.toString();
 }
 
 function update_code() {
@@ -298,11 +288,7 @@ function update_code() {
     },
 
   }).done(function(data) {
-    data = data.replace(/</g, '&lt;');
-    data = data.replace(/>/g, '&gt;');
-    data = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    data = data.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
-    document.getElementById("code").innerHTML = data;
+    editor.setValue(data);
   });
 }
 

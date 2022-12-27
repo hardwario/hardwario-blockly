@@ -16,6 +16,10 @@ exports.init = function () {
     res.sendFile('/html/index.html', { root: __dirname });
   });
 
+  app.get('/yaml_editor', (req, res) => {
+    res.sendFile('/html/yamlEditor.html', { root: __dirname });
+  });
+
   app.get('/parse_code', (req, res) => {
     if (req.query.Code === undefined) {
       res.send("No code to parse");
