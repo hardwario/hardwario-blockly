@@ -4,6 +4,7 @@ battery:
     - Battery Module
   application_init:
     block:
+      colour: '#FE45DD'
       text:
         - Initialize Battery Module %1
         - With Update Interval %2 ms
@@ -20,7 +21,6 @@ battery:
       - twr_module_battery_set_event_handler(battery_event_handler, NULL);
       - twr_module_battery_set_update_interval({UPDATE_INTERVAL});
   handler:
-    colour: '#FE45DD'
     block:
       text: On Battery Module %1
     declaration: void battery_event_handler(twr_module_battery_event_t event, void *event_param)

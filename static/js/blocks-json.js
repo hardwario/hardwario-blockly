@@ -12,7 +12,8 @@ Blockly.defineBlocksWithJsonArray([
             }
         ],
         "tooltip": "Application Initialization",
-        "helpUrl": ""
+        "helpUrl": "",
+        "colour": "#000000"
     },
     {
         "type": "hio_application_task",
@@ -36,7 +37,8 @@ Blockly.defineBlocksWithJsonArray([
             }
         ],
         "tooltip": "Application Task",
-        "helpUrl": ""
+        "helpUrl": "",
+        "colour": "#000000"
     },
     {
         "type": "variables_get_integer",
@@ -129,7 +131,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
-        "colour": "#000000",
+        "colour": "#FE45DD",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -155,7 +157,7 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "BLOCKS"
             }
         ],
-        "colour": "#FE45DD",
+        "colour": "#000000",
         "tooltip": "",
         "helpUrl": ""
     },

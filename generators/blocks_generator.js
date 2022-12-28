@@ -121,6 +121,11 @@ class BlockGenerator {
         ];
         block['tooltip'] = 'Application Initialization';
         block['helpUrl'] = '';
+        let colour = '#000000';
+        if (this.categories['Initialization']['configuration'] !== null && 'colour' in this.categories['Initialization']['configuration']) {
+            colour = this.categories['Initialization']['configuration']['colour'];
+        }
+        block["colour"] = colour;
         this.blocks.push(block);
         this.categories['Initialization']['blocks'].push(block['type']);
 
@@ -147,6 +152,11 @@ class BlockGenerator {
         ];
         block['tooltip'] = 'Application Task';
         block['helpUrl'] = '';
+        colour = '#000000';
+        if (this.categories['Task']['configuration'] !== null && 'colour' in this.categories['Task']['configuration']) {
+            colour = this.categories['Task']['configuration']['colour'];
+        }
+        block["colour"] = colour;
         this.blocks.push(block);
         this.categories['Task']['blocks'].push(block['type']);
 
