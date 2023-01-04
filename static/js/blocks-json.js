@@ -131,7 +131,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": "null",
         "nextStatement": "null",
-        "colour": "#FE45DD",
+        "colour": "#125f44",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -157,7 +157,7 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "BLOCKS"
             }
         ],
-        "colour": "#000000",
+        "colour": "#125f44",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -166,7 +166,7 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Publish Battery Voltage Over the Radio",
         "previousStatement": "null",
         "nextStatement": "null",
-        "colour": "#000000",
+        "colour": "#125f44",
         "tooltip": "",
         "helpUrl": ""
     },

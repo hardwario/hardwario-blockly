@@ -308,8 +308,12 @@ class BlockGenerator {
         }
         else {
             let colour = '#000000';
-            if (this.categories['Initialization']['configuration'] !== null && 'colour' in this.categories['Initialization']['configuration']) {
-                colour = this.categories['Initialization']['configuration']['colour'];
+            let category = module_content['category'][0];
+            if(category in this.categories)
+            {
+                if (this.categories[category]['configuration'] !== null && 'colour' in this.categories[category]['configuration']) {
+                    colour = this.categories[category]['configuration']['colour'];
+                }
             }
             block["colour"] = colour;
         }

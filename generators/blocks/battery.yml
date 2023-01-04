@@ -4,7 +4,6 @@ battery:
     - Battery Module
   application_init:
     block:
-      colour: '#FE45DD'
       text:
         - Initialize Battery Module %1
         - With Update Interval %2 ms
