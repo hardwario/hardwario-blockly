@@ -1,0 +1,54 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="hio_application_initialize" id="?7}tRHXkri+W-uh`coM1" x="-320" y="-741">
+    <statement name="BLOCKS">
+      <block type="hio_led_initialize" id=";7NX;gAsjst2Sz3wz!PE">
+        <next>
+          <block type="hio_radio_initialize" id="Rw*-D80F)+7!H+DY%y[%">
+            <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>
+            <field name="FIRMWARE_NAME">twr-blockly-firmware</field>
+            <next>
+              <block type="hio_button_initialize" id="|?HdV[d=y.F/+]971[tF">
+                <field name="GPIO">TWR_GPIO_BUTTON</field>
+                <field name="PULL">TWR_GPIO_PULL_DOWN</field>
+                <field name="STATE">TRUE</field>
+                <next>
+                  <block type="hio_battery_initialize" id="#pQt#LU8tBH3]YXCP.Z!">
+                    <field name="UPDATE_INTERVAL">5000</field>
+                    <next>
+                      <block type="hio_coreTmp112_initialize" id="m6sa5Mp/Sy)u,?0T/Z.x">
+                        <field name="UPDATE_INTERVAL">5000</field>
+                        <next>
+                          <block type="hio_pir_initialize" id="T{F212Ow4/@Iu7)@wKg8">
+                            <field name="SENSITIVITY">TWR_MODULE_PIR_SENSITIVITY_MEDIUM</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_pir_event" id="i-(Y[|R8m+Um/oH2Gzkt" x="-271" y="-270">
+    <field name="NAME">MOTION</field>
+    <statement name="BLOCKS">
+      <block type="hio_pir_publish_motion_count" id="?Hy~L?D#g$f=xv3nt2u:"></block>
+    </statement>
+  </block>
+  <block type="hio_coreTmp112_event" id="Q,+s|L2HTe7^ZYAaJX|H" x="36" y="-154">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_coreTmp112_publish_temperature_value" id="9m)AhuvW_rz?-nQF7Xmj"></block>
+    </statement>
+  </block>
+  <block type="hio_battery_event" id=";o@+/,{prETxdpxvCrO." x="-291" y="-136">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_battery_publish_voltage" id="0.z@/H6!@E.DXD``QFn}"></block>
+    </statement>
+  </block>
+</xml>

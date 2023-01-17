@@ -93,13 +93,13 @@ class BlockGenerator {
 
         xml = format(xml);
 
-        fs.readFile(path.join(__dirname, '..', 'html', 'index.html.template'), 'utf8', function (err, data) {
+        fs.readFile(path.join(__dirname, '..', 'html', 'blocksEditor.html.template'), 'utf8', function (err, data) {
             if (err) {
                 return console.log(err);
             }
             var result = data.replace(/<!--CATEGORIES-->/g, xml);
 
-            fs.writeFile(path.join(__dirname, '..', 'html', 'index.html'), result, 'utf8', function (err) {
+            fs.writeFile(path.join(__dirname, '..', 'html', 'blocksEditor.html'), result, 'utf8', function (err) {
                 if (err) return console.log(err);
             });
         });

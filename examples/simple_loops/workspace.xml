@@ -1,0 +1,108 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="1h4XEs!uj]o~Q3f#Bh~;">i</variable>
+  </variables>
+  <block type="hio_button_event" id="wk_jQO/mmrIaq]30v/v-" x="601" y="-249">
+    <field name="NAME">PRESS</field>
+    <statement name="BLOCKS">
+      <block type="controls_repeat_ext" id="[+1A-aa|_H;yVmEqLHL*">
+        <value name="TIMES">
+          <shadow type="math_number" id="}R4qn]/:0Hf|4j/C{@@6">
+            <field name="NUM">10</field>
+          </shadow>
+          <block type="math_arithmetic" id="5w;Ju`K~/n~L;pUA%rA^">
+            <field name="OP">ADD</field>
+            <value name="A">
+              <shadow type="math_number" id="CP)J~,R=OWluHG*[c(R:">
+                <field name="NUM">1</field>
+              </shadow>
+              <block type="math_number" id="mvS+|Id9[F8H/)k]Fm8Q">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="[ND}pPhiY=7n.~lTn![l">
+                <field name="NUM">1</field>
+              </shadow>
+              <block type="math_number" id="$B|KnvcS[5KNunB-iUp4">
+                <field name="NUM">10</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO">
+          <block type="hio_radio_send_string" id="?ECckZlO~7Wki{k(VU,E">
+            <field name="STRING_TO_BE_SEND">STRING</field>
+            <field name="SUBTOPIC">string</field>
+          </block>
+        </statement>
+        <next>
+          <block type="controls_whileUntil" id="oCKvxwmTVvtR)N1*#i6:">
+            <field name="MODE">WHILE</field>
+            <value name="BOOL">
+              <block type="logic_boolean" id="io:!t-F;ulUdme|3*ZC.">
+                <field name="BOOL">FALSE</field>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="hio_radio_send_string" id="15+sAoKhsk+Qa1Atz0On">
+                <field name="STRING_TO_BE_SEND">STRING</field>
+                <field name="SUBTOPIC">string</field>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_for" id="0[k-k6O6;SS_kfg5f#3O">
+                <field name="VAR" id="1h4XEs!uj]o~Q3f#Bh~;">i</field>
+                <value name="FROM">
+                  <shadow type="math_number" id=";Dtjm9GrUu*TNRA!!;7`">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="math_number" id=".te@P#.BpA^+c?uftY}!">
+                    <field name="NUM">6</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <shadow type="math_number" id="p}#DH+,7jdGlVUf/aujJ">
+                    <field name="NUM">10</field>
+                  </shadow>
+                  <block type="math_number" id="unCEH;T0)rAbQD[~:aao">
+                    <field name="NUM">40</field>
+                  </block>
+                </value>
+                <value name="BY">
+                  <shadow type="math_number" id="LxqML?J+b`u85990r`2N">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="math_number" id="u_Zo/p}zRrTIsbUBFKg_">
+                    <field name="NUM">3</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="hio_radio_send_string" id="]I(o~Bkhl9?y`WvVghd_">
+                    <field name="STRING_TO_BE_SEND">STRING</field>
+                    <field name="SUBTOPIC">string</field>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_application_initialize" id="8w+V^WP`$4cL]2k,[Ygl" x="77" y="-213">
+    <statement name="BLOCKS">
+      <block type="hio_button_initialize" id="I$!IafZWSj0Tn(+!Z@w#">
+        <field name="GPIO">TWR_GPIO_BUTTON</field>
+        <field name="PULL">TWR_GPIO_PULL_DOWN</field>
+        <field name="STATE">TRUE</field>
+        <next>
+          <block type="hio_radio_initialize" id="t9_F}-/Jm|dH9@3tA2.y">
+            <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>
+            <field name="FIRMWARE_NAME">twr-blockly-firmware</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

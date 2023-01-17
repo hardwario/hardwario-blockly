@@ -361,7 +361,6 @@ function list() {
         var key = localStorage.key(i);
         if(key.startsWith("hio_project_"))
         {
-          var value = localStorage.getItem(key);
           var li = document.createElement("a");
           li.appendChild(document.createTextNode(key.slice("hio_project_".length)));
           li.setAttribute("onclick", "loadProject('" + key + "')");

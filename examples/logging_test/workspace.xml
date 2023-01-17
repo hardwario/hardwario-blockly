@@ -1,0 +1,51 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="hio_application_initialize" id=".lmlomO.cWA0-U4wF3nu" x="95" y="50">
+    <statement name="BLOCKS">
+      <block type="hio_button_initialize" id="FgdL;c1|oJCY+E4-rnw$">
+        <field name="GPIO">TWR_GPIO_BUTTON</field>
+        <field name="PULL">TWR_GPIO_PULL_DOWN</field>
+        <field name="STATE">TRUE</field>
+        <next>
+          <block type="hio_logging_initialize" id="~?Cr%cEw1bsr%6@s@6,U">
+            <next>
+              <block type="hio_coreTmp112_initialize" id="|p4|yJt6cA50!D:zg]T:">
+                <field name="UPDATE_INTERVAL">5000</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_button_event" id="i*[pHp#?a]VomtPQ[Va*" x="480" y="71">
+    <field name="NAME">PRESS</field>
+    <statement name="BLOCKS">
+      <block type="hio_logging_info" id="6`Ck1k}?E{h$t@G#j#JD">
+        <field name="MESSAGE">Info</field>
+        <next>
+          <block type="hio_logging_warning" id="IWs,2u[[u/SEeJIS:vZ(">
+            <field name="MESSAGE">Warning</field>
+            <next>
+              <block type="hio_logging_debug" id=";4MqiA)zju5(v7PCPfYC">
+                <field name="MESSAGE">Debug</field>
+                <next>
+                  <block type="hio_logging_error" id="3xr1x~Tq]-UYQV0~jtCJ">
+                    <field name="MESSAGE">Error</field>
+                    <next>
+                      <block type="hio_logging_debug" id="sUR20_~780v(Pu`8ofG!">
+                        <field name="MESSAGE">Debug</field>
+                        <value name="VARIABLE">
+                          <block type="hio_coreTmp112_value" id="Fw79/]_+|RX6xbRSzgmr"></block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

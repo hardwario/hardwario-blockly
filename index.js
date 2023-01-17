@@ -1,5 +1,7 @@
 const express = require('express');
+var favicon = require('serve-favicon')
 const path = require('path');
+var fs = require('fs');
 
 exports.init = function () {
   const blocks_generator = require("./generators/blocks_generator.js");
@@ -7,13 +9,18 @@ exports.init = function () {
   
   const app = express();
   const PORT = 3000;
-
+  
+  app.use(favicon(path.join(__dirname, 'static', 'img', 'favicon', 'favicon.ico')))
   app.use(express.static(path.join(__dirname, 'static')));
 
   blocks_generator.generate_blocks();
 
   app.get('/', (req, res) => {
     res.sendFile('/html/index.html', { root: __dirname });
+  });
+
+  app.get('/blocks_editor', (req, res) => {
+    res.sendFile('/html/blocksEditor.html', { root: __dirname });
   });
 
   app.get('/yaml_editor', (req, res) => {
@@ -37,6 +44,11 @@ exports.init = function () {
 
   app.get('/update_code', (req, res) => {
     res.send(code_generator.generate_code(req.query.Code, false));
+  });
+
+  app.get('/examples_list', (req, res) => {
+    var files = fs.readdirSync(`${__dirname}/examples`);
+    res.send(files);
   });
 
   app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
