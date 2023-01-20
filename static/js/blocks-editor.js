@@ -19,6 +19,7 @@ var options = {
 
 // On page load function
 window.addEventListener('load', switch_code);
+window.addEventListener('load', load_workspace);
 window.addEventListener('load', list);
 
 var blocklyArea = document.getElementById('blocklyArea');
@@ -275,6 +276,7 @@ function switch_code() {
   }
 
   onresize();
+  update_code();
 }
 
 function update_code() {
@@ -317,6 +319,16 @@ function importWorkspace() {
     Blockly.Xml.domToWorkspace(xml, workspace);
   };
   reader.readAsText(file);
+}
+
+function load_workspace() {
+  Blockly.getMainWorkspace().clear()
+  if (typeof (Storage) !== "undefined") {
+    if (localStorage.length > 0) {
+      var xml = Blockly.Xml.textToDom(localStorage.getItem("hio_selected_project"));
+      Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+    }
+  }
 }
 
 workspace.addChangeListener(onBlockEvent);

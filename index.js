@@ -8,7 +8,7 @@ exports.init = function () {
   const code_generator = require("./generators/code_generator.js");
   
   const app = express();
-  const PORT = 3000;
+  const PORT = 8000;
   
   app.use(favicon(path.join(__dirname, 'static', 'img', 'favicon', 'favicon.ico')))
   app.use(express.static(path.join(__dirname, 'static')));
@@ -48,8 +48,26 @@ exports.init = function () {
 
   app.get('/examples_list', (req, res) => {
     var files = fs.readdirSync(`${__dirname}/examples`);
+    files.forEach(function (directory, index) {
+      if (fs.existsSync(`${__dirname}/examples/${directory}/workspace.xml`)) {
+        files[index] = files[index];
+      }
+      else {
+        files.splice(index, 1);
+      }
+    });
     res.send(files);
   });
 
+  app.get('/get_example', (req, res) => {
+    if (req.query.example === undefined) {
+      res.send("No example to load");
+    }
+    else {
+      var data = fs.readFileSync(`${__dirname}/examples/${req.query.example}/workspace.xml`, 'utf8');
+      res.send(data);
+    }
+  });
+  
   app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
 }
