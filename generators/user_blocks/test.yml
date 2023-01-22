@@ -1,0 +1,22 @@
+---
+test:
+  category:
+    - Test Module
+  global_variable:
+    - int test = 0;
+  application_init:
+    block:
+      text:
+        - Initialize my block
+    code:
+      - test = i + 58 / 2
+  action:
+    add_to_i:
+      block:
+        text:
+          - test + %1
+        arguments:
+          VALUE:
+            type: input
+      code:
+        - test += {VALUE};

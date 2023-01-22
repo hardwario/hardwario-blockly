@@ -7,19 +7,23 @@ const { exit } = require('process');
 class BlockGenerator {
     constructor() {
         this.modules_path = path.join(__dirname, 'blocks');
+        this.user_modules_path = path.join(__dirname, 'user_blocks');
         this.categories_path = path.join(__dirname, 'categories');
 
         this.modules = {};
+        this.user_modules = {};
 
         this.blocks = [];
 
         this.categories = {};
 
         this.load_modules();
+        this.load_user_modules();
         this.load_categories();
 
         this.generate_static_blocks();
         this.generate_dynamic_blocks();
+        this.generate_user_blocks();
 
         this.generate_categories_xml();
         this.generate_blocks_json();
@@ -38,6 +42,14 @@ class BlockGenerator {
             let file_name = file.split('.')[0];
             let module = yaml.load(fs.readFileSync(path.join(this.modules_path, file), 'utf8'));
             this.modules[file_name] = module[file_name];
+        });
+    }
+
+    load_user_modules() {
+        fs.readdirSync(this.user_modules_path).forEach(file => {
+            let file_name = file.split('.')[0];
+            let module = yaml.load(fs.readFileSync(path.join(this.user_modules_path, file), 'utf8'));
+            this.user_modules[file_name] = module[file_name];
         });
     }
 
@@ -93,7 +105,7 @@ class BlockGenerator {
 
         xml = format(xml);
 
-        fs.readFile(path.join(__dirname, '..', 'html', 'blocksEditor.html.template'), 'utf8', function (err, data) {
+        fs.readFile(path.join(__dirname, '..', 'html', 'blocksEditor.template.html'), 'utf8', function (err, data) {
             if (err) {
                 return console.log(err);
             }
@@ -236,6 +248,20 @@ class BlockGenerator {
 
     generate_dynamic_blocks() {
         for (const [module_name, module_content] of Object.entries(this.modules)) {
+            if ('application_init' in module_content) {
+                this.generate_module_initialization(module_content, module_name);
+            }
+            if ('handler' in module_content) {
+                this.generate_module_event_handler(module_content, module_name);
+            }
+            if ('action' in module_content) {
+                this.generate_module_actions(module_content, module_name);
+            }
+        }
+    }
+
+    generate_user_blocks() {
+        for (const [module_name, module_content] of Object.entries(this.user_modules)) {
             if ('application_init' in module_content) {
                 this.generate_module_initialization(module_content, module_name);
             }

@@ -10,6 +10,7 @@ const shell = require('shelljs')
 class CodeGenerator {
     constructor() {
         this.blocks_path = path.join(__dirname, 'blocks');
+        this.user_blocks_path = path.join(__dirname, 'user_blocks');
 
         this.blocks = {};
 
@@ -23,13 +24,27 @@ class CodeGenerator {
             'math_arithmetic': { 'ADD': '+', 'MINUS': '-', 'MULTIPLY': '*', 'DIVIDE': '/' }
         }
 
+        this.load_all_blocks();  
+    }
+
+    load_all_blocks() {
+        console.log("JSEM TU");
         this.load_blocks();
+        this.load_user_blocks();
     }
 
     load_blocks() {
         fs.readdirSync(this.blocks_path).forEach(file => {
             let file_name = file.split('.')[0];
             let module = yaml.load(fs.readFileSync(path.join(this.blocks_path, file), 'utf8'));
+            this.blocks[file_name] = module[file_name];
+        });
+    }
+
+    load_user_blocks() {
+        fs.readdirSync(this.user_blocks_path).forEach(file => {
+            let file_name = file.split('.')[0];
+            let module = yaml.load(fs.readFileSync(path.join(this.user_blocks_path, file), 'utf8'));
             this.blocks[file_name] = module[file_name];
         });
     }

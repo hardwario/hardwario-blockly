@@ -3,7 +3,7 @@ categories:
   Initialization:
     colour: '#000000'
   Task:
-    colour: '#000000'
+    colour: '#123458'
   Button:
     colour: '#000000'
   Radio:
@@ -36,3 +36,4 @@ categories:
     colour: '#000000'
   CO2 Module:
   Relay Module:
+  Test Module:

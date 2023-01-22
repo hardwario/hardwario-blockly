@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="/css/blocksEditor.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blocks Creator</title>
+<style type="text/css" media="screen">
+  #editor { 
+    height: 100%;
+    width: 100%;
+  }
+  html, body
+  {
+    height: 100%;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+  <script src="/js/blocks-creator.js"></script>
+
+  <div style="display: flex; align-items: center; margin: auto; width: 50%;">
+    <img src="/img/hardwario-logo.png" alt="Hardwario Logo">
+    <h1>Blocks Creator</h1>      
+  </div>
+  <div style="clear: both;"></div>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Categories</h3>
+                    <p class="card-text">You can add your own categories or use the premade categories</p>
+                    <a href="/categories_editor" class="btn btn-primary">Go to Categories Editor</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div style="display: block; height: 100%;">
+
+    <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <h3>Your Blocks</h3>
+              <div id="list-user-blocks" class="list-group"></div>
+          </div>
+          <div class="col-sm-6">
+              <h3>Pre-made Blocks</h3>
+              <div id="list-pre-made-blocks" class="list-group"></div>
+          </div>
+      </div>
+  </div>
+</body>
+</html>

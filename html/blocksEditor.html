@@ -37,8 +37,9 @@
         <block type="hio_power_initialize"></block>
         <block type="hio_radio_initialize"></block>
         <block type="hio_relay_initialize"></block>
+        <block type="hio_test_initialize"></block>
     </category>
-    <category name="Task" colour="#000000">
+    <category name="Task" colour="#123458">
         <block type="hio_application_task"></block>
         <block type="hio_task_run_application_task"></block>
     </category>
@@ -129,6 +130,9 @@
         <block type="hio_relay_pulse"></block>
         <block type="hio_relay_toggle"></block>
     </category>
+    <category name="Test Module" colour="#000000">
+        <block type="hio_test_add_to_i"></block>
+    </category>
 </xml>
     </div>
     <div id="code"></div>
@@ -175,7 +179,8 @@
 
   <button class="btn btn-warning" onclick="exportWorkspace()">Export Workspace</button>
   <button class="btn btn-info" id="switch_code_button" onclick="switch_code();">Show Code</button>
-  <input class="form-control" id="importFile" type="file" onchange="importWorkspace()" />
+  <a href="http://localhost:8000" class="btn btn-success">Return Home</a>
+  <input class="form-control form-control-sm" id="importFile" type="file" onchange="importWorkspace()" />
 
 </body>
 
