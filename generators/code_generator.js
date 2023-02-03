@@ -10,7 +10,12 @@ const shell = require('shelljs')
 class CodeGenerator {
     constructor() {
         this.blocks_path = path.join(__dirname, 'blocks');
-        this.user_blocks_path = path.join(__dirname, 'user_blocks');
+
+        const appDataPath = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share");
+        this.user_folder = path.join(appDataPath, 'HARDWARIO Blockly');
+        this.user_blocks_path = path.join(appDataPath, 'HARDWARIO Blockly', 'blocks');
+        this.user_categories_directory_path = path.join(appDataPath, 'HARDWARIO Blockly', 'categories');
+        this.user_categories_path = path.join(appDataPath, 'HARDWARIO Blockly', 'categories', 'categories.yml');
 
         this.blocks = {};
 
@@ -28,7 +33,6 @@ class CodeGenerator {
     }
 
     load_all_blocks() {
-        console.log("JSEM TU");
         this.load_blocks();
         this.load_user_blocks();
     }

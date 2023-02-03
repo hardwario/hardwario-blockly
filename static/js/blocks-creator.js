@@ -5,6 +5,7 @@ window.addEventListener('load', load_pre_made_blocks);
 localStorage.setItem("hio_block_data", "");
 localStorage.setItem("hio_block_name", "");
 localStorage.setItem("hio_selected_block_type", "");
+localStorage.setItem("hio_new_user_block", "");
 
 function load_saved_blocks() {
     // Load list of saved blocks
@@ -73,4 +74,15 @@ function select_block(block) {
     };
     xhttp.open("GET", "http://localhost:8000/load_user_blocks_file?name=" + block, true);
     xhttp.send();
+}
+
+function create_block() {
+    var nameOfTheBlock = prompt("Please enter the name of the block without spaces", "temperatureSensor");
+    if (nameOfTheBlock != null) {
+        localStorage.setItem("hio_block_data", "NEW_BLOCK");
+        localStorage.setItem("hio_block_name", nameOfTheBlock + '.yml');
+        localStorage.setItem("hio_selected_block_type", "user");
+        localStorage.setItem("hio_new_user_block", "true");
+        window.location.href = "http://localhost:8000/yaml_editor?new_user_block=true&name=" + nameOfTheBlock;
+    }
 }

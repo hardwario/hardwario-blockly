@@ -18,9 +18,8 @@ var options = {
 };
 
 // On page load function
-window.addEventListener('load', switch_code);
-window.addEventListener('load', load_workspace);
-window.addEventListener('load', list);
+window.addEventListener('load', switchCode);
+window.addEventListener('load', loadWorkspace);
 
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
@@ -46,8 +45,6 @@ window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(workspace);
 
-/* Inject your workspace */
-
 checkCategories();
 
 workspace.registerButtonCallback('createInteger', createIntegerVariable)
@@ -63,9 +60,14 @@ function createFloatVariable() {
 }
 
 // Returns an arry of XML nodes.
-var integerVariablesFlyout = function (workspace) {
-  var integerVariablesList = workspace.getVariablesOfType('Integer');
+var variablesFlyout = function (workspace) {
   var blockList = [];
+
+  var label = document.createElement('label');
+  label.setAttribute('text', 'Integer Variables');
+  blockList.push(label);
+
+  var integerVariablesList = workspace.getVariablesOfType('Integer');
   var button = document.createElement('button');
   button.setAttribute('text', 'Create Integer');
   button.setAttribute('callbackKey', 'createInteger');
@@ -95,13 +97,11 @@ var integerVariablesFlyout = function (workspace) {
     block.appendChild(field);
     blockList.push(block);
   }
-  return blockList;
-};
+  var label = document.createElement('label');
+  label.setAttribute('text', 'Float Variables');
+  blockList.push(label);
 
-var floatVariablesFlyout = function (workspace) {
   var floatVariablesList = workspace.getVariablesOfType('Float');
-  var blockList = [];
-
   var button = document.createElement('button');
   button.setAttribute('text', 'Create Float');
   button.setAttribute('callbackKey', 'createFloat');
@@ -131,14 +131,19 @@ var floatVariablesFlyout = function (workspace) {
     block.appendChild(field);
     blockList.push(block);
   }
+
+  return blockList;
+};
+
+var floatVariablesFlyout = function (workspace) {
+  var blockList = [];
+
+
   return blockList;
 };
 
 workspace.registerToolboxCategoryCallback(
-  'INTEGER_PALETTE', integerVariablesFlyout);
-
-workspace.registerToolboxCategoryCallback(
-  'FLOAT_PALETTE', floatVariablesFlyout);
+  'VARIABLES', variablesFlyout);
 
 function checkUniqueBlock(block_type, event) {
   for (const block of workspace.blockDB.values()) {
@@ -167,7 +172,10 @@ function checkCategories() {
     'blockly-b': false,
   }
   for (const category of workspace.toolbox_.contents_) {
-      document.getElementById(category.id_).style.display = '';
+    if (category.toolboxItemDef_.kind == 'SEP') {
+      continue;
+    }
+    document.getElementById(category.id_).style.display = '';
   }
   for (const block of workspace.blockDB.values()) {
     if (block.type == 'hio_button_initialize') {
@@ -214,7 +222,7 @@ function checkCategories() {
       workspace.createVariable('climate_altitude_value', 'Float');
       document.getElementById('blockly-a').style.display = '';
     }
-    else if(block.type == 'hio_battery_initialize'){
+    else if (block.type == 'hio_battery_initialize') {
       categories['blockly-b'] = true;
       workspace.createVariable('battery_voltage_value', 'Float');
     }
@@ -228,7 +236,6 @@ function checkCategories() {
 
 function checkBlocks() {
   for (const block of workspace.blockDB.values()) {
-    console.log(block);
     if (block.type == 'hio_button_initialize') {
       document.getElementById('blockly-2').style.display = '';
     }
@@ -254,7 +261,7 @@ function onBlockEvent(event) {
   if (event.type == Blockly.Events.BLOCK_MOVE) {
     console.log("block moved");
   }
-  if(event.type == Blockly.Events.BLOCK_CREATE || event.type == Blockly.Events.BLOCK_DELETE ||
+  if (event.type == Blockly.Events.BLOCK_CREATE || event.type == Blockly.Events.BLOCK_DELETE ||
     event.type == Blockly.Events.BLOCK_CHANGE || event.type == Blockly.Events.BLOCK_MOVE ||
     event.type == Blockly.Events.VAR_CREATE || event.type == Blockly.Events.VAR_DELETE ||
     event.type == Blockly.Events.VAR_RENAME) {
@@ -262,17 +269,17 @@ function onBlockEvent(event) {
   }
 }
 
-function switch_code() {
-  var switch_button = document.getElementById("switch_code_button");
+function switchCode() {
+  var switch_button = document.getElementById("switchCode_button");
   var code_div = document.getElementById("code");
   if (code_div.style.display === "none") {
     switch_button.innerText = "Hide Code";
     code_div.style.display = "block";
-    $(".grid-container").css("display","grid").css("grid-template-columns","1fr 1fr");
+    $(".grid-container").css("display", "grid").css("grid-template-columns", "1fr 1fr");
   } else {
     switch_button.innerText = "Show Code";
     code_div.style.display = "none";
-    $(".grid-container").css("display","grid").css("grid-template-columns","1fr");
+    $(".grid-container").css("display", "grid").css("grid-template-columns", "1fr");
   }
 
   onresize();
@@ -283,11 +290,11 @@ function update_code() {
   $.ajax({
     url: "/update_code",
     type: "GET",
-        data: {
-        Code: exportJSON(),
+    data: {
+      Code: exportJSON(),
     },
 
-  }).done(function(data) {
+  }).done(function (data) {
     editor.setValue(data);
   });
 }
@@ -301,7 +308,7 @@ function exportWorkspace() {
   const url = URL.createObjectURL(blob)
 
   link.href = url
-  link.download = "workspace.xml"
+  link.download = project + ".xml";
   document.body.appendChild(link)
   link.click()
 
@@ -321,25 +328,38 @@ function importWorkspace() {
   reader.readAsText(file);
 }
 
-function load_workspace() {
-  Blockly.getMainWorkspace().clear()
-  if (typeof (Storage) !== "undefined") {
-    if (localStorage.length > 0) {
-      var xml = Blockly.Xml.textToDom(localStorage.getItem("hio_selected_project"));
-      Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
-    }
+function loadWorkspace() {
+  $.ajax({
+    url: "/load_project",
+    type: "GET",
+    data: {
+      name: project
+    },
+  }).done(function (data) {
+    var xml = Blockly.Xml.textToDom(data);
+    Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
   }
+  );
 }
 
 workspace.addChangeListener(onBlockEvent);
 
-function save() {
-  if (typeof (Storage) !== "undefined") {
-    var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
-    var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
-    localStorage.setItem("hio_project_" + nameOfTheProject, Blockly.Xml.domToText(xml));
-    list();
+function saveWorkspace() {
+  var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+  var xml_text = Blockly.Xml.domToPrettyText(xml);
+
+  //Send data to server
+  $.ajax({
+    url: "/save_project",
+    type: "POST",
+    data: {
+      data: xml_text,
+      name: project
+    },
+  }).done(function (data) {
+    alert(data);
   }
+  );
 }
 
 function restore() {
@@ -363,38 +383,15 @@ function loadProject(name) {
   }
 }
 
-/**List of the project as clickable list */
-function list() {
-  if (typeof (Storage) !== "undefined") {
-    if (localStorage.length > 0) {
-      var list = document.getElementById("list");
-      list.innerHTML = "";
-      for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        if(key.startsWith("hio_project_"))
-        {
-          var li = document.createElement("a");
-          li.appendChild(document.createTextNode(key.slice("hio_project_".length)));
-          li.setAttribute("onclick", "loadProject('" + key + "')");
-          li.setAttribute("class", "list-group-item list-group-item-action");
-          list.appendChild(li);  
-        }
-      }
-    }
-  }
-}
-
 function deleteSavedProjects() {
   if (typeof (Storage) !== "undefined") {
     if (localStorage.length > 0) {
       for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
-        if(key.startsWith("hio_project_"))
-        {
+        if (key.startsWith("hio_project_")) {
           localStorage.removeItem(key);
         }
       }
-      list();
     }
   }
 }
@@ -404,7 +401,6 @@ function clear() {
     if (localStorage.length > 0) {
       var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
       localStorage.removeItem("hio_project_" + nameOfTheProject);
-      list();
     }
   }
 }

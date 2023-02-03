@@ -17,6 +17,11 @@
 </head>
 
 <body>
+
+  <script>
+    var project = '<%-project%>';
+  </script>
+
   <div class="grid-container" id="blockly-container">
     <div>
       <div id="blocklyArea" class="area"></div>
@@ -37,7 +42,6 @@
         <block type="hio_power_initialize"></block>
         <block type="hio_radio_initialize"></block>
         <block type="hio_relay_initialize"></block>
-        <block type="hio_test_initialize"></block>
     </category>
     <category name="Task" colour="#123458">
         <block type="hio_application_task"></block>
@@ -119,8 +123,7 @@
         <block type="controls_whileUntil"></block>
         <block type="controls_for"></block>
     </category>
-    <category name="Integer Variables" colour="#000000" custom="INTEGER_PALETTE"></category>
-    <category name="Float Variables" colour="#000000" custom="FLOAT_PALETTE"></category>
+    <category name="Variables" colour="#000000" custom="VARIABLES"></category>
     <category name="CO2 Module" colour="#000000">
         <block type="hio_co2_event"></block>
         <block type="hio_co2_publish_co2"></block>
@@ -130,9 +133,8 @@
         <block type="hio_relay_pulse"></block>
         <block type="hio_relay_toggle"></block>
     </category>
-    <category name="Test Module" colour="#000000">
-        <block type="hio_test_add_to_i"></block>
-    </category>
+    <category name="Test Module" colour="#000000"></category>
+    <sep></sep>
 </xml>
     </div>
     <div id="code"></div>
@@ -143,11 +145,6 @@
         editor.session.setMode("ace/mode/c_cpp");
     </script>
   </div>
-
-  <!--<button class="btn btn-primary" id="connectButton" type="button">Flash</button>
-<button class="btn btn-primary" onclick="connectDevices()">Connect Device</button>-->
-
-  <script type="module" src="/js/flasher.js"></script>
 
   <script>
     function parse_code() {
@@ -165,7 +162,7 @@
   </script>
 
   <script src="https://unpkg.com/blockly"></script>
-  <script type="module" src="/js/blocks-json.js"></script>
+  <script src="/js/blocks-json.js"></script>
   <script src="/js/blocks-editor.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -174,11 +171,11 @@
   <input id="compileAndDownload" type="button" class="btn btn-success" value="Compile And Download"
     onclick="parse_code();" />
 
-  <button class="btn btn-warning" onclick="save()">Save Workspace</button>
-  <button class="btn btn-warning" onclick="restore()">Load Workspace</button>
+  <button class="btn btn-warning" onclick="saveWorkspace()">Save Workspace</button>
+  <!--<button class="btn btn-warning" onclick="restore()">Load Workspace</button>-->
 
   <button class="btn btn-warning" onclick="exportWorkspace()">Export Workspace</button>
-  <button class="btn btn-info" id="switch_code_button" onclick="switch_code();">Show Code</button>
+  <button class="btn btn-info" id="switchCode_button" onclick="switchCode();">Show Code</button>
   <a href="http://localhost:8000" class="btn btn-success">Return Home</a>
   <input class="form-control form-control-sm" id="importFile" type="file" onchange="importWorkspace()" />
 

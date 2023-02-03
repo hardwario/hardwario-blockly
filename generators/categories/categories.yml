@@ -30,9 +30,7 @@ categories:
     colour: '#000000'
   Loops:
     colour: '#000000'
-  Integer Variables:
-    colour: '#000000'
-  Float Variables:
+  Variables:
     colour: '#000000'
   CO2 Module:
   Relay Module:

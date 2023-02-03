@@ -24,7 +24,12 @@
 </head>
 
 <body>
-    <script src="/js/page-index.js"></script>
+    <script>
+        var examples_list = <%-JSON.stringify(examples_list)%>;
+        var user_projects_list = <%-JSON.stringify(user_projects_list)%>;
+    </script>
+
+    <script src="/js/index.js"></script>
 
     <div style="display: flex; align-items: center; margin: auto; width: 50%;">
         <img src="/img/hardwario-logo.png" alt="Hardwario Logo">
@@ -39,7 +44,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Blockly</h3>
                         <p class="card-text">Blockly is a visual programming editor. It allows you to create programs by dragging blocks together.</p>
-                        <a href="/blocks_editor" class="btn btn-primary">Go to Blockly</a>
+                        <button class="btn btn-success" onclick="new_project()">Create Project</button>
                     </div>
                 </div>
             </div>
@@ -61,7 +66,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <h3>Your Projects</h3>
-                <div id="list-saved-projects" class="list-group"></div>
+                <div id="list-user-projects" class="list-group"></div>
             </div>
             <div class="col-sm-6">
                 <h3>Examples</h3>

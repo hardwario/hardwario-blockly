@@ -1602,29 +1602,5 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#123458",
         "tooltip": "",
         "helpUrl": ""
-    },
-    {
-        "type": "hio_test_initialize",
-        "message0": "Initialize my block",
-        "previousStatement": "null",
-        "nextStatement": "null",
-        "colour": "#000000",
-        "tooltip": "",
-        "helpUrl": ""
-    },
-    {
-        "type": "hio_test_add_to_i",
-        "message0": "test + %1",
-        "args0": [
-            {
-                "type": "input_value",
-                "name": "VALUE"
-            }
-        ],
-        "previousStatement": "null",
-        "nextStatement": "null",
-        "colour": "#000000",
-        "tooltip": "",
-        "helpUrl": ""
     }
 ]);

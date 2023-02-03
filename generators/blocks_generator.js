@@ -7,8 +7,13 @@ const { exit } = require('process');
 class BlockGenerator {
     constructor() {
         this.modules_path = path.join(__dirname, 'blocks');
-        this.user_modules_path = path.join(__dirname, 'user_blocks');
         this.categories_path = path.join(__dirname, 'categories');
+        
+        const appDataPath = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share");
+        this.user_folder = path.join(appDataPath, 'HARDWARIO Blockly');
+        this.user_blocks_path = path.join(appDataPath, 'HARDWARIO Blockly', 'blocks');
+        this.user_categories_folder_path = path.join(appDataPath, 'HARDWARIO Blockly', 'categories');
+        this.user_categories_path = path.join(appDataPath, 'HARDWARIO Blockly', 'categories', 'categories.yml');
 
         this.modules = {};
         this.user_modules = {};
@@ -17,8 +22,11 @@ class BlockGenerator {
 
         this.categories = {};
 
+        this.setup_folders();
+
         this.load_modules();
         this.load_user_modules();
+  
         this.load_categories();
 
         this.generate_static_blocks();
@@ -27,6 +35,22 @@ class BlockGenerator {
 
         this.generate_categories_xml();
         this.generate_blocks_json();
+    }
+
+    setup_folders() {
+        if (!fs.existsSync(this.user_folder)) {
+            fs.mkdirSync(this.user_folder);
+        }
+        if (!fs.existsSync(this.user_blocks_path)) {
+            fs.mkdirSync(this.user_blocks_path);
+        }
+        if (!fs.existsSync(this.user_categories_folder_path)) {
+            fs.mkdirSync(this.user_categories_folder_path);
+        }
+        if (!fs.existsSync(this.user_categories_path)) {
+            let data = "---\ncategories:\n  ";
+            fs.writeFileSync(this.user_categories_path, data);
+        }
     }
 
     generate_blocks_json() {
@@ -46,9 +70,9 @@ class BlockGenerator {
     }
 
     load_user_modules() {
-        fs.readdirSync(this.user_modules_path).forEach(file => {
+        fs.readdirSync(this.user_blocks_path).forEach(file => {
             let file_name = file.split('.')[0];
-            let module = yaml.load(fs.readFileSync(path.join(this.user_modules_path, file), 'utf8'));
+            let module = yaml.load(fs.readFileSync(path.join(this.user_blocks_path, file), 'utf8'));
             this.user_modules[file_name] = module[file_name];
         });
     }
@@ -69,8 +93,8 @@ class BlockGenerator {
             if (this.categories[category]['configuration'] !== null && 'colour' in this.categories[category]['configuration']) {
                 colour = this.categories[category]['configuration']['colour'];
             }
-            if (category == 'Integer Variables') {
-                xml += `<category name="${category}" colour="${colour}" custom="INTEGER_PALETTE">`;
+            if (category == 'Variables') {
+                xml += `<category name="${category}" colour="${colour}" custom="VARIABLES">`;
             }
             else if (category == 'Float Variables') {
                 xml += `<category name="${category}" colour="${colour}" custom="FLOAT_PALETTE">`;
@@ -101,17 +125,18 @@ class BlockGenerator {
             }
             xml += '</category>';
         }
+        xml += '<sep></sep>';
         xml += '</xml>';
 
         xml = format(xml);
 
-        fs.readFile(path.join(__dirname, '..', 'html', 'blocksEditor.template.html'), 'utf8', function (err, data) {
+        fs.readFile(path.join(__dirname, '..', 'views', 'blocksEditor.template.ejs'), 'utf8', function (err, data) {
             if (err) {
                 return console.log(err);
             }
             var result = data.replace(/<!--CATEGORIES-->/g, xml);
 
-            fs.writeFile(path.join(__dirname, '..', 'html', 'blocksEditor.html'), result, 'utf8', function (err) {
+            fs.writeFile(path.join(__dirname, '..', 'views', 'blocksEditor.ejs'), result, 'utf8', function (err) {
                 if (err) return console.log(err);
             });
         });
@@ -262,14 +287,29 @@ class BlockGenerator {
 
     generate_user_blocks() {
         for (const [module_name, module_content] of Object.entries(this.user_modules)) {
-            if ('application_init' in module_content) {
-                this.generate_module_initialization(module_content, module_name);
+            try {
+                if ('application_init' in module_content) {
+                    this.generate_module_initialization(module_content, module_name);
+                }
             }
-            if ('handler' in module_content) {
-                this.generate_module_event_handler(module_content, module_name);
+            catch (e) {
+                console.log(e);
             }
-            if ('action' in module_content) {
-                this.generate_module_actions(module_content, module_name);
+            try {
+                if ('handler' in module_content) {
+                    this.generate_module_event_handler(module_content, module_name);
+                }
+            }
+            catch (e) {
+                console.log(e);
+            }
+            try {
+                if ('action' in module_content) {
+                    this.generate_module_actions(module_content, module_name);
+                }
+            }
+            catch (e) {
+                console.log(e);
             }
         }
     }
