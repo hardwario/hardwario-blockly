@@ -1,22 +1,16 @@
-window.addEventListener('load', load);
+window.addEventListener('load', loadFile);
 
-function save() {
+function saveFile() {
     // Get contents of div with id editor
     var contents = editor.getValue();
-
-    if(localStorage.getItem("hio_selected_block_type") == "pre_made") {
-        var url = "http://localhost:8000/save_pre_made_blocks";
-    } else {
-        var url = "http://localhost:8000/save_user_blocks";
-    }
 
     // Send YAML to the server
     $.ajax({
         type: "POST",
-        url: url,
+        url: "/save_user_block",
         data: {
             data: contents,
-            name: localStorage.getItem("hio_block_name")
+            name: user_block
         },
         success: function (data) {
             // Display success message
@@ -26,12 +20,40 @@ function save() {
                 message.innerHTML = "";
             }
 
-            , 2000);
+                , 2000);
         }
-    });  
+    });
 }
 
-function load() {
-    editor.setValue(localStorage.getItem("hio_block_data"));
-    document.getElementById("block-name").innerHTML = localStorage.getItem("hio_block_name");
+function loadFile() {
+    if (user_block === "" && pre_made_block === "") {
+        //TODO: Return to blocks creator home page
+    }
+    else if (user_block !== "") {
+        $.ajax({
+            url: "/load_user_block",
+            type: "GET",
+            data: {
+                name: user_block
+            },
+        }).done(function (data) {
+            var xml = Blockly.Xml.textToDom(data);
+            Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+        }
+        );
+    }
+    else if (pre_made_block !== "") {
+        $.ajax({
+            url: "/load_pre_made_block",
+            type: "GET",
+            data: {
+                name: pre_made_block
+            },
+        }).done(function (data) {
+            editor.setValue(data);
+            editor.setReadOnly(true);
+            document.getElementById('saveButton').style.display = 'none';
+        }
+        );
+    }
 }

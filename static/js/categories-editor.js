@@ -8,7 +8,7 @@ function save() {
     // Send YAML to the server
     $.ajax({
         type: "POST",
-        url: "http://localhost:8000/save_categories",
+        url: "/save_categories",
         data: {
             data: contents
         },
@@ -29,7 +29,7 @@ function load() {
     // Load YAML from the server
     $.ajax({
         type: "GET",
-        url: "http://localhost:8000/load_categories",
+        url: "/load_categories",
         success: function (data) {
             // Display YAML in the editor
             editor.setValue(data);

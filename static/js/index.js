@@ -3,26 +3,19 @@ window.addEventListener('load', load_examples);
 
 localStorage.setItem("hio_selected_project", "");
 
-function select_example(example) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var data = this.responseText;
-      localStorage.setItem("hio_selected_project", data);
-      window.location.href = "http://localhost:8000/blocks_editor";
-    }
-  };
-  xhttp.open("GET", "http://localhost:8000/get_example?example=" + example, true);
-  xhttp.send();
+function select_example(name) {
+  window.location.href = "/blocks_editor?example=" + name;
 }
 
-function select_project(key) {
-  if (typeof (Storage) !== "undefined") {
-    if (localStorage.length > 0) {
-      var data = localStorage.getItem(key);
-      localStorage.setItem("hio_selected_project", data);
-      window.location.href = "http://localhost:8000/blocks_editor";
-    }
+function select_project(name) {
+  window.location.href = "/blocks_editor?project=" + name;
+}
+
+function delete_project(name) {
+  var r = confirm("Are you sure you want to delete the project " + name + "?");
+  if (r == true) {
+    // Delete the project
+    window.location.href = "/delete_project?project=" + name;
   }
 }
 
@@ -39,7 +32,7 @@ function new_project() {
     }
     else {
       // Create the project
-      window.location.href = "http://localhost:8000/blocks_editor?project=" + name;
+      window.location.href = "/blocks_editor?project=" + name;
     }
   }
 }
@@ -61,26 +54,30 @@ function load_user_projects() {
   var list = document.getElementById("list-user-projects");
   list.innerHTML = "";
   for (var i = 0; i < user_projects_list.length; i++) {
-    var li = document.createElement("a");
-    li.appendChild(document.createTextNode(user_projects_list[i]));
-    li.setAttribute("onclick", "select_project('" + user_projects_list[i] + "')");
-    li.setAttribute("class", "list-group-item list-group-item-action");
+    // List item with delete button in another column on the same line
+    var li = document.createElement("div");
+    li.setAttribute("class", "row");
+
+    var col = document.createElement("div");
+    col.setAttribute("class", "col-sm-10");
+
+    var li_name = document.createElement("a");
+    li_name.appendChild(document.createTextNode(user_projects_list[i]));
+    li_name.setAttribute("onclick", "select_project('" + user_projects_list[i] + "')");
+    li_name.setAttribute("class", "list-group-item list-group-item-action col-10");
+    col.appendChild(li_name);
+    li.appendChild(col);
+
+    var col2 = document.createElement("div");
+    col2.setAttribute("class", "col-sm-2");
+
+    var li_delete = document.createElement("button");
+    li_delete.appendChild(document.createTextNode("Delete"));
+    li_delete.setAttribute("onclick", "delete_project('" + user_projects_list[i] + "')");
+    li_delete.setAttribute("class", "btn btn-danger col-2");
+    col2.appendChild(li_delete);
+    li.appendChild(col2);
+
     list.appendChild(li);
   }
-  /*if (typeof (Storage) !== "undefined") {
-    if (localStorage.length > 0) {
-      var list = document.getElementById("list-user-projects");
-      list.innerHTML = "";
-      for (var i = 0; i < user_projects_list.length; i++) {
-        var key = localStorage.key(i);
-        if (key.startsWith("hio_project_")) {
-          var li = document.createElement("a");
-          li.appendChild(document.createTextNode(key.slice("hio_project_".length)));
-          li.setAttribute("onclick", "select_project('" + key + "')");
-          li.setAttribute("class", "list-group-item list-group-item-action");
-          list.appendChild(li);
-        }
-      }
-    }
-  }*/
 }

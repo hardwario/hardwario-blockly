@@ -329,17 +329,38 @@ function importWorkspace() {
 }
 
 function loadWorkspace() {
-  $.ajax({
-    url: "/load_project",
-    type: "GET",
-    data: {
-      name: project
-    },
-  }).done(function (data) {
-    var xml = Blockly.Xml.textToDom(data);
-    Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+  if(project === "" && example === "")
+  {
+    //TODO: Return to home page
   }
-  );
+  else if(project !== "") {
+    $.ajax({
+      url: "/load_project",
+      type: "GET",
+      data: {
+        name: project
+      },
+    }).done(function (data) {
+      var xml = Blockly.Xml.textToDom(data);
+      Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+    }
+    );
+  }
+  else if(example !== "") {
+    $.ajax({
+      url: "/load_example",
+      type: "GET",
+      data: {
+        name: example
+      },
+    }).done(function (data) {
+      document.getElementById('saveWorkspaceButton').style.display = 'none';
+      console.log(data);
+      var xml = Blockly.Xml.textToDom(data);
+      Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+    }
+    );
+  }
 }
 
 workspace.addChangeListener(onBlockEvent);

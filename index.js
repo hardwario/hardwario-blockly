@@ -7,7 +7,8 @@ const bodyParser = require("body-parser");
 const appDataPath = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share");
 
 const user_blocks_path = path.join(appDataPath, 'HARDWARIO Blockly', 'blocks');
-const user_categories_path = path.join(appDataPath, 'HARDWARIO Blockly', 'categories');
+const user_categories_folder_path = path.join(appDataPath, 'HARDWARIO Blockly', 'categories');
+const user_categories_path = path.join(user_categories_folder_path, 'categories.yml');
 const user_projects_path = path.join(appDataPath, 'HARDWARIO Blockly', 'projects');
 const blocks_generator = require("./generators/blocks_generator.js");
 const code_generator = require("./generators/code_generator.js");
@@ -30,11 +31,11 @@ const init = () => {
   });
 
   app.get('/blocks_editor', (req, res) => {
-    res.render('blocksEditor', { root: __dirname, project: req.query.project });
+    res.render('blocksEditor', { root: __dirname, project: req.query.project, example: req.query.example });
   });
 
   app.get('/blocks_creator', (req, res) => {
-    res.render('blocksCreator', { root: __dirname });
+    res.render('blocksCreator', { root: __dirname, user_blocks_list: get_user_blocks_list(), pre_made_blocks_list: get_pre_made_blocks_list() });
   });
 
   app.get('/categories_editor', (req, res) => {
@@ -47,7 +48,7 @@ const init = () => {
         fs.writeFileSync(`${user_blocks_path}/${req.query.name}.yml`, "NEW_BLOCK")
       }
     }
-    res.render('yamlEditor', { root: __dirname });
+    res.render('yamlEditor', { root: __dirname, user_block: req.query.user_block, pre_made_block: req.query.pre_made_block });
   });
 
   app.get('/parse_code', (req, res) => {
@@ -99,15 +100,27 @@ const init = () => {
     res.send(data);
   });
 
+  app.get('/delete_project', (req, res) => {
+    fs.rmdirSync(path.join(user_projects_path, req.query.project), { recursive: true });
+    res.render('index', { root: __dirname, examples_list: get_examples_list(), user_projects_list: get_user_projects_list() });
+  });
+
+  app.get('/load_example', (req, res) => {
+    console.log(`${__dirname}/examples/${req.query.name}/workspace.xml`);
+    var data = fs.readFileSync(`${__dirname}/examples/${req.query.name}/workspace.xml`, 'utf8');
+    console.log(data);
+    res.send(data);
+  });
+
   app.post('/save_categories', (req, res) => {
     var data = req.body.data;
-    fs.writeFileSync(`${__dirname}/generators/categories/categories.yml`, data);
+    fs.writeFileSync(user_categories_path, data);
     res.send("Categories saved");
     blocks_generator.generate_blocks();
   });
 
   app.get('/load_categories', (req, res) => {
-    var data = fs.readFileSync(`${__dirname}/generators/categories/categories.yml`, 'utf8');
+    var data = fs.readFileSync(user_categories_path, 'utf8');
     res.send(data);
   });
 
@@ -116,12 +129,24 @@ const init = () => {
     res.send(files);
   });
 
-  app.post('/save_user_blocks', (req, res) => {
+  app.post('/save_user_block', (req, res) => {
     var data = req.body.data;
-    fs.writeFileSync(`${user_blocks_path}/${req.body.name}`, data);
+    var name = req.body.name;
+
+    fs.writeFileSync(path.join(user_blocks_path, name + '.yml'), data);
     res.send("User blocks saved");
+
     blocks_generator.generate_blocks();
     code_generator.load_all_blocks();
+  });
+
+  app.get('/delete_user_block', (req, res) => {
+    fs.unlinkSync(path.join(user_blocks_path, req.query.name));
+    blocks_generator.generate_blocks();
+    code_generator.load_all_blocks();
+    
+    res.render('blocksCreator', { root: __dirname, user_blocks_list: get_user_blocks_list(), pre_made_blocks_list: get_pre_made_blocks_list() });
+
   });
 
   app.post('/save_pre_made_blocks', (req, res) => {
@@ -142,19 +167,9 @@ const init = () => {
     res.send(files);
   });
 
-  app.get('/load_pre_made_blocks_file', (req, res) => {
+  app.get('/load_pre_made_block', (req, res) => {
     var data = fs.readFileSync(`${__dirname}/generators/blocks/${req.query.name}`, 'utf8');
     res.send(data);
-  });
-
-  app.get('/get_example', (req, res) => {
-    if (req.query.example === undefined) {
-      res.send("No example to load");
-    }
-    else {
-      var data = fs.readFileSync(`${__dirname}/examples/${req.query.example}/workspace.xml`, 'utf8');
-      res.send(data);
-    }
   });
   
   app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
@@ -189,6 +204,19 @@ function get_user_projects_list() {
       files.splice(index, 1);
     }
   });
+  return files;
+}
+
+function get_user_blocks_list() {
+  if (!fs.existsSync(user_blocks_path)) {
+    fs.mkdirSync(user_blocks_path);
+  }
+  var files = fs.readdirSync(user_blocks_path);
+  return files;
+}
+
+function get_pre_made_blocks_list() {
+  var files = fs.readdirSync(`${__dirname}/generators/blocks`);
   return files;
 }
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
   <link rel="stylesheet" href="/css/blocksEditor.css">
@@ -9,39 +10,55 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blocks Creator</title>
-<style type="text/css" media="screen">
-  #editor { 
-    height: 100%;
-    width: 100%;
-  }
-  html, body
-  {
-    height: 100%;
-    width: 100%;
-  }
-</style>
+  <title>Blocks Creator</title>
+  <style type="text/css" media="screen">
+    #editor {
+      height: 100%;
+      width: 100%;
+    }
+
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
 </head>
+
 <body>
+  <script>
+    var user_blocks_list = <%-JSON.stringify(user_blocks_list)%>;
+    var pre_made_blocks_list = <%-JSON.stringify(pre_made_blocks_list)%>;
+  </script>
+
   <script src="/js/blocks-creator.js"></script>
 
   <div style="display: flex; align-items: center; margin: auto; width: 50%;">
     <img src="/img/hardwario-logo.png" alt="Hardwario Logo">
-    <h1>Blocks Creator</h1>      
+    <h1>Blocks Creator</h1>
   </div>
   <div style="clear: both;"></div>
 
   <div class="container">
     <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Categories</h3>
-                    <p class="card-text">You can add your own categories or use the premade categories</p>
-                    <a href="/categories_editor" class="btn btn-primary">Go to Categories Editor</a>
-                </div>
-            </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Blocks</h3>
+            <p class="card-text">You can add your own blocks to use in blocks editor</p>
+            <button class="btn btn-success" onclick="new_block()">Create Block</button>
+          </div>
         </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Categories</h3>
+            <p class="card-text">You can add your own categories or use the premade categories</p>
+            <a href="/categories_editor" class="btn btn-success">Edit your categories</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -49,17 +66,16 @@
 
     <div class="container">
       <div class="row">
-          <div class="col-sm-6">
-              <h3>Your Blocks</h3>
-              <button class="btn btn-success" onclick="create_block()">Create Block</button>
-              <hr>
-              <div id="list-user-blocks" class="list-group"></div>
-          </div>
-          <div class="col-sm-6">
-              <h3>Pre-made Blocks</h3>
-              <div id="list-pre-made-blocks" class="list-group"></div>
-          </div>
+        <div class="col-sm-6">
+          <h3>Your Blocks</h3>
+          <div id="list-user-blocks" class="list-group"></div>
+        </div>
+        <div class="col-sm-6">
+          <h3>Pre-made Blocks</h3>
+          <div id="list-pre-made-blocks" class="list-group"></div>
+        </div>
       </div>
-  </div>
+    </div>
 </body>
+
 </html>
