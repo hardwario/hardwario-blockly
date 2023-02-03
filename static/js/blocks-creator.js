@@ -37,7 +37,16 @@ function load_saved_blocks() {
 
 function delete_user_block(name) {
     if (confirm("Are you sure you want to delete the block '" + name + "'?")) {
-        window.location.href = "/delete_user_block?name=" + name;
+        // Send request to delete the block with ajax
+        $.ajax({
+            url: "/delete_user_block",
+            type: "GET",
+            data: { name: name },
+            success: function (data) {
+              // Reload the list of projects
+              window.location.href = "/blocks_creator";
+            }
+          });
     }
 }
 

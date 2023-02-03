@@ -47,9 +47,14 @@ class CodeGenerator {
 
     load_user_blocks() {
         fs.readdirSync(this.user_blocks_path).forEach(file => {
-            let file_name = file.split('.')[0];
-            let module = yaml.load(fs.readFileSync(path.join(this.user_blocks_path, file), 'utf8'));
-            this.blocks[file_name] = module[file_name];
+            try {
+                let file_name = file.split('.')[0];
+                let module = yaml.load(fs.readFileSync(path.join(this.user_blocks_path, file), 'utf8'));
+                this.user_modules[file_name] = module[file_name];
+            }
+            catch (e) {
+                console.log(e);
+            } 
         });
     }
 

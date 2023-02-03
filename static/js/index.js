@@ -14,8 +14,16 @@ function select_project(name) {
 function delete_project(name) {
   var r = confirm("Are you sure you want to delete the project " + name + "?");
   if (r == true) {
-    // Delete the project
-    window.location.href = "/delete_project?project=" + name;
+    // Send request to delete the project with ajax
+    $.ajax({
+      url: "/delete_project",
+      type: "GET",
+      data: { project: name },
+      success: function (data) {
+        // Reload the list of projects
+        window.location.href = "/";
+      }
+    });
   }
 }
 

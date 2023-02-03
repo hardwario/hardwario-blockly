@@ -102,7 +102,7 @@ const init = () => {
 
   app.get('/delete_project', (req, res) => {
     fs.rmdirSync(path.join(user_projects_path, req.query.project), { recursive: true });
-    res.render('index', { root: __dirname, examples_list: get_examples_list(), user_projects_list: get_user_projects_list() });
+    res.send("Project deleted");
   });
 
   app.get('/load_example', (req, res) => {
@@ -145,8 +145,7 @@ const init = () => {
     blocks_generator.generate_blocks();
     code_generator.load_all_blocks();
     
-    res.render('blocksCreator', { root: __dirname, user_blocks_list: get_user_blocks_list(), pre_made_blocks_list: get_pre_made_blocks_list() });
-
+    res.send("User blocks deleted");
   });
 
   app.post('/save_pre_made_blocks', (req, res) => {

@@ -71,9 +71,14 @@ class BlockGenerator {
 
     load_user_modules() {
         fs.readdirSync(this.user_blocks_path).forEach(file => {
-            let file_name = file.split('.')[0];
-            let module = yaml.load(fs.readFileSync(path.join(this.user_blocks_path, file), 'utf8'));
-            this.user_modules[file_name] = module[file_name];
+            try {
+                let file_name = file.split('.')[0];
+                let module = yaml.load(fs.readFileSync(path.join(this.user_blocks_path, file), 'utf8'));
+                this.user_modules[file_name] = module[file_name];
+            }
+            catch (e) {
+                console.log(e);
+            } 
         });
     }
 
