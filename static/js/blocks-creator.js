@@ -83,7 +83,17 @@ function new_block() {
         }
         else {
             // Create the block
-            window.location.href = "/yaml_editor?user_block=" + name;
+            window.location.href = "/yaml_editor?user_block=" + name + '.yml';
         }
     }
 }
+
+function open_user_folder() {
+    $.ajax({
+      url: "/open_user_folder",
+      type: "GET",
+      success: function (data) {
+        console.log("User folder opened");
+      }
+    });
+  }

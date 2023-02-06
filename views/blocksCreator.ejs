@@ -27,8 +27,8 @@
 
 <body>
   <script>
-    var user_blocks_list = <%-JSON.stringify(user_blocks_list)%>;
-    var pre_made_blocks_list = <%-JSON.stringify(pre_made_blocks_list)%>;
+    var user_blocks_list = <%-JSON.stringify(user_blocks_list) %>;
+    var pre_made_blocks_list = <%-JSON.stringify(pre_made_blocks_list) %>;
   </script>
 
   <script src="/js/blocks-creator.js"></script>
@@ -67,7 +67,9 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Your Blocks</h3>
+          <h3>Your Blocks
+            <a class="btn btn-primary" onclick="open_user_folder()">Open Blocks Folder</a>
+          </h3>
           <div id="list-user-blocks" class="list-group"></div>
         </div>
         <div class="col-sm-6">

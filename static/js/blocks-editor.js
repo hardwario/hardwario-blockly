@@ -437,3 +437,10 @@ function exportJSON() {
 
   return json;
 }
+
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.key === 's') {
+    e.preventDefault();
+    saveWorkspace();
+  }
+});

@@ -3,6 +3,7 @@ var favicon = require('serve-favicon')
 const path = require('path');
 var fs = require('fs');
 const bodyParser = require("body-parser");
+const openExplorer = require('open-file-explorer');
 
 const appDataPath = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share");
 
@@ -127,16 +128,11 @@ const init = () => {
     res.send(data);
   });
 
-  app.get('/load_user_blocks', (req, res) => {
-    var files = fs.readdirSync(user_blocks_folder_path);
-    res.send(files);
-  });
-
   app.post('/save_user_block', (req, res) => {
     var data = req.body.data;
     var name = req.body.name;
 
-    fs.writeFileSync(path.join(user_blocks_folder_path, name + '.yml'), data);
+    fs.writeFileSync(path.join(user_blocks_folder_path, name), data);
     res.send("User blocks saved");
 
     blocks_generator.generate_blocks();
@@ -159,7 +155,7 @@ const init = () => {
     code_generator.load_all_blocks();
   });
 
-  app.get('/load_user_blocks_file', (req, res) => {
+  app.get('/load_user_block', (req, res) => {
     var data = fs.readFileSync(`${user_blocks_folder_path}/${req.query.name}`, 'utf8');
     res.send(data);
   });
@@ -173,6 +169,12 @@ const init = () => {
     var data = fs.readFileSync(`${__dirname}/generators/blocks/${req.query.name}`, 'utf8');
     res.send(data);
   });
+
+  app.get('/open_user_folder', (req, res) => {
+    openExplorer(user_folder);
+    res.send("User folder opened");
+  });
+
 
   app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
 }

@@ -37,8 +37,8 @@ function loadFile() {
                 name: user_block
             },
         }).done(function (data) {
-            var xml = Blockly.Xml.textToDom(data);
-            Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+            console.log(data);
+            editor.setValue(data);
         }
         );
     }
@@ -57,3 +57,12 @@ function loadFile() {
         );
     }
 }
+
+document.addEventListener('keydown', e => {
+    if (user_block !== "") {
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault();
+            saveFile();
+        }
+    }
+});

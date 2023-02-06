@@ -89,3 +89,13 @@ function load_user_projects() {
     list.appendChild(li);
   }
 }
+
+function open_user_folder() {
+  $.ajax({
+    url: "/open_user_folder",
+    type: "GET",
+    success: function (data) {
+      console.log("User folder opened");
+    }
+  });
+}

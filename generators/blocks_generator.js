@@ -21,6 +21,7 @@ class BlockGenerator {
         this.blocks = [];
 
         this.categories = {};
+        this.user_categories = {};
 
         this.load_modules();
         this.load_user_modules();
@@ -65,17 +66,27 @@ class BlockGenerator {
     }
 
     load_categories() {
-        fs.readdirSync(this.categories_path).forEach(file => {
-            let categories = yaml.load(fs.readFileSync(path.join(this.categories_path, file), 'utf8'));
-            for (const [category, _] of Object.entries(categories['categories'])) {
-                this.categories[category] = { 'configuration': categories['categories'][category], 'blocks': [] };
-            }
-        });
+        let categories = yaml.load(fs.readFileSync(path.join(this.categories_path, 'categories.yml'), 'utf8'));
+        for (const [category, _] of Object.entries(categories['categories'])) {
+            this.categories[category] = { 'configuration': categories['categories'][category], 'blocks': [] };
+        }
+
+        let user_categories = yaml.load(fs.readFileSync(path.join(this.user_categories_folder_path, 'categories.yml'), 'utf8'));
+        for (const [category, _] of Object.entries(user_categories['categories'])) {
+            this.categories[category] = { 'configuration': user_categories['categories'][category], 'blocks': [] };
+            this.user_categories[category] = null;
+        }
     }
 
     generate_categories_xml() {
+        let not_separated = true;
         let xml = '<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">';
         for (const [category, _] of Object.entries(this.categories)) {
+            if(category in this.user_categories && not_separated) {
+                xml += `<sep></sep>`;
+                not_separated = false;
+            }
+
             let colour = '#000000';
             if (this.categories[category]['configuration'] !== null && 'colour' in this.categories[category]['configuration']) {
                 colour = this.categories[category]['configuration']['colour'];
@@ -112,7 +123,6 @@ class BlockGenerator {
             }
             xml += '</category>';
         }
-        xml += '<sep></sep>';
         xml += '</xml>';
 
         xml = format(xml);
