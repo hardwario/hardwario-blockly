@@ -22,8 +22,6 @@ class BlockGenerator {
 
         this.categories = {};
 
-        this.setup_folders();
-
         this.load_modules();
         this.load_user_modules();
   
@@ -35,22 +33,6 @@ class BlockGenerator {
 
         this.generate_categories_xml();
         this.generate_blocks_json();
-    }
-
-    setup_folders() {
-        if (!fs.existsSync(this.user_folder)) {
-            fs.mkdirSync(this.user_folder);
-        }
-        if (!fs.existsSync(this.user_blocks_path)) {
-            fs.mkdirSync(this.user_blocks_path);
-        }
-        if (!fs.existsSync(this.user_categories_folder_path)) {
-            fs.mkdirSync(this.user_categories_folder_path);
-        }
-        if (!fs.existsSync(this.user_categories_path)) {
-            let data = "---\ncategories:\n  ";
-            fs.writeFileSync(this.user_categories_path, data);
-        }
     }
 
     generate_blocks_json() {

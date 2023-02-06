@@ -6,17 +6,20 @@ const bodyParser = require("body-parser");
 
 const appDataPath = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share");
 
-const user_blocks_path = path.join(appDataPath, 'HARDWARIO Blockly', 'blocks');
-const user_categories_folder_path = path.join(appDataPath, 'HARDWARIO Blockly', 'categories');
+const user_folder = path.join(appDataPath, 'HARDWARIO Blockly');
+const user_blocks_folder_path = path.join(user_folder, 'blocks');
+const user_categories_folder_path = path.join(user_folder, 'categories');
 const user_categories_path = path.join(user_categories_folder_path, 'categories.yml');
-const user_projects_path = path.join(appDataPath, 'HARDWARIO Blockly', 'projects');
+const user_projects_folder_path = path.join(user_folder, 'projects');
+setup_folders();
+
 const blocks_generator = require("./generators/blocks_generator.js");
 const code_generator = require("./generators/code_generator.js");
 
 const init = () => {
   const app = express();
   const PORT = 8000;
-  
+
   app.use(favicon(path.join(__dirname, 'static', 'img', 'favicon', 'favicon.ico')))
   app.use(express.static(path.join(__dirname, 'static')));
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,7 +47,7 @@ const init = () => {
 
   app.get('/yaml_editor', (req, res) => {
     if (req.query.new_user_block === "true") {
-      if(!fs.existsSync(`${user_blocks_path}/${req.query.name}.yml`)){
+      if (!fs.existsSync(`${user_blocks_path}/${req.query.name}.yml`)) {
         fs.writeFileSync(`${user_blocks_path}/${req.query.name}.yml`, "NEW_BLOCK")
       }
     }
@@ -144,7 +147,7 @@ const init = () => {
     fs.unlinkSync(path.join(user_blocks_path, req.query.name));
     blocks_generator.generate_blocks();
     code_generator.load_all_blocks();
-    
+
     res.send("User blocks deleted");
   });
 
@@ -170,7 +173,7 @@ const init = () => {
     var data = fs.readFileSync(`${__dirname}/generators/blocks/${req.query.name}`, 'utf8');
     res.send(data);
   });
-  
+
   app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
 }
 if (require.main === module) {
@@ -217,6 +220,25 @@ function get_user_blocks_list() {
 function get_pre_made_blocks_list() {
   var files = fs.readdirSync(`${__dirname}/generators/blocks`);
   return files;
+}
+
+function setup_folders() {
+  if (!fs.existsSync(user_folder)) {
+    fs.mkdirSync(user_folder);
+  }
+  if (!fs.existsSync(user_blocks_folder_path)) {
+    fs.mkdirSync(user_blocks_folder_path);
+  }
+  if (!fs.existsSync(user_categories_folder_path)) {
+    fs.mkdirSync(user_categories_folder_path);
+  }
+  if (!fs.existsSync(user_categories_path)) {
+    let data = "---\ncategories:\n  ";
+    fs.writeFileSync(user_categories_path, data);
+  }
+  if (!fs.existsSync(user_projects_folder_path)) {
+    fs.mkdirSync(user_projects_folder_path);
+  }
 }
 
 module.exports = init;
