@@ -47,8 +47,8 @@ const init = () => {
 
   app.get('/yaml_editor', (req, res) => {
     if (req.query.new_user_block === "true") {
-      if (!fs.existsSync(`${user_blocks_path}/${req.query.name}.yml`)) {
-        fs.writeFileSync(`${user_blocks_path}/${req.query.name}.yml`, "NEW_BLOCK")
+      if (!fs.existsSync(`${user_blocks_folder_path}/${req.query.name}.yml`)) {
+        fs.writeFileSync(`${user_blocks_folder_path}/${req.query.name}.yml`, "NEW_BLOCK")
       }
     }
     res.render('yamlEditor', { root: __dirname, user_block: req.query.user_block, pre_made_block: req.query.pre_made_block });
@@ -90,21 +90,21 @@ const init = () => {
     var data = req.body.data;
     var name = req.body.name;
 
-    if (!fs.existsSync(path.join(user_projects_path, name))) {
-      fs.mkdirSync(path.join(user_projects_path, name));
+    if (!fs.existsSync(path.join(user_projects_folder_path, name))) {
+      fs.mkdirSync(path.join(user_projects_folder_path, name));
     }
 
-    fs.writeFileSync(path.join(user_projects_path, name, 'workspace.xml'), data);
+    fs.writeFileSync(path.join(user_projects_folder_path, name, 'workspace.xml'), data);
     res.send("Project saved");
   });
 
   app.get('/load_project', (req, res) => {
-    var data = fs.readFileSync(path.join(user_projects_path, req.query.name, 'workspace.xml'), 'utf8');
+    var data = fs.readFileSync(path.join(user_projects_folder_path, req.query.name, 'workspace.xml'), 'utf8');
     res.send(data);
   });
 
   app.get('/delete_project', (req, res) => {
-    fs.rmdirSync(path.join(user_projects_path, req.query.project), { recursive: true });
+    fs.rmdirSync(path.join(user_projects_folder_path, req.query.project), { recursive: true });
     res.send("Project deleted");
   });
 
@@ -128,7 +128,7 @@ const init = () => {
   });
 
   app.get('/load_user_blocks', (req, res) => {
-    var files = fs.readdirSync(user_blocks_path);
+    var files = fs.readdirSync(user_blocks_folder_path);
     res.send(files);
   });
 
@@ -136,7 +136,7 @@ const init = () => {
     var data = req.body.data;
     var name = req.body.name;
 
-    fs.writeFileSync(path.join(user_blocks_path, name + '.yml'), data);
+    fs.writeFileSync(path.join(user_blocks_folder_path, name + '.yml'), data);
     res.send("User blocks saved");
 
     blocks_generator.generate_blocks();
@@ -144,7 +144,7 @@ const init = () => {
   });
 
   app.get('/delete_user_block', (req, res) => {
-    fs.unlinkSync(path.join(user_blocks_path, req.query.name));
+    fs.unlinkSync(path.join(user_blocks_folder_path, req.query.name));
     blocks_generator.generate_blocks();
     code_generator.load_all_blocks();
 
@@ -160,7 +160,7 @@ const init = () => {
   });
 
   app.get('/load_user_blocks_file', (req, res) => {
-    var data = fs.readFileSync(`${user_blocks_path}/${req.query.name}`, 'utf8');
+    var data = fs.readFileSync(`${user_blocks_folder_path}/${req.query.name}`, 'utf8');
     res.send(data);
   });
 
@@ -194,12 +194,12 @@ function get_examples_list() {
 }
 
 function get_user_projects_list() {
-  if (!fs.existsSync(user_projects_path)) {
-    fs.mkdirSync(user_projects_path);
+  if (!fs.existsSync(user_projects_folder_path)) {
+    fs.mkdirSync(user_projects_folder_path);
   }
-  var files = fs.readdirSync(user_projects_path);
+  var files = fs.readdirSync(user_projects_folder_path);
   files.forEach(function (folder, index) {
-    if (fs.existsSync(`${user_projects_path}/${folder}/workspace.xml`)) {
+    if (fs.existsSync(`${user_projects_folder_path}/${folder}/workspace.xml`)) {
       files[index] = files[index];
     }
     else {
@@ -210,10 +210,10 @@ function get_user_projects_list() {
 }
 
 function get_user_blocks_list() {
-  if (!fs.existsSync(user_blocks_path)) {
-    fs.mkdirSync(user_blocks_path);
+  if (!fs.existsSync(user_blocks_folder_path)) {
+    fs.mkdirSync(user_blocks_folder_path);
   }
-  var files = fs.readdirSync(user_blocks_path);
+  var files = fs.readdirSync(user_blocks_folder_path);
   return files;
 }
 

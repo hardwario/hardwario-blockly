@@ -97,7 +97,7 @@ class CodeGenerator {
                 let name = block['type'].substring("hio_".length, block['type'].length - "_event".length)
                 let full_event_name = this.blocks[name]['handler']['events']['prefix'] + block['fields']['NAME']
                 if ('inputs' in block) {
-                    this.indent += 2
+                    this.indent = 2
                     this.next(block['inputs']['BLOCKS'], this.event_handlers[name + '_handler'][full_event_name])
                 }
                 this.indent = 0;
