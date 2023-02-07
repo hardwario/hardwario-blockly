@@ -1602,5 +1602,61 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#123458",
         "tooltip": "",
         "helpUrl": ""
+    },
+    {
+        "type": "hio_My block_initialize",
+        "message0": "Initialize Battery Module %1 With Update Interval %2 ms",
+        "args0": [
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "field_number",
+                "name": "UPDATE_INTERVAL",
+                "value": 5000,
+                "min": 1,
+                "max": 1000000
+            }
+        ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#000000",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_My block_event",
+        "message0": "On Battery Module %1 %2 %3",
+        "args0": [
+            {
+                "type": "field_dropdown",
+                "name": "NAME",
+                "options": [
+                    [
+                        "UPDATE",
+                        "UPDATE"
+                    ]
+                ]
+            },
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "input_statement",
+                "name": "BLOCKS"
+            }
+        ],
+        "colour": "#000000",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_My block_publish_voltage",
+        "message0": "Publish Battery Voltage Over the Radio",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#000000",
+        "tooltip": "",
+        "helpUrl": ""
     }
 ]);

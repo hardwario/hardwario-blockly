@@ -29,7 +29,7 @@ class CodeGenerator {
             'math_arithmetic': { 'ADD': '+', 'MINUS': '-', 'MULTIPLY': '*', 'DIVIDE': '/' }
         }
 
-        this.load_all_blocks();  
+        this.load_all_blocks();
     }
 
     load_all_blocks() {
@@ -50,11 +50,11 @@ class CodeGenerator {
             try {
                 let file_name = file.split('.')[0];
                 let module = yaml.load(fs.readFileSync(path.join(this.user_blocks_path, file), 'utf8'));
-                this.user_modules[file_name] = module[file_name];
+                this.blocks[file_name] = module[file_name];
             }
             catch (e) {
                 console.log(e);
-            } 
+            }
         });
     }
 
@@ -122,7 +122,7 @@ class CodeGenerator {
 
     compile_code(output) {
         shell.cd(path.join(__dirname, '..'));
-        if(!fs.existsSync((path.join(__dirname, '..', 'skeleton')))) {
+        if (!fs.existsSync((path.join(__dirname, '..', 'skeleton')))) {
             shell.rm('-rf', './skeleton');
             shell.exec('git clone --recursive https://github.com/hardwario/twr-skeleton.git ./skeleton');
         }
