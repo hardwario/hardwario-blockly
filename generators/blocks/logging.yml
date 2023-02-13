@@ -63,7 +63,7 @@ logging:
           VARIABLE:
             type: input
       code:
-        - twr_log_error("{MESSAGE}");
+        - twr_log_error("{MESSAGE} {FORMAT_STRING}", {VARIABLE});
     warning:
       block:
         text:

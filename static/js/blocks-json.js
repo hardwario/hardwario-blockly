@@ -577,7 +577,7 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "LEFT",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
@@ -587,7 +587,7 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "TOP",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             }
@@ -1492,11 +1492,11 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "ADDRESS",
                 "options": [
                     [
-                        "TWR_MODULE_RELAY_I2C_ADDRESS_DEFAULT",
+                        "Default",
                         "TWR_MODULE_RELAY_I2C_ADDRESS_DEFAULT"
                     ],
                     [
-                        "TWR_MODULE_RELAY_I2C_ADDRESS_ALTERNATE",
+                        "Alternate",
                         "TWR_MODULE_RELAY_I2C_ADDRESS_ALTERNATE"
                     ]
                 ]

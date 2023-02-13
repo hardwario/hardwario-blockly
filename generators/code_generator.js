@@ -251,10 +251,25 @@ class CodeGenerator {
                     let random_variable_name = randomString(12);
                     for (let code of block_definition['action'][action]['code']) {
                         if ('fields' in block) {
-                            console.log(block['fields']);
                             if ('inputs' in block) {
                                 for (let input in block['inputs']) {
+                                    let format_string = '';
                                     block['fields'][input] = this.generate_sub_section(block['inputs'][input]['block'])
+                                    if (code.search('FORMAT_STRING')) {
+                                        if('VAR' in block['inputs'][input]['block']['fields'])
+                                        {
+                                            if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Integer') {
+                                                format_string = '%d';
+                                            }
+                                            else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Float') {
+                                                format_string = '%.1f';
+                                            }
+                                        }
+                                        else {
+                                            format_string = '%d';
+                                        }
+                                        block['fields']['FORMAT_STRING'] = format_string;
+                                    }
                                 }
                                 if ('VALUE' in block['inputs']) {
                                     let variable = this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['name'];

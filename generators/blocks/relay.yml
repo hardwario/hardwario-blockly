@@ -13,8 +13,8 @@ relay:
         ADDRESS:
           type: dropdown
           options:
-            - ['TWR_MODULE_RELAY_I2C_ADDRESS_DEFAULT', 'TWR_MODULE_RELAY_I2C_ADDRESS_DEFAULT']
-            - ['TWR_MODULE_RELAY_I2C_ADDRESS_ALTERNATE', 'TWR_MODULE_RELAY_I2C_ADDRESS_ALTERNATE']
+            - ['Default', 'TWR_MODULE_RELAY_I2C_ADDRESS_DEFAULT']
+            - ['Alternate', 'TWR_MODULE_RELAY_I2C_ADDRESS_ALTERNATE']
         X:
           type: new_line
         DEFAULT_STATE:

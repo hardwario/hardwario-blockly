@@ -27,7 +27,7 @@ function saveFile() {
 
 function loadFile() {
     if (user_block === "" && pre_made_block === "") {
-        //TODO: Return to blocks creator home page
+        window.location.href = "/blocks_creator";
     }
     else if (user_block !== "") {
         $.ajax({

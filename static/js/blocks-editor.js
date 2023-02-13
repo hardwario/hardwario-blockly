@@ -331,7 +331,7 @@ function importWorkspace() {
 function loadWorkspace() {
   if(project === "" && example === "")
   {
-    //TODO: Return to home page
+    window.location.href = "/";
   }
   else if(project !== "") {
     $.ajax({
