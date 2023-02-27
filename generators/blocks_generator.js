@@ -72,9 +72,14 @@ class BlockGenerator {
         }
 
         let user_categories = yaml.load(fs.readFileSync(path.join(this.user_categories_folder_path, 'categories.yml'), 'utf8'));
-        for (const [category, _] of Object.entries(user_categories['categories'])) {
-            this.categories[category] = { 'configuration': user_categories['categories'][category], 'blocks': [] };
-            this.user_categories[category] = null;
+        try {
+            for (const [category, _] of Object.entries(user_categories['categories'])) {
+                this.categories[category] = { 'configuration': user_categories['categories'][category], 'blocks': [] };
+                this.user_categories[category] = null;
+            }
+        }
+        catch (e) {
+            console.log(e);
         }
     }
 

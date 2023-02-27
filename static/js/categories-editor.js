@@ -20,9 +20,9 @@ function save() {
                 message.innerHTML = "";
             }
 
-            , 2000);
+                , 2000);
         }
-    });  
+    });
 }
 
 function load() {
@@ -36,3 +36,10 @@ function load() {
         }
     });
 }
+
+document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        save();
+    }
+});

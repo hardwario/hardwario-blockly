@@ -608,14 +608,14 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "CENTER_X",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
             {
                 "type": "field_number",
                 "name": "CENTER_Y",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
@@ -625,7 +625,7 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "RADIUS",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             }
@@ -646,14 +646,14 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "START_X",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
             {
                 "type": "field_number",
                 "name": "START_Y",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
@@ -663,14 +663,14 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "END_X",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
             {
                 "type": "field_number",
                 "name": "END_Y",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             }
@@ -691,14 +691,14 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "START_X",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
             {
                 "type": "field_number",
                 "name": "START_Y",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
@@ -708,14 +708,14 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "END_X",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
             {
                 "type": "field_number",
                 "name": "END_Y",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             }
@@ -736,7 +736,7 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "LEFT",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
@@ -746,7 +746,7 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "TOP",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             }
@@ -851,7 +851,7 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "LEFT",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
@@ -861,7 +861,7 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_number",
                 "name": "TOP",
-                "value": 0,
+                "value": 1,
                 "min": 0,
                 "max": 128
             },
