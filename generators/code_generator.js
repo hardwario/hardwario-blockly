@@ -251,13 +251,19 @@ class CodeGenerator {
                     let random_variable_name = randomString(12);
                     for (let code of block_definition['action'][action]['code']) {
                         if ('fields' in block) {
+                            for (let argument in block_definition['action'][action]['block']['arguments']) {
+                                if(block_definition['action'][action]['block']['arguments'][argument]['type'] == 'input') {
+                                    block['fields'][argument] = '\'\'';
+                                    block['fields']['FORMAT_STRING'] = '%c';
+                                }
+                                block['fields'][argument] = String(block['fields'][argument]);
+                            }
                             if ('inputs' in block) {
                                 for (let input in block['inputs']) {
                                     let format_string = '';
                                     block['fields'][input] = this.generate_sub_section(block['inputs'][input]['block'])
                                     if (code.search('FORMAT_STRING')) {
-                                        if('VAR' in block['inputs'][input]['block']['fields'])
-                                        {
+                                        if ('VAR' in block['inputs'][input]['block']['fields']) {
                                             if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Integer') {
                                                 format_string = '%d';
                                             }
@@ -474,8 +480,6 @@ class CodeGenerator {
                 this.event_handlers[event_handler][full_event_name] = [];
                 if (block_definition['handler']['events']['enum'][event]) {
                     for (let code of block_definition['handler']['events']['enum'][event]) {
-                        console.log(this.indent);
-                        console.log(code);
                         if (code.includes('}')) {
                             this.indent -= 1;
                         }

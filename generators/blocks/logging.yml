@@ -12,6 +12,7 @@ logging:
   action:
     info:
       block:
+        colour: '#008000'
         text:
           - Log Info %1
           - 'Message: %2 %3'
@@ -27,9 +28,10 @@ logging:
           VARIABLE:
             type: input
       code:
-        - twr_log_info("{MESSAGE}");
+        - twr_log_info("{MESSAGE} {FORMAT_STRING}", {VARIABLE});
     debug:
       block:
+        colour: '#BF40BF'
         text:
           - Log Debug %1
           - 'Message: %2 %3'
@@ -45,9 +47,10 @@ logging:
           VARIABLE:
             type: input
       code:
-        - twr_log_debug("{MESSAGE}");
+        - twr_log_debug("{MESSAGE} {FORMAT_STRING}", {VARIABLE});
     error:
       block:
+        colour: '#FF0000'
         text:
           - Log Error %1
           - 'Message: %2 %3'
@@ -66,6 +69,7 @@ logging:
         - twr_log_error("{MESSAGE} {FORMAT_STRING}", {VARIABLE});
     warning:
       block:
+        colour: '#FFA500'
         text:
           - Log Warning %1
           - 'Message: %2 %3'
@@ -81,4 +85,4 @@ logging:
           VARIABLE:
             type: input
       code:
-        - twr_log_warning("{MESSAGE}");
+        - twr_log_warning("{MESSAGE} {FORMAT_STRING}", {VARIABLE});

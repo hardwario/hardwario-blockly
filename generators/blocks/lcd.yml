@@ -56,14 +56,14 @@ lcd:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           Y:
             type: new_line
           TOP:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
       code:
         - twr_gfx_draw_string(pgfx, {LEFT}, {TOP}, "{STRING}", true);
     draw_circle:
@@ -79,19 +79,19 @@ lcd:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           CENTER_Y:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           Y:
             type: new_line
           RADIUS:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
       code:
         - twr_gfx_draw_circle(pgfx, {CENTER_X}, {CENTER_Y}, {RADIUS}, true);
     draw_line:
@@ -107,24 +107,24 @@ lcd:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           START_Y:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           Y:
             type: new_line
           END_X:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           END_Y:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
       code:
         - twr_gfx_draw_line(pgfx, {START_X}, {START_Y}, {END_X}, {END_Y}, true);
     draw_rectangle:
@@ -140,24 +140,24 @@ lcd:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           START_Y:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           Y:
             type: new_line
           END_X:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           END_Y:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
       code:
         - twr_gfx_draw_rectangle(pgfx, {START_X}, {START_Y}, {END_X}, {END_Y}, true);
     draw_pixel:
@@ -173,14 +173,14 @@ lcd:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           Y:
             type: new_line
           TOP:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
       code:
         - twr_gfx_draw_pixel(pgfx, {LEFT}, {TOP}, true);
     set_power_state:
@@ -237,17 +237,17 @@ lcd:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           Y:
             type: new_line
           TOP:
             type: number
             min: 0
             max: 128
-            value: 1
+            value: 0
           Z:
             type: new_line
-          VALUE:
+          VARIABLE:
             type: input
       code:
         - twr_gfx_printf(pgfx, {LEFT}, {TOP}, true, "{FORMAT_STRING}", {VARIABLE});
