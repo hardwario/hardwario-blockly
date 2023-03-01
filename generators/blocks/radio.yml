@@ -14,8 +14,8 @@ radio:
         RADIO_MODE:
           type: dropdown
           options:
-            - ["TWR_RADIO_MODE_NODE_SLEEPING", "TWR_RADIO_MODE_NODE_SLEEPING"]
-            - ["TWR_RADIO_MODE_NODE_LISTENING", "TWR_RADIO_MODE_NODE_LISTENING"]
+            - ["SLEEPING", "TWR_RADIO_MODE_NODE_SLEEPING"]
+            - ["LISTENING", "TWR_RADIO_MODE_NODE_LISTENING"]
         Y:
           type: new_line
         FIRMWARE_NAME:

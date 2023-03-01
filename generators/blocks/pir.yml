@@ -16,10 +16,10 @@ pir:
         SENSITIVITY:
           type: dropdown
           options:
-            - ["TWR_MODULE_PIR_SENSITIVITY_LOW", "TWR_MODULE_PIR_SENSITIVITY_LOW"]
-            - ["TWR_MODULE_PIR_SENSITIVITY_MEDIUM", "TWR_MODULE_PIR_SENSITIVITY_MEDIUM"]
-            - ["TWR_MODULE_PIR_SENSITIVITY_HIGH", "TWR_MODULE_PIR_SENSITIVITY_HIGH"]
-            - ["TWR_MODULE_PIR_SENSITIVITY_VERY_HIGH", "TWR_MODULE_PIR_SENSITIVITY_VERY_HIGH"]
+            - ["LOW", "TWR_MODULE_PIR_SENSITIVITY_LOW"]
+            - ["MEDIUM", "TWR_MODULE_PIR_SENSITIVITY_MEDIUM"]
+            - ["HIGH", "TWR_MODULE_PIR_SENSITIVITY_HIGH"]
+            - ["VERY HIGH", "TWR_MODULE_PIR_SENSITIVITY_VERY_HIGH"]
     code:
       - twr_module_pir_init(&pir);
       - twr_module_pir_set_sensitivity(&pir, {SENSITIVITY});

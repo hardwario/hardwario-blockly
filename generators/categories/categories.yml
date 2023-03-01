@@ -12,7 +12,7 @@ categories:
     colour: '#571E00'
   Logging:
     colour: '#052F38'
-  Core Temperature:
+  Core TMP112:
     colour: '#4A0C1B'
   Motion Detector:
     colour: '#5F5F0D'

@@ -19,15 +19,15 @@ button:
         GPIO:
           type: dropdown
           options:
-            - ["TWR_GPIO_BUTTON", "TWR_GPIO_BUTTON"]
+            - ["BUTTON", "TWR_GPIO_BUTTON"]
         Y:
           type: new_line
         PULL:
           type: dropdown
           options:
-            - ["TWR_GPIO_PULL_DOWN", "TWR_GPIO_PULL_DOWN"]
-            - ["TWR_GPIO_PULL_NONE", "TWR_GPIO_PULL_NONE"]
-            - ["TWR_GPIO_PULL_UP", "TWR_GPIO_PULL_UP"]
+            - ["PULL DOWN", "TWR_GPIO_PULL_DOWN"]
+            - ["PULL NONE", "TWR_GPIO_PULL_NONE"]
+            - ["PULL UP", "TWR_GPIO_PULL_UP"]
         Z:
           type: new_line
         DEFAULT_STATE:

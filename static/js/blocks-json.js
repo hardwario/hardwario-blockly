@@ -186,7 +186,7 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "GPIO",
                 "options": [
                     [
-                        "TWR_GPIO_BUTTON",
+                        "BUTTON",
                         "TWR_GPIO_BUTTON"
                     ]
                 ]
@@ -199,15 +199,15 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "PULL",
                 "options": [
                     [
-                        "TWR_GPIO_PULL_DOWN",
+                        "PULL DOWN",
                         "TWR_GPIO_PULL_DOWN"
                     ],
                     [
-                        "TWR_GPIO_PULL_NONE",
+                        "PULL NONE",
                         "TWR_GPIO_PULL_NONE"
                     ],
                     [
-                        "TWR_GPIO_PULL_UP",
+                        "PULL UP",
                         "TWR_GPIO_PULL_UP"
                     ]
                 ]
@@ -982,31 +982,31 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "MODE",
                 "options": [
                     [
-                        "TWR_LED_MODE_BLINK",
+                        "BLINK",
                         "TWR_LED_MODE_BLINK"
                     ],
                     [
-                        "TWR_LED_MODE_BLINK_FAST",
+                        "BLINK FAST",
                         "TWR_LED_MODE_BLINK_FAST"
                     ],
                     [
-                        "TWR_LED_MODE_BLINK_SLOW",
+                        "BLINK SLOW",
                         "TWR_LED_MODE_BLINK_SLOW"
                     ],
                     [
-                        "TWR_LED_MODE_FLASH",
+                        "FLASH",
                         "TWR_LED_MODE_FLASH"
                     ],
                     [
-                        "TWR_LED_MODE_OFF",
+                        "OFF",
                         "TWR_LED_MODE_OFF"
                     ],
                     [
-                        "TWR_LED_MODE_ON",
+                        "ON",
                         "TWR_LED_MODE_ON"
                     ],
                     [
-                        "TWR_LED_MODE_TOGGLE",
+                        "TOGGLE",
                         "TWR_LED_MODE_TOGGLE"
                     ]
                 ]
@@ -1072,31 +1072,31 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "MODE",
                 "options": [
                     [
-                        "TWR_LED_MODE_BLINK",
+                        "BLINK",
                         "TWR_LED_MODE_BLINK"
                     ],
                     [
-                        "TWR_LED_MODE_BLINK_FAST",
+                        "BLINK FAST",
                         "TWR_LED_MODE_BLINK_FAST"
                     ],
                     [
-                        "TWR_LED_MODE_BLINK_SLOW",
+                        "BLINK SLOW",
                         "TWR_LED_MODE_BLINK_SLOW"
                     ],
                     [
-                        "TWR_LED_MODE_FLASH",
+                        "FLASH",
                         "TWR_LED_MODE_FLASH"
                     ],
                     [
-                        "TWR_LED_MODE_OFF",
+                        "OFF",
                         "TWR_LED_MODE_OFF"
                     ],
                     [
-                        "TWR_LED_MODE_ON",
+                        "ON",
                         "TWR_LED_MODE_ON"
                     ],
                     [
-                        "TWR_LED_MODE_TOGGLE",
+                        "TOGGLE",
                         "TWR_LED_MODE_TOGGLE"
                     ]
                 ]
@@ -1265,19 +1265,19 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "SENSITIVITY",
                 "options": [
                     [
-                        "TWR_MODULE_PIR_SENSITIVITY_LOW",
+                        "LOW",
                         "TWR_MODULE_PIR_SENSITIVITY_LOW"
                     ],
                     [
-                        "TWR_MODULE_PIR_SENSITIVITY_MEDIUM",
+                        "MEDIUM",
                         "TWR_MODULE_PIR_SENSITIVITY_MEDIUM"
                     ],
                     [
-                        "TWR_MODULE_PIR_SENSITIVITY_HIGH",
+                        "HIGH",
                         "TWR_MODULE_PIR_SENSITIVITY_HIGH"
                     ],
                     [
-                        "TWR_MODULE_PIR_SENSITIVITY_VERY_HIGH",
+                        "VERY HIGH",
                         "TWR_MODULE_PIR_SENSITIVITY_VERY_HIGH"
                     ]
                 ]
@@ -1370,11 +1370,11 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "RADIO_MODE",
                 "options": [
                     [
-                        "TWR_RADIO_MODE_NODE_SLEEPING",
+                        "SLEEPING",
                         "TWR_RADIO_MODE_NODE_SLEEPING"
                     ],
                     [
-                        "TWR_RADIO_MODE_NODE_LISTENING",
+                        "LISTENING",
                         "TWR_RADIO_MODE_NODE_LISTENING"
                     ]
                 ]

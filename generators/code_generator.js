@@ -71,36 +71,40 @@ class CodeGenerator {
             this.generate_variables(data['variables'])
         }
 
-        for (let block in data['blocks']['blocks']) {
-            block = data['blocks']['blocks'][block]
-            if (block['type'] == 'hio_application_initialize') {
-                if ('inputs' in block) {
-                    this.indent = 1
-                    this.next(block['inputs']['BLOCKS'], this.application_init)
+        if ('blocks' in data) {
+            for (let block in data['blocks']['blocks']) {
+                block = data['blocks']['blocks'][block]
+                if (block['type'] == 'hio_application_initialize') {
+                    if ('inputs' in block) {
+                        this.indent = 1
+                        this.next(block['inputs']['BLOCKS'], this.application_init)
+                    }
                 }
             }
         }
 
-        for (let block in data['blocks']['blocks']) {
-            block = data['blocks']['blocks'][block]
-            if (block['type'] == 'hio_application_task') {
-                if ('inputs' in block) {
-                    this.indent = 1
-                    this.application_init.push('\ttwr_scheduler_plan_from_now(0, {TASK_INTERVAL});'.format(block['fields']))
-                    this.next(block['inputs']['BLOCKS'], this.application_task)
-                    this.application_task.push('\ttwr_scheduler_plan_current_relative({TASK_INTERVAL});'.format(block['fields']))
+        if ('blocks' in data) {
+            for (let block in data['blocks']['blocks']) {
+                block = data['blocks']['blocks'][block]
+                if (block['type'] == 'hio_application_task') {
+                    if ('inputs' in block) {
+                        this.indent = 1
+                        this.application_init.push('\ttwr_scheduler_plan_from_now(0, {TASK_INTERVAL});'.format(block['fields']))
+                        this.next(block['inputs']['BLOCKS'], this.application_task)
+                        this.application_task.push('\ttwr_scheduler_plan_current_relative({TASK_INTERVAL});'.format(block['fields']))
+                    }
+                    this.indent = 0
                 }
-                this.indent = 0
-            }
 
-            if (block['type'].includes('event')) {
-                let name = block['type'].substring("hio_".length, block['type'].length - "_event".length)
-                let full_event_name = this.blocks[name]['handler']['events']['prefix'] + block['fields']['NAME']
-                if ('inputs' in block) {
-                    this.indent = 2
-                    this.next(block['inputs']['BLOCKS'], this.event_handlers[name + '_handler'][full_event_name])
+                if (block['type'].includes('event')) {
+                    let name = block['type'].substring("hio_".length, block['type'].length - "_event".length)
+                    let full_event_name = this.blocks[name]['handler']['events']['prefix'] + block['fields']['NAME']
+                    if ('inputs' in block) {
+                        this.indent = 2
+                        this.next(block['inputs']['BLOCKS'], this.event_handlers[name + '_handler'][full_event_name])
+                    }
+                    this.indent = 0;
                 }
-                this.indent = 0;
             }
         }
 
@@ -252,7 +256,7 @@ class CodeGenerator {
                     for (let code of block_definition['action'][action]['code']) {
                         if ('fields' in block) {
                             for (let argument in block_definition['action'][action]['block']['arguments']) {
-                                if(block_definition['action'][action]['block']['arguments'][argument]['type'] == 'input') {
+                                if (block_definition['action'][action]['block']['arguments'][argument]['type'] == 'input') {
                                     block['fields'][argument] = '\'\'';
                                     block['fields']['FORMAT_STRING'] = '%c';
                                 }
