@@ -25,7 +25,7 @@ const init = () => {
   app.use(express.static(path.join(__dirname, 'static')));
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  app.set('views', './views');
+  app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'ejs');
 
   blocks_generator.generate_blocks();
@@ -71,7 +71,8 @@ const init = () => {
   });
 
   app.get('/update_code', (req, res) => {
-    res.send(code_generator.generate_code(req.query.Code, false));
+    let code = code_generator.generate_code(req.query.Code, false);
+    res.send(code);
   });
 
   app.get('/examples_list', (req, res) => {
@@ -243,4 +244,4 @@ function setup_folders() {
   }
 }
 
-module.exports = init;
+module.exports = { init };

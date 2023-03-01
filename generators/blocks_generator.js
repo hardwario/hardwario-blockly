@@ -213,6 +213,11 @@ class BlockGenerator {
             ],
             "output": "Number",
         }
+        colour = '#000000';
+        if (this.categories['Variables']['configuration'] !== null && 'colour' in this.categories['Variables']['configuration']) {
+            colour = this.categories['Variables']['configuration']['colour'];
+        }
+        block["colour"] = colour;
         this.blocks.push(block);
 
         block = {
@@ -234,7 +239,12 @@ class BlockGenerator {
             "previousStatement": 'null',
             "nextStatement": 'null',
         }
-        this.blocks.push(block)
+        colour = '#000000';
+        if (this.categories['Variables']['configuration'] !== null && 'colour' in this.categories['Variables']['configuration']) {
+            colour = this.categories['Variables']['configuration']['colour'];
+        }
+        block["colour"] = colour;
+        this.blocks.push(block);
 
         block = {
             "type": "variables_get_float",
@@ -250,7 +260,13 @@ class BlockGenerator {
             ],
             "output": "Number",
         }
+        colour = '#000000';
+        if (this.categories['Variables']['configuration'] !== null && 'colour' in this.categories['Variables']['configuration']) {
+            colour = this.categories['Variables']['configuration']['colour'];
+        }
+        block["colour"] = colour;
         this.blocks.push(block);
+
         block = {
             "type": "variables_set_float",
             "message0": "%{BKY_VARIABLES_SET}",
@@ -270,6 +286,11 @@ class BlockGenerator {
             "previousStatement": "null",
             "nextStatement": "null",
         }
+        colour = '#000000';
+        if (this.categories['Variables']['configuration'] !== null && 'colour' in this.categories['Variables']['configuration']) {
+            colour = this.categories['Variables']['configuration']['colour'];
+        }
+        block["colour"] = colour;
         this.blocks.push(block);
     }
 

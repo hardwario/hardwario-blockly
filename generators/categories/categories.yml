@@ -1,38 +1,40 @@
 ---
 categories:
   Initialization:
-    colour: '#000000'
+    colour: '#A50427'
   Task:
-    colour: '#123458'
+    colour: '#A50427'
   Button:
-    colour: '#000000'
+    colour: '#1D5310'
   Radio:
-    colour: '#000000'
+    colour: '#C54F38'
   LED:
-    colour: '#000000'
+    colour: '#571E00'
   Logging:
-    colour: '#000000'
+    colour: '#052F38'
   Core Temperature:
-    colour: '#000000'
+    colour: '#4A0C1B'
   Motion Detector:
-    colour: '#000000'
+    colour: '#5F5F0D'
   Power Module:
-    colour: '#000000'
+    colour: '#64391F'
   LCD Module:
-    colour: '#000000'
+    colour: '#5A1AA1'
   Climate Module:
-    colour: '#000000'
+    colour: '#873467'
   Battery Module:
     colour: '#125f44'
   Logic:
-    colour: '#000000'
+    colour: '#5B80A5'
   Math:
-    colour: '#000000'
+    colour: '#5B67A5'
   Loops:
-    colour: '#000000'
+    colour: '#5BA65B'
   Variables:
-    colour: '#000000'
+    colour: '#A55B80'
   CO2 Module:
+    colour: '#844F19'
   Relay Module:
+    colour: '#A01D09'
   Servo Motor:
   Test Module:
