@@ -61,7 +61,7 @@ const init = () => {
     }
     else {
       code_generator.generate_code(req.query.Code, true);
-      res.send("Code parsed");
+      res.send(path.join(__dirname, 'skeleton', 'firmware.bin'));
     }
   });
 

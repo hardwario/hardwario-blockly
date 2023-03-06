@@ -47,8 +47,8 @@
           Code: exportJSON(),
         },
 
-      }).done(function () {
-        window.location = "/download_code";
+      }).done(function (data) {
+        window.parent.postMessage({path: data}, '*');
       });
     }
   </script>
@@ -60,7 +60,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <input id="compileAndDownload" type="button" class="btn btn-success" value="Compile And Download"
+  <input id="compileAndDownload" type="button" class="btn btn-success" value="Compile And Flash"
     onclick="parse_code();" />
 
   <button class="btn btn-warning" onclick="saveWorkspace()" id="saveWorkspaceButton">Save Workspace</button>
