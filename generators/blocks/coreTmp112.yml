@@ -18,7 +18,7 @@ coreTmp112:
           max: 1000000
           value: 5000
     code:
-      - twr_tmp112_init(&core_tmp112, TWR_I2C_I2C0, 0x49);
+      - twr_tmp112_init(&core_tmp112, TWR_I2C_I2C0, TWR_TAG_TEMPERATURE_I2C_ADDRESS_ALTERNATE);
       - twr_tmp112_set_event_handler(&core_tmp112, core_tmp112_event_handler, NULL);
       - twr_tmp112_set_update_interval(&core_tmp112, {UPDATE_INTERVAL});
   handler:

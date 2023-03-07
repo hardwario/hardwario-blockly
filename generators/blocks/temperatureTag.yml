@@ -1,0 +1,42 @@
+---
+button:
+  category:
+    - Temperature Tag
+  global_variable:
+    - twr_tag_temperature_t tmp112;
+  application_init:
+    block:
+      text:
+        - Initialize Temperature Tag %1
+        - With Update interval %2 ms
+      arguments:
+        NEW_LINE:
+          type: new_line
+        UPDATE_INTERVAL:
+          type: number
+          min: 1
+          max: 1000000
+          value: 5000
+    code:
+      - twr_tag_temperature_init(&tmp112, TWR_I2C_I2C0, TWR_TAG_TEMPERATURE_I2C_ADDRESS_DEFAULT);
+      - twr_tag_temperature_set_event_handler(&tmp112, tmp112_event_handler, NULL);
+      - twr_tag_temperature_set_update_interval(&tmp112, {UPDATE_INTERVAL});
+  handler:
+    block:
+      text: On Temperature %1
+    declaration: void tag_tmp112_event_handler(twr_tag_temperature_t *self, twr_tag_temperature_event_t event, void *event_param)
+    events:
+      prefix: TWR_TAG_TEMPERATURE_EVENT_
+      enum:
+        UPDATE:
+          - float value;
+          - if (twr_tag_temperature_get_temperature_celsius(self, &value)) {
+          - tag_tmp112 = value;
+          - "}"
+  action:
+    publish_temperature_value:
+      block:
+        text:
+          - Publish Temperature Over the Radio
+      code:
+        - twr_radio_pub_temperature(TWR_TAG_TEMPERATURE_I2C_ADDRESS_DEFAULT, &tag_tmp112);

@@ -24,6 +24,12 @@ categories:
     colour: '#873467'
   Battery Module:
     colour: '#125f44'
+  Temperature Tag:
+    colour: '#733794'
+  Humidity Tag:
+    colour: '#336F87'
+  Barometer Tag:
+    colour: '#AD6469'
   Logic:
     colour: '#5B80A5'
   Math:

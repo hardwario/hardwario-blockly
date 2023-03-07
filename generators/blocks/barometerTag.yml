@@ -1,0 +1,45 @@
+---
+button:
+  category:
+    - Barometer Tag
+  global_variable:
+    - barometer_tag_t barometer_tag;
+  application_init:
+    block:
+      text:
+        - Initialize Barometer Tag %1
+        - With Update interval %2 ms
+      arguments:
+        NEW_LINE:
+          type: new_line
+        UPDATE_INTERVAL:
+          type: number
+          min: 1
+          max: 1000000
+          value: 5000
+    code:   
+      - twr_tag_barometer_init(&barometer_tag, TWR_I2C_I2C1);
+      - twr_tag_barometer_set_event_handler(&barometer_tag, barometer_tag_event_handler, NULL);
+      - twr_tag_barometer_set_update_interval(&barometer_tag, {UPDATE_INTERVAL});
+  handler:
+    block:
+      text: On Barometer %1
+    declaration: void barometer_tag_event_handler(twr_tag_barometer_t *self, twr_tag_barometer_event_t event, void *event_param)
+    events:
+      prefix: TWR_TAG_BAROMETER_EVENT_
+      enum:
+        UPDATE:
+          - float value_pascals;
+          - float value_meters;
+          - if (twr_tag_barometer_get_altitude_meter(self, &value_meters) && twr_tag_barometer_get_pressure_pascal(self, &value_pascals)) {
+          - tag_barometer_meters = value_meters;
+          - tag_barometer_pascal = value_pascals;
+          - "}"
+  action:
+    publish_barometer_value:
+      block:
+        text:
+          - Publish Barometer Over the Radio
+      code:
+        - twr_radio_pub_barometer(param->channel, &tag_barometer_pascal, &tag_barometer_meters);
+

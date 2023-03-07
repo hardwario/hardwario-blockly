@@ -1,0 +1,42 @@
+---
+button:
+  category:
+    - Humidity Tag
+  global_variable:
+    - humidity_tag_t humidity_tag;
+  application_init:
+    block:
+      text:
+        - Initialize Humidity Tag %1
+        - With Update interval %2 ms
+      arguments:
+        NEW_LINE:
+          type: new_line
+        UPDATE_INTERVAL:
+          type: number
+          min: 1
+          max: 1000000
+          value: 5000
+    code:   
+      - twr_tag_humidity_init(&humidity_tag, TWR_TAG_HUMIDITY_REVISION_R3, TWR_I2C_I2C1, TWR_TAG_HUMIDITY_I2C_ADDRESS_DEFAULT);
+      - twr_tag_humidity_set_event_handler(&humidity_tag, humidity_tag_event_handler, NULL);
+      - twr_tag_humidity_set_update_interval(&humidity_tag, {UPDATE_INTERVAL});
+  handler:
+    block:
+      text: On Humidity %1
+    declaration: void humidity_tag_event_handler(twr_tag_humidity_t *self, twr_tag_humidity_event_t event, void *event_param)
+    events:
+      prefix: TWR_TAG_HUMIDITY_EVENT_
+      enum:
+        UPDATE:
+          - float value;
+          - if (twr_tag_humidity_get_humidity_percentage(self, &value)) {
+          - tag_humidity = value;
+          - "}"
+  action:
+    publish_humidity_value:
+      block:
+        text:
+          - Publish Humidity Over the Radio
+      code:
+        - twr_radio_pub_humidity(TWR_TAG_HUMIDITY_I2C_ADDRESS_DEFAULT, &tag_humidity);
