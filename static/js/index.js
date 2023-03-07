@@ -1,7 +1,34 @@
 window.addEventListener('load', load_user_projects);
 window.addEventListener('load', load_examples);
+window.addEventListener('load', set_form);
 
 localStorage.setItem("hio_selected_project", "");
+
+var createProjectForm = null;
+
+function set_form() {
+  createProjectForm = document.getElementById("createProjectForm");
+
+  createProjectForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const name = createProjectForm.elements["name"].value;
+  
+    // Ask user for name of the project
+    if (name == null || name == "") {
+      alert("Name of the project cannot be empty");
+    }
+    else {
+      // Check if the project already exists
+      if (user_projects_list.includes(name)) {
+        alert("Project already exists");
+      }
+      else {
+        // Create the project
+        window.location.href = "/blocks_editor?project=" + name;
+      }
+    }
+  });
+}
 
 function select_example(name) {
   window.location.href = "/blocks_editor?example=" + name;

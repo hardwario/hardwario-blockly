@@ -1,6 +1,30 @@
 
 window.addEventListener('load', load_saved_blocks);
 window.addEventListener('load', load_pre_made_blocks);
+window.addEventListener('load', set_form);
+
+function set_form() {
+    createModuleBlock = document.getElementById("createModuleBlock");
+
+    createModuleBlock.addEventListener("submit", (event) => {
+        // Ask user for name of the block
+        event.preventDefault();
+        const name = createModuleBlock.elements["name"].value;
+        if (name == null || name == "") {
+            alert("Name of the block cannot be empty");
+        }
+        else {
+            // Check if the block already exists
+            if (user_blocks_list.includes(name)) {
+                alert("Block already exists");
+            }
+            else {
+                // Create the block
+                window.location.href = "/yaml_editor?user_block=" + name + '.yml';
+            }
+        }
+    });
+}
 
 function load_saved_blocks() {
     // Load list of saved blocks
@@ -43,10 +67,10 @@ function delete_user_block(name) {
             type: "GET",
             data: { name: name },
             success: function (data) {
-              // Reload the list of projects
-              window.location.href = "/blocks_creator";
+                // Reload the list of projects
+                window.location.href = "/blocks_creator";
             }
-          });
+        });
     }
 }
 
@@ -70,30 +94,12 @@ function select_user_block(name) {
     window.location.href = "/yaml_editor?user_block=" + name;
 }
 
-function new_block() {
-    // Ask user for name of the block
-    var name = prompt("Please enter the name of the block", "My block");
-    if (name == null || name == "") {
-        alert("Name of the block cannot be empty");
-    }
-    else {
-        // Check if the block already exists
-        if (user_blocks_list.includes(name)) {
-            alert("Block already exists");
-        }
-        else {
-            // Create the block
-            window.location.href = "/yaml_editor?user_block=" + name + '.yml';
-        }
-    }
-}
-
 function open_user_folder() {
     $.ajax({
-      url: "/open_user_folder",
-      type: "GET",
-      success: function (data) {
-        console.log("User folder opened");
-      }
+        url: "/open_user_folder",
+        type: "GET",
+        success: function (data) {
+            console.log("User folder opened");
+        }
     });
-  }
+}

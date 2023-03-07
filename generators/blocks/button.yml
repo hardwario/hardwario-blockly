@@ -25,9 +25,9 @@ button:
         PULL:
           type: dropdown
           options:
-            - ["PULL DOWN", "TWR_GPIO_PULL_DOWN"]
-            - ["PULL NONE", "TWR_GPIO_PULL_NONE"]
-            - ["PULL UP", "TWR_GPIO_PULL_UP"]
+            - ["DOWN", "TWR_GPIO_PULL_DOWN"]
+            - ["NONE", "TWR_GPIO_PULL_NONE"]
+            - ["UP", "TWR_GPIO_PULL_UP"]
         Z:
           type: new_line
         DEFAULT_STATE:

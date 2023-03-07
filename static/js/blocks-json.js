@@ -199,15 +199,15 @@ Blockly.defineBlocksWithJsonArray([
                 "name": "PULL",
                 "options": [
                     [
-                        "PULL DOWN",
+                        "DOWN",
                         "TWR_GPIO_PULL_DOWN"
                     ],
                     [
-                        "PULL NONE",
+                        "NONE",
                         "TWR_GPIO_PULL_NONE"
                     ],
                     [
-                        "PULL UP",
+                        "UP",
                         "TWR_GPIO_PULL_UP"
                     ]
                 ]

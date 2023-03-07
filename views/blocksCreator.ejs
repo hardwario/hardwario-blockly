@@ -46,7 +46,6 @@
           <div class="card-body">
             <h3 class="card-title">Blocks</h3>
             <p class="card-text">You can add your own blocks to use in blocks editor</p>
-            <button class="btn btn-success" onclick="new_block()">Create Block</button>
           </div>
         </div>
       </div>
@@ -70,6 +69,13 @@
           <h3>Your Blocks
             <a class="btn btn-primary" onclick="open_user_folder()">Open Blocks Folder</a>
           </h3>
+          <form id="createModuleBlock">
+            <div class="form-group">
+                <label for="name">Module Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="My Module">
+                <button class="btn btn-success" type="submit">Create Module</button>
+            </div>
+          </form>
           <div id="list-user-blocks" class="list-group"></div>
         </div>
         <div class="col-sm-6">

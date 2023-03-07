@@ -58,7 +58,7 @@ class CodeGenerator {
         });
     }
 
-    generate_code(data, compile = false) {
+    async generate_code(data, compile = false) {
         data = JSON.parse(data);
 
         this.global_variable = []
@@ -111,7 +111,8 @@ class CodeGenerator {
         let output = this.print_code();
 
         if (compile) {
-            this.compile_code(output);
+            await this.compile_code(output);
+            console.log('done');
         }
         else {
             return output;
@@ -119,15 +120,29 @@ class CodeGenerator {
     }
 
     compile_code(output) {
-        shell.cd(path.join(__dirname, '..'));
-        if (!fs.existsSync((path.join(__dirname, '..', 'skeleton')))) {
-            shell.exec('git clone --recursive https://github.com/hardwario/twr-skeleton.git skeleton');
-        }
-        fs.writeFileSync(path.join(__dirname, '..', 'skeleton', 'src', 'application.c'), output, 'utf8');
-        shell.cd('./skeleton');
-        shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug');
-        shell.exec('ninja -C obj/debug');
-        console.log('done');
+        return new Promise((resolve, reject) => {
+            shell.cd(path.join(__dirname, '..'));
+            if (!fs.existsSync((path.join(__dirname, '..', 'skeleton')))) {
+                shell.exec('git clone --recursive https://github.com/hardwario/twr-skeleton.git skeleton', (error, stdout, stderr) => {
+                    if (error) {
+                        console.warn(error);
+                    }
+                });
+            }
+            fs.writeFileSync(path.join(__dirname, '..', 'skeleton', 'src', 'application.c'), output, 'utf8');
+            shell.cd('./skeleton');
+            shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug', (error, stdout, stderr) => {
+                if (error) {
+                    console.warn(error);
+                }
+            });
+            shell.exec('ninja -C obj/debug', (error, stdout, stderr) => {
+                if (error) {
+                    console.warn(error);
+                }
+                resolve(stdout ? stdout : stderr);
+            });
+        });
     }
 
     print_code() {
@@ -203,7 +218,7 @@ class CodeGenerator {
 
     next(next, event_handler) {
         let block = undefined;
-        if ('block' in next) {
+        if (next !== undefined && ('block' in next && next['block'] != undefined && next['block'] != null)) {
             block = next['block']
             if (block['type'].includes('_initialize')) {
                 let name = block['type'].substring("hio_".length, block['type'].length - "_initialize".length)
@@ -256,20 +271,27 @@ class CodeGenerator {
                             if ('inputs' in block) {
                                 for (let input in block['inputs']) {
                                     let format_string = '';
-                                    block['fields'][input] = this.generate_sub_section(block['inputs'][input]['block'])
-                                    if (code.search('FORMAT_STRING')) {
-                                        if ('VAR' in block['inputs'][input]['block']['fields']) {
-                                            if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Integer') {
+                                    var input_data = undefined;
+                                    if(block['inputs'][input]['block'] != null && block['inputs'][input]['block'] != undefined)
+                                    {
+                                        input_data = this.generate_sub_section(block['inputs'][input]['block']);
+                                    }
+                                    if(input_data != undefined) {
+                                        block['fields'][input] = input_data;
+                                        if (code.search('FORMAT_STRING')) {
+                                            if ('VAR' in block['inputs'][input]['block']['fields']) {
+                                                if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Integer') {
+                                                    format_string = '%d';
+                                                }
+                                                else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Float') {
+                                                    format_string = '%.1f';
+                                                }
+                                            }
+                                            else {
                                                 format_string = '%d';
                                             }
-                                            else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Float') {
-                                                format_string = '%.1f';
-                                            }
+                                            block['fields']['FORMAT_STRING'] = format_string;
                                         }
-                                        else {
-                                            format_string = '%d';
-                                        }
-                                        block['fields']['FORMAT_STRING'] = format_string;
                                     }
                                 }
                                 if ('VALUE' in block['inputs']) {
@@ -308,7 +330,7 @@ class CodeGenerator {
                 }
             }
         }
-        if ('next' in block) {
+        if ((block != undefined && block != null) && 'next' in block) {
             this.next(block['next'], event_handler)
         }
     }
@@ -316,10 +338,12 @@ class CodeGenerator {
     generate_sub_section(block) {
         if (block['type'] == 'logic_compare' || block['type'] == 'logic_operation' || block['type'] == 'math_arithmetic') {
             if (block['fields']['OP'] == 'POWER') {
-                return 'pow(({left_side}), ({right_side}))'.format({ left_side: this.generate_sub_section(block['inputs']['A']['block']), right_side: this.generate_sub_section(block['inputs']['B']['block']) })
+                if(('inputs' in block) && 'B' in block['inputs'] && 'A' in block['inputs'])
+                    return 'pow(({left_side}), ({right_side}))'.format({ left_side: this.generate_sub_section(block['inputs']['A']['block']), right_side: this.generate_sub_section(block['inputs']['B']['block']) })
             }
             else {
-                return '({left_side}) {operator} ({right_side})'.format({ left_side: this.generate_sub_section(block['inputs']['A']['block']), operator: this.operators[block['type']][block['fields']['OP']], right_side: this.generate_sub_section(block['inputs']['B']['block']) })
+                if(('inputs' in block) && 'B' in block['inputs'] && 'A' in block['inputs'])
+                    return '({left_side}) {operator} ({right_side})'.format({ left_side: this.generate_sub_section(block['inputs']['A']['block']), operator: this.operators[block['type']][block['fields']['OP']], right_side: this.generate_sub_section(block['inputs']['B']['block']) })
             }
         }
         else if (block['type'] == 'math_number') {

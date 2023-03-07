@@ -44,7 +44,6 @@
                     <div class="card-body">
                         <h3 class="card-title">Blockly</h3>
                         <p class="card-text">Blockly is a visual programming editor. It allows you to create programs by dragging blocks together.</p>
-                        <button class="btn btn-success" onclick="new_project()">Create Project</button>
                     </div>
                 </div>
             </div>
@@ -68,6 +67,13 @@
                 <h3>Your Projects
                     <a class="btn btn-primary" onclick="open_user_folder()">Open Projects Folder</a>
                 </h3>
+                <form id="createProjectForm">
+                    <div class="form-group">
+                        <label for="name">Project Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="My Project">
+                        <button class="btn btn-success" type="submit">Create Project</button>
+                    </div>
+                </form>
                 <div id="list-user-projects" class="list-group"></div>
             </div>
             <div class="col-sm-6">
