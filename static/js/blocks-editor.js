@@ -23,7 +23,7 @@ var options = {
     minScale: 0.3,
     scaleSpeed: 1.2
   },
-  //renderer: 'zelos',
+  renderer: 'zelos',
 };
 
 // On page load function
