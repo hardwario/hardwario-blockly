@@ -1,5 +1,5 @@
 ---
-button:
+humidityTag:
   category:
     - Humidity Tag
   global_variable:

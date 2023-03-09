@@ -102,6 +102,9 @@ class BlockGenerator {
             else if (category == 'Float Variables') {
                 xml += `<category name="${category}" colour="${colour}" custom="FLOAT_PALETTE">`;
             }
+            else if (category == 'Functions') {
+                xml += `<category name="${category}" colour="${colour}" custom="PROCEDURE">`;
+            }
             else {
                 xml += `<category name="${category}" colour="${colour}">`;
             }

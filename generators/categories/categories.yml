@@ -24,6 +24,10 @@ categories:
     colour: '#873467'
   Battery Module:
     colour: '#125f44'
+  CO2 Module:
+    colour: '#844F19'
+  Relay Module:
+    colour: '#A01D09'
   Temperature Tag:
     colour: '#733794'
   Humidity Tag:
@@ -38,9 +42,7 @@ categories:
     colour: '#5BA65B'
   Variables:
     colour: '#A55B80'
-  CO2 Module:
-    colour: '#844F19'
-  Relay Module:
-    colour: '#A01D09'
+  Functions:
+    colour: '#995ba5'
   Servo Motor:
   Test Module:

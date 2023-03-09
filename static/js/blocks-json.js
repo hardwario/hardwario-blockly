@@ -119,6 +119,62 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A55B80"
     },
     {
+        "type": "hio_barometerTag_initialize",
+        "message0": "Initialize Barometer Tag %1 With Update interval %2 ms",
+        "args0": [
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "field_number",
+                "name": "UPDATE_INTERVAL",
+                "value": 5000,
+                "min": 1,
+                "max": 1000000
+            }
+        ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#AD6469",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_barometerTag_event",
+        "message0": "On Barometer %1 %2 %3",
+        "args0": [
+            {
+                "type": "field_dropdown",
+                "name": "NAME",
+                "options": [
+                    [
+                        "UPDATE",
+                        "UPDATE"
+                    ]
+                ]
+            },
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "input_statement",
+                "name": "BLOCKS"
+            }
+        ],
+        "colour": "#AD6469",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_barometerTag_publish_barometer_value",
+        "message0": "Publish Barometer Over the Radio",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#AD6469",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
         "type": "hio_battery_initialize",
         "message0": "Initialize Battery Module %1 With Update Interval %2 ms",
         "args0": [
@@ -496,6 +552,62 @@ Blockly.defineBlocksWithJsonArray([
         "previousStatement": "null",
         "nextStatement": "null",
         "colour": "#4A0C1B",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_humidityTag_initialize",
+        "message0": "Initialize Humidity Tag %1 With Update interval %2 ms",
+        "args0": [
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "field_number",
+                "name": "UPDATE_INTERVAL",
+                "value": 5000,
+                "min": 1,
+                "max": 1000000
+            }
+        ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#336F87",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_humidityTag_event",
+        "message0": "On Humidity %1 %2 %3",
+        "args0": [
+            {
+                "type": "field_dropdown",
+                "name": "NAME",
+                "options": [
+                    [
+                        "UPDATE",
+                        "UPDATE"
+                    ]
+                ]
+            },
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "input_statement",
+                "name": "BLOCKS"
+            }
+        ],
+        "colour": "#336F87",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_humidityTag_publish_humidity_value",
+        "message0": "Publish Humidity Over the Radio",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#336F87",
         "tooltip": "",
         "helpUrl": ""
     },
@@ -1604,6 +1716,62 @@ Blockly.defineBlocksWithJsonArray([
         "previousStatement": "null",
         "nextStatement": "null",
         "colour": "#A50427",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_temperatureTag_initialize",
+        "message0": "Initialize Temperature Tag %1 With Update interval %2 ms",
+        "args0": [
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "field_number",
+                "name": "UPDATE_INTERVAL",
+                "value": 5000,
+                "min": 1,
+                "max": 1000000
+            }
+        ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#733794",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_temperatureTag_event",
+        "message0": "On Temperature %1 %2 %3",
+        "args0": [
+            {
+                "type": "field_dropdown",
+                "name": "NAME",
+                "options": [
+                    [
+                        "UPDATE",
+                        "UPDATE"
+                    ]
+                ]
+            },
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "input_statement",
+                "name": "BLOCKS"
+            }
+        ],
+        "colour": "#733794",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_temperatureTag_publish_temperature_value",
+        "message0": "Publish Temperature Over the Radio",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#733794",
         "tooltip": "",
         "helpUrl": ""
     },

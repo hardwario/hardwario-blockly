@@ -156,7 +156,7 @@ workspace.registerToolboxCategoryCallback(
 
 function checkUniqueBlock(block_type, event) {
   for (const block of workspace.blockDB.values()) {
-    if (block.hue_ == null) {
+    if (block.colour_ == '#000000') {
       continue;
     }
     if (block.type == block_type && block.id != event.ids[0]) {
@@ -254,18 +254,20 @@ function checkBlocks() {
 function onBlockEvent(event) {
   if (event.type == Blockly.Events.BLOCK_CREATE) {
 
-    if (workspace.getBlockById(event.ids[0]).type.includes('init')) {
-      if (checkUniqueBlock(workspace.getBlockById(event.ids[0]).type, event)) {
+    if (event.json.type.includes('init')) {
+      if (checkUniqueBlock(event.json.type, event)) {
         return;
       }
       else {
         checkCategories();
         checkBlocks();
+        checkInitializations(event.json.type, event);
       }
     }
   }
   else if (event.type == Blockly.Events.BLOCK_DELETE) {
     checkCategories();
+    checkInitializations(event.oldJson.type, event);
   }
   if (event.type == Blockly.Events.BLOCK_MOVE) {
     console.log("block moved");
@@ -277,6 +279,31 @@ function onBlockEvent(event) {
     update_code();
   }
 }
+
+function checkInitializations(block, event) {
+  if (block.includes('init')) {
+    var block_type = block.split('_')[1];
+    var warning = null;
+    var valid = true;
+
+    if(event.type == 'delete') {
+      warning = "This module is not initialized.\nPlease initialize it first by finding corresponding initialization block \nin the toolbox and dragging it into the workspace.";
+      valid = false;
+    }
+
+    for (const block of workspace.blockDB.values()) {
+      if(block.type.includes('init')) {
+        continue;
+      }
+
+      if (block.type.includes(block_type)) {
+        block.setWarningText(warning);
+        block.setEnabled(valid);
+      }
+    }
+  }
+}
+
 
 function switchCode() {
   var switch_button = document.getElementById("switchCode_button");
@@ -305,6 +332,16 @@ function update_code() {
 
   }).done(function (data) {
     editor.setValue(data);
+    if(data.includes("Parsing code error."))
+    {
+      // Disable button
+      document.getElementById("compileAndDownload").disabled = true;
+    }
+    else
+    {
+      // Enable button
+      document.getElementById("compileAndDownload").disabled = false;
+    }
   });
 }
 
@@ -338,11 +375,10 @@ function importWorkspace() {
 }
 
 function loadWorkspace() {
-  if(project === "" && example === "")
-  {
+  if (project === "" && example === "") {
     window.location.href = "/";
   }
-  else if(project !== "") {
+  else if (project !== "") {
     $.ajax({
       url: "/load_project",
       type: "GET",
@@ -355,7 +391,7 @@ function loadWorkspace() {
     }
     );
   }
-  else if(example !== "") {
+  else if (example !== "") {
     $.ajax({
       url: "/load_example",
       type: "GET",

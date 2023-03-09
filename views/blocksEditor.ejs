@@ -30,11 +30,13 @@
       <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="Initialization" colour="#A50427">
         <block type="hio_application_initialize"></block>
+        <block type="hio_barometerTag_initialize"></block>
         <block type="hio_battery_initialize"></block>
         <block type="hio_button_initialize"></block>
         <block type="hio_climate_initialize"></block>
         <block type="hio_co2_initialize"></block>
         <block type="hio_coreTmp112_initialize"></block>
+        <block type="hio_humidityTag_initialize"></block>
         <block type="hio_lcd_initialize"></block>
         <block type="hio_led_initialize"></block>
         <block type="hio_ledStrip_initialize"></block>
@@ -43,6 +45,7 @@
         <block type="hio_power_initialize"></block>
         <block type="hio_radio_initialize"></block>
         <block type="hio_relay_initialize"></block>
+        <block type="hio_temperatureTag_initialize"></block>
         <block type="hio_My block_initialize"></block>
     </category>
     <category name="Task" colour="#A50427">
@@ -109,6 +112,27 @@
         <block type="hio_battery_event"></block>
         <block type="hio_battery_publish_voltage"></block>
     </category>
+    <category name="CO2 Module" colour="#844F19">
+        <block type="hio_co2_event"></block>
+        <block type="hio_co2_publish_co2"></block>
+    </category>
+    <category name="Relay Module" colour="#A01D09">
+        <block type="hio_relay_set_state"></block>
+        <block type="hio_relay_pulse"></block>
+        <block type="hio_relay_toggle"></block>
+    </category>
+    <category name="Temperature Tag" colour="#733794">
+        <block type="hio_temperatureTag_event"></block>
+        <block type="hio_temperatureTag_publish_temperature_value"></block>
+    </category>
+    <category name="Humidity Tag" colour="#336F87">
+        <block type="hio_humidityTag_event"></block>
+        <block type="hio_humidityTag_publish_humidity_value"></block>
+    </category>
+    <category name="Barometer Tag" colour="#AD6469">
+        <block type="hio_barometerTag_event"></block>
+        <block type="hio_barometerTag_publish_barometer_value"></block>
+    </category>
     <category name="Logic" colour="#5B80A5">
         <block type="controls_if"></block>
         <block type="logic_compare"></block>
@@ -126,15 +150,7 @@
         <block type="controls_for"></block>
     </category>
     <category name="Variables" colour="#A55B80" custom="VARIABLES"></category>
-    <category name="CO2 Module" colour="#844F19">
-        <block type="hio_co2_event"></block>
-        <block type="hio_co2_publish_co2"></block>
-    </category>
-    <category name="Relay Module" colour="#A01D09">
-        <block type="hio_relay_set_state"></block>
-        <block type="hio_relay_pulse"></block>
-        <block type="hio_relay_toggle"></block>
-    </category>
+    <category name="Functions" colour="#995ba5" custom="PROCEDURE"></category>
     <category name="Servo Motor" colour="#000000"></category>
     <category name="Test Module" colour="#000000"></category>
     <sep></sep>
