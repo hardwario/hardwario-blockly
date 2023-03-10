@@ -40,6 +40,8 @@
 
   <script>
     function parse_code() {
+      document.getElementById("loader").style.display = "inline-block";
+      document.getElementById("compileAndDownload").style.display = "none";
       $.ajax({
         url: "/parse_code",
         type: "GET",
@@ -48,6 +50,8 @@
         },
 
       }).done(function (data) {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("compileAndDownload").style.display = "inline-block";
         window.parent.postMessage({path: data}, '*');
       });
     }
@@ -60,8 +64,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+  
   <input id="compileAndDownload" type="button" class="btn btn-success" value="Compile And Flash"
-    onclick="parse_code();" />
+  onclick="parse_code();" />
+  
+  <div class="loader" id="loader" style="display: none;"></div>
 
   <button class="btn btn-warning" onclick="saveWorkspace()" id="saveWorkspaceButton">Save Workspace</button>
 

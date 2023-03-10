@@ -52,11 +52,13 @@ var onresize = function (e) {
 };
 window.addEventListener('resize', onresize, false);
 onresize();
+
 Blockly.svgResize(workspace);
 
 checkCategories();
 
 workspace.registerButtonCallback('createInteger', createIntegerVariable)
+workspace.addChangeListener(Blockly.Events.disableOrphans);
 
 function createIntegerVariable() {
   Blockly.Variables.createVariableButtonHandler(workspace, null, 'Integer');
@@ -253,7 +255,6 @@ function checkBlocks() {
 
 function onBlockEvent(event) {
   if (event.type == Blockly.Events.BLOCK_CREATE) {
-
     if (event.json.type.includes('init')) {
       if (checkUniqueBlock(event.json.type, event)) {
         return;
@@ -261,16 +262,13 @@ function onBlockEvent(event) {
       else {
         checkCategories();
         checkBlocks();
-        checkInitializations(event.json.type, event);
       }
     }
+    checkInitializations(event.json.type, event);
   }
   else if (event.type == Blockly.Events.BLOCK_DELETE) {
     checkCategories();
     checkInitializations(event.oldJson.type, event);
-  }
-  if (event.type == Blockly.Events.BLOCK_MOVE) {
-    console.log("block moved");
   }
   if (event.type == Blockly.Events.BLOCK_CREATE || event.type == Blockly.Events.BLOCK_DELETE ||
     event.type == Blockly.Events.BLOCK_CHANGE || event.type == Blockly.Events.BLOCK_MOVE ||
@@ -286,13 +284,13 @@ function checkInitializations(block, event) {
     var warning = null;
     var valid = true;
 
-    if(event.type == 'delete') {
+    if (event.type == 'delete') {
       warning = "This module is not initialized.\nPlease initialize it first by finding corresponding initialization block \nin the toolbox and dragging it into the workspace.";
       valid = false;
     }
 
     for (const block of workspace.blockDB.values()) {
-      if(block.type.includes('init')) {
+      if (block.type.includes('init')) {
         continue;
       }
 
@@ -301,6 +299,33 @@ function checkInitializations(block, event) {
         block.setEnabled(valid);
       }
     }
+  }
+  else {
+    var block_type = block.split('_')[1];
+    var warning = null;
+    var valid = true;
+
+    var module_initialized = false;
+
+    for (const block of workspace.blockDB.values()) {
+      if (block.type.includes('init') && block.type.includes(block_type)) {
+        module_initialized = true;
+      }
+    }
+
+    var block = workspace.getBlockById(event.ids[0]);
+
+    if(block)
+    {
+      if (module_initialized === false) {
+        warning = "This module is not initialized.\nPlease initialize it first by finding corresponding initialization block \nin the toolbox and dragging it into the workspace.";
+        valid = false;
+      }
+  
+      block.setWarningText(warning);
+      block.setEnabled(valid);
+    }
+
   }
 }
 
@@ -332,13 +357,11 @@ function update_code() {
 
   }).done(function (data) {
     editor.setValue(data);
-    if(data.includes("Parsing code error."))
-    {
+    if (data.includes("Parsing code error.")) {
       // Disable button
       document.getElementById("compileAndDownload").disabled = true;
     }
-    else
-    {
+    else {
       // Enable button
       document.getElementById("compileAndDownload").disabled = false;
     }

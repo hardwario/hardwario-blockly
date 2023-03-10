@@ -127,21 +127,44 @@ class CodeGenerator {
                     if (error) {
                         console.warn(error);
                     }
+                    console.log(stdout ? stdout : stderr);
+                    fs.writeFileSync(path.join(__dirname, '..', 'skeleton', 'src', 'application.c'), output, 'utf8');
+                    shell.cd('./skeleton');
+
+                    shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug', (error, stdout, stderr) => {
+                        if (error) {
+                            console.warn(error);
+                        }
+                        console.log(stdout ? stdout : stderr);
+                        shell.exec('ninja -C obj/debug', (error, stdout, stderr) => {
+                            if (error) {
+                                console.warn(error);
+                            }
+                            console.log(stdout ? stdout : stderr);
+                            resolve(stdout ? stdout : stderr);
+                        });
+                    });
                 });
             }
-            fs.writeFileSync(path.join(__dirname, '..', 'skeleton', 'src', 'application.c'), output, 'utf8');
-            shell.cd('./skeleton');
-            shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug', (error, stdout, stderr) => {
-                if (error) {
-                    console.warn(error);
-                }
-            });
-            shell.exec('ninja -C obj/debug', (error, stdout, stderr) => {
-                if (error) {
-                    console.warn(error);
-                }
-                resolve(stdout ? stdout : stderr);
-            });
+            else {
+                fs.writeFileSync(path.join(__dirname, '..', 'skeleton', 'src', 'application.c'), output, 'utf8');
+                shell.cd('./skeleton');
+                shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug', (error, stdout, stderr) => {
+                    if (error) {
+                        console.warn(error);
+                    }
+                    console.log(stdout ? stdout : stderr);
+
+                    shell.exec('ninja -C obj/debug', (error, stdout, stderr) => {
+                        if (error) {
+                            console.warn(error);
+                        }
+                        console.log(stdout ? stdout : stderr);
+
+                        resolve(stdout ? stdout : stderr);
+                    });
+                });
+            }
         });
     }
 
