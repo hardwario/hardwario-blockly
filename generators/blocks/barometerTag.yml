@@ -3,7 +3,7 @@ barometerTag:
   category:
     - Barometer Tag
   global_variable:
-    - barometer_tag_t barometer_tag;
+    - twr_tag_barometer_t barometer_tag;
   application_init:
     block:
       text:

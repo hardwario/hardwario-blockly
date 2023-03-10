@@ -2,8 +2,6 @@
 co2:
   category:
     - CO2 Module
-  global_variable:
-    - float co2_value;
   application_init:
     block:
       text:

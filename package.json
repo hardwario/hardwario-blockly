@@ -1,6 +1,6 @@
 {
-  "name": "blockly-test-nodejs",
-  "version": "1.1.11",
+  "name": "hardwario-blockly-dev",
+  "version": "1.0.0",
   "description": "",
   "exports": {
     ".": {

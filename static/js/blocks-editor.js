@@ -181,6 +181,11 @@ function checkCategories() {
     'blockly-9': false,
     'blockly-a': false,
     'blockly-b': false,
+    'blockly-c': false,
+    'blockly-d': false,
+    'blockly-e': false,
+    'blockly-f': false,
+    'blockly-g': false,
   }
   for (const category of workspace.toolbox_.contents_) {
     if (category.toolboxItemDef_.kind == 'SEP') {
@@ -236,6 +241,26 @@ function checkCategories() {
     else if (block.type == 'hio_battery_initialize') {
       categories['blockly-b'] = true;
       workspace.createVariable('battery_voltage_value', 'Float');
+    }
+    else if (block.type == 'hio_co2_initialize') {
+      categories['blockly-c'] = true;
+      workspace.createVariable('co2_value', 'Float');
+    }
+    else if (block.type == 'hio_relay_initialize') {
+      categories['blockly-d'] = true;
+    }
+    else if (block.type == 'hio_temperatureTag_initialize') {
+      categories['blockly-e'] = true;
+      workspace.createVariable('tag_tmp112', 'Float');
+    }
+    else if (block.type == 'hio_humidityTag_initialize') {
+      categories['blockly-f'] = true;
+      workspace.createVariable('tag_humidity', 'Float');
+    }
+    else if (block.type == 'hio_barometerTag_initialize') {
+      categories['blockly-g'] = true;
+      workspace.createVariable('tag_barometer_meters', 'Float');
+      workspace.createVariable('tag_barometer_pascal', 'Float');
     }
   }
   for (const [key, value] of Object.entries(categories)) {

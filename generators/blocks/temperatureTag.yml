@@ -19,7 +19,7 @@ temperatureTag:
           value: 5000
     code:
       - twr_tag_temperature_init(&tmp112, TWR_I2C_I2C0, TWR_TAG_TEMPERATURE_I2C_ADDRESS_DEFAULT);
-      - twr_tag_temperature_set_event_handler(&tmp112, tmp112_event_handler, NULL);
+      - twr_tag_temperature_set_event_handler(&tmp112, tag_tmp112_event_handler, NULL);
       - twr_tag_temperature_set_update_interval(&tmp112, {UPDATE_INTERVAL});
   handler:
     block:

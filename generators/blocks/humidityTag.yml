@@ -3,7 +3,7 @@ humidityTag:
   category:
     - Humidity Tag
   global_variable:
-    - humidity_tag_t humidity_tag;
+    - twr_tag_humidity_t humidity_tag;
   application_init:
     block:
       text:
