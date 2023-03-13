@@ -51,7 +51,7 @@ function load_saved_blocks() {
         var li_delete = document.createElement("button");
         li_delete.appendChild(document.createTextNode("Delete"));
         li_delete.setAttribute("onclick", "delete_user_block('" + user_blocks_list[i] + "')");
-        li_delete.setAttribute("class", "btn btn-danger col-2");
+        li_delete.setAttribute("class", "btn btn-danger");
         col2.appendChild(li_delete);
         li.appendChild(col2);
 
