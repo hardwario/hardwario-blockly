@@ -109,7 +109,7 @@ function load_user_projects() {
     var li_delete = document.createElement("button");
     li_delete.appendChild(document.createTextNode("Delete"));
     li_delete.setAttribute("onclick", "delete_project('" + user_projects_list[i] + "')");
-    li_delete.setAttribute("class", "btn btn-danger col-2");
+    li_delete.setAttribute("class", "btn btn-danger");
     col2.appendChild(li_delete);
     li.appendChild(col2);
 

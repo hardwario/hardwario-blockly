@@ -23,7 +23,7 @@ radio:
           value: twr-blockly-firmware
     code:
       - twr_radio_init({RADIO_MODE});
-      - twr_radio_pairing_request("{FIRMWARE_NAME}", "1.0.0");
+      - twr_radio_pairing_request("{FIRMWARE_NAME}", "blockly_dev");
   action:
     send_string:
       block:

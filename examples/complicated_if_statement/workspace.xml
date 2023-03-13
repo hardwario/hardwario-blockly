@@ -9,12 +9,12 @@
             <field name="OP">EQ</field>
             <value name="A">
               <block type="math_number" id="A|^#jhBlH!PF%3TQ0{p]">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
             <value name="B">
               <block type="math_number" id="^]j}Yua:neXDl$9|X4`U">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
           </block>
@@ -30,12 +30,12 @@
             <field name="OP">NEQ</field>
             <value name="A">
               <block type="math_number" id="DpOJQb_e.2q6ZQL)@|fR">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
             <value name="B">
               <block type="math_number" id="qvH;xH{ff1|QONlfjc)D">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
           </block>
@@ -51,12 +51,12 @@
             <field name="OP">LT</field>
             <value name="A">
               <block type="math_number" id="rm+/{39SX=/nek0FcSB{">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
             <value name="B">
               <block type="math_number" id="8tdH;prarS/.HL~|1oy4">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
           </block>
@@ -72,12 +72,12 @@
             <field name="OP">LTE</field>
             <value name="A">
               <block type="math_number" id="(JnPdZ;?]z8|if;(_N}V">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
             <value name="B">
               <block type="math_number" id="W*RPsyu]xNZas2*Val)n">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
           </block>
@@ -93,12 +93,12 @@
             <field name="OP">GT</field>
             <value name="A">
               <block type="math_number" id="qL*/@sv5EX,,z$~5H[[C">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
             <value name="B">
               <block type="math_number" id="R-?@fqt%d:m!c4;m){wc">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
           </block>
@@ -114,12 +114,12 @@
             <field name="OP">GTE</field>
             <value name="A">
               <block type="math_number" id="tee2Ql*G~REbV#b2jG~^">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
             <value name="B">
               <block type="math_number" id="c=VbF_g7.SCqAj%am}yZ">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
           </block>
@@ -210,7 +210,7 @@
                         <field name="NUM">1</field>
                       </shadow>
                       <block type="math_number" id="@:vcV8B#3A=zbR=+MoU=">
-                        <field name="NUM">0</field>
+                        <field name="NUM">1</field>
                       </block>
                     </value>
                     <value name="B">
@@ -218,7 +218,7 @@
                         <field name="NUM">1</field>
                       </shadow>
                       <block type="math_number" id="mchH%@kgrAP-($1=@3Kj">
-                        <field name="NUM">0</field>
+                        <field name="NUM">1</field>
                       </block>
                     </value>
                   </block>
@@ -231,7 +231,7 @@
                         <field name="NUM">1</field>
                       </shadow>
                       <block type="math_number" id="VVTx[=xv=PB}TdOkL=qN">
-                        <field name="NUM">0</field>
+                        <field name="NUM">1</field>
                       </block>
                     </value>
                     <value name="B">
@@ -239,7 +239,7 @@
                         <field name="NUM">1</field>
                       </shadow>
                       <block type="math_number" id=":!w+dq:XMQq-*W@:Mle?">
-                        <field name="NUM">0</field>
+                        <field name="NUM">1</field>
                       </block>
                     </value>
                   </block>
@@ -265,7 +265,7 @@
                     <field name="NUM">1</field>
                   </shadow>
                   <block type="math_number" id="Q#`Ria,C6$|D-Z1qv?g#">
-                    <field name="NUM">0</field>
+                    <field name="NUM">1</field>
                   </block>
                 </value>
                 <value name="B">
@@ -273,7 +273,7 @@
                     <field name="NUM">1</field>
                   </shadow>
                   <block type="math_number" id="iMM~HHx8l~zL`:=g_=Q+">
-                    <field name="NUM">0</field>
+                    <field name="NUM">1</field>
                   </block>
                 </value>
               </block>
@@ -286,7 +286,7 @@
                     <field name="NUM">1</field>
                   </shadow>
                   <block type="math_number" id="$G@Q6p_}AmNZx+W;Ip[A">
-                    <field name="NUM">0</field>
+                    <field name="NUM">1</field>
                   </block>
                 </value>
                 <value name="B">
@@ -318,7 +318,7 @@
                     <field name="NUM">1</field>
                   </shadow>
                   <block type="math_number" id="C@2y@rD~S=;fF~);Ku](">
-                    <field name="NUM">0</field>
+                    <field name="NUM">1</field>
                   </block>
                 </value>
                 <value name="B">
@@ -326,7 +326,7 @@
                     <field name="NUM">1</field>
                   </shadow>
                   <block type="math_number" id="i}F7zR(L`UlkPt54(Os|">
-                    <field name="NUM">0</field>
+                    <field name="NUM">1</field>
                   </block>
                 </value>
               </block>
@@ -339,7 +339,7 @@
                     <field name="NUM">1</field>
                   </shadow>
                   <block type="math_number" id="_=:Q$0Oo_e2]=TVYW}W_">
-                    <field name="NUM">0</field>
+                    <field name="NUM">1</field>
                   </block>
                 </value>
                 <value name="B">
@@ -347,7 +347,7 @@
                     <field name="NUM">1</field>
                   </shadow>
                   <block type="math_number" id="IfgO/+Y**O2OL`zf=/2{">
-                    <field name="NUM">0</field>
+                    <field name="NUM">1</field>
                   </block>
                 </value>
               </block>
@@ -374,7 +374,7 @@
       <block type="hio_button_initialize" id="I$!IafZWSj0Tn(+!Z@w#">
         <field name="GPIO">TWR_GPIO_BUTTON</field>
         <field name="PULL">TWR_GPIO_PULL_DOWN</field>
-        <field name="STATE">TRUE</field>
+        <field name="DEFAULT_STATE">TRUE</field>
         <next>
           <block type="hio_radio_initialize" id="t9_F}-/Jm|dH9@3tA2.y">
             <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>

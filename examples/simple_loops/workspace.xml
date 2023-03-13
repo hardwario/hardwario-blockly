@@ -17,7 +17,7 @@
                 <field name="NUM">1</field>
               </shadow>
               <block type="math_number" id="mvS+|Id9[F8H/)k]Fm8Q">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
             <value name="B">
@@ -95,7 +95,7 @@
       <block type="hio_button_initialize" id="I$!IafZWSj0Tn(+!Z@w#">
         <field name="GPIO">TWR_GPIO_BUTTON</field>
         <field name="PULL">TWR_GPIO_PULL_DOWN</field>
-        <field name="STATE">TRUE</field>
+        <field name="DEFAULT_STATE">TRUE</field>
         <next>
           <block type="hio_radio_initialize" id="t9_F}-/Jm|dH9@3tA2.y">
             <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>

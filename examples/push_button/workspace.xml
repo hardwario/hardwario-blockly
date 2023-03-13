@@ -1,5 +1,5 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
-  <block type="hio_application_initialize" id="iV*t1gIOKs`d4-COFMT-" x="-640" y="-629">
+  <block type="hio_application_initialize" id="iV*t1gIOKs`d4-COFMT-" x="-688" y="-633">
     <statement name="BLOCKS">
       <block type="hio_logging_initialize" id="1$]uU!F~ZytDvud]xk45">
         <next>
@@ -8,7 +8,7 @@
               <block type="hio_button_initialize" id="J|fTDMS!Yt@_qN/QR2y1">
                 <field name="GPIO">TWR_GPIO_BUTTON</field>
                 <field name="PULL">TWR_GPIO_PULL_DOWN</field>
-                <field name="STATE">TRUE</field>
+                <field name="DEFAULT_STATE">TRUE</field>
                 <next>
                   <block type="hio_battery_initialize" id="VCpU6ogd*~Gpu#GYplsV">
                     <field name="UPDATE_INTERVAL">5000</field>
@@ -32,19 +32,19 @@
       </block>
     </statement>
   </block>
-  <block type="hio_coreTmp112_event" id="WP$4;oJ`@,@];rB+UeWt" x="-193" y="-632">
+  <block type="hio_coreTmp112_event" id="WP$4;oJ`@,@];rB+UeWt" x="-235" y="-639">
     <field name="NAME">UPDATE</field>
     <statement name="BLOCKS">
       <block type="hio_coreTmp112_publish_temperature_value" id="V|z@}OqvKi!0r,=,Uw)t"></block>
     </statement>
   </block>
-  <block type="hio_battery_event" id="[:OT+:ky$Sl~cj~(3a}=" x="-197" y="-519">
+  <block type="hio_battery_event" id="[:OT+:ky$Sl~cj~(3a}=" x="-236" y="-505">
     <field name="NAME">UPDATE</field>
     <statement name="BLOCKS">
       <block type="hio_battery_publish_voltage" id="i5~]#DbCgC/r?3u5f:{W"></block>
     </statement>
   </block>
-  <block type="hio_button_event" id="I^?,q(U]lR5dtYT8}dEX" x="-628" y="-196">
+  <block type="hio_button_event" id="I^?,q(U]lR5dtYT8}dEX" x="-236" y="-359">
     <field name="NAME">CLICK</field>
     <statement name="BLOCKS">
       <block type="hio_led_pulse" id="}!MI9s0=B}tZQI/N4HoZ">
@@ -55,7 +55,7 @@
       </block>
     </statement>
   </block>
-  <block type="hio_button_event" id="~s)%@Ye.t+_Pg0=tlaQm" x="-302" y="-200">
+  <block type="hio_button_event" id="~s)%@Ye.t+_Pg0=tlaQm" x="-237" y="-163">
     <field name="NAME">HOLD</field>
     <statement name="BLOCKS">
       <block type="hio_led_pulse" id="{}-xgF$xM~+0mSJZ)FZd">

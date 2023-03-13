@@ -3,7 +3,7 @@
     <variable type="Float" id="pW|gS!qStA2dqCzQjr^S">temperature_set_point</variable>
     <variable type="Float" id="ebnR-AssyX9acvs=/yuI">core_tmp112_value</variable>
   </variables>
-  <block type="hio_application_initialize" id="[|9xE]^Nf[bw0H|XV_]T" x="-673" y="-675">
+  <block type="hio_application_initialize" id="[|9xE]^Nf[bw0H|XV_]T" x="-664" y="-660">
     <statement name="BLOCKS">
       <block type="hio_led_initialize" id="mO+S=ct.5/E-P,)LKB([">
         <next>
@@ -39,7 +39,7 @@
       </block>
     </statement>
   </block>
-  <block type="hio_application_task" id="KLgtrE4{8!qcxz69,7lh" x="-156" y="-643">
+  <block type="hio_application_task" id="KLgtrE4{8!qcxz69,7lh" x="60" y="-668">
     <field name="TASK_INTERVAL">1000</field>
     <statement name="BLOCKS">
       <block type="hio_lcd_clear" id="T$oK+d+4KG+T)W|x1p~W">
@@ -50,8 +50,8 @@
               <block type="hio_lcd_printf" id="z|@V_TZIVzVk~)4g/U2V">
                 <field name="LEFT">20</field>
                 <field name="TOP">20</field>
-                <value name="VALUE">
-                  <block type="variables_get_float" id="X4tTx[Cm];;ef~F0qAFv">
+                <value name="VARIABLE">
+                  <block type="variables_get_float" id=":7G!gPorkvRshATrCE4D">
                     <field name="VAR" id="ebnR-AssyX9acvs=/yuI" variabletype="Float">core_tmp112_value</field>
                   </block>
                 </value>
@@ -75,8 +75,8 @@
                                   <block type="hio_lcd_printf" id="Oq)#!h.]s!N_GyS0Bb,z">
                                     <field name="LEFT">40</field>
                                     <field name="TOP">100</field>
-                                    <value name="VALUE">
-                                      <block type="variables_get_float" id="$zAA6e*43h1$~;2(1rBo">
+                                    <value name="VARIABLE">
+                                      <block type="variables_get_float" id="@Y29ZgZ*bK}pvux$K%=/">
                                         <field name="VAR" id="pW|gS!qStA2dqCzQjr^S" variabletype="Float">temperature_set_point</field>
                                       </block>
                                     </value>
@@ -107,7 +107,7 @@
       </block>
     </statement>
   </block>
-  <block type="hio_coreTmp112_event" id="SMirRX5ew@0T{i%(0wni" x="-675" y="-324">
+  <block type="hio_coreTmp112_event" id="SMirRX5ew@0T{i%(0wni" x="482" y="-666">
     <field name="NAME">UPDATE</field>
     <statement name="BLOCKS">
       <block type="controls_if" id="G?SS@#}ve+.a7*x:x0@{">
@@ -168,7 +168,7 @@
       </block>
     </statement>
   </block>
-  <block type="hio_lcd_event" id="eHSoQwzO:/BA|45HhaW}" x="-676" y="-12">
+  <block type="hio_lcd_event" id="eHSoQwzO:/BA|45HhaW}" x="-666" y="-112">
     <field name="NAME">LEFT_CLICK</field>
     <statement name="BLOCKS">
       <block type="variables_set_float" id="$c:bHj6%AGy?DBxn8vz#">
@@ -203,7 +203,7 @@
       </block>
     </statement>
   </block>
-  <block type="hio_lcd_event" id="s0Hq8F$OLYQ3e!E7Ks@_" x="-676" y="106">
+  <block type="hio_lcd_event" id="s0Hq8F$OLYQ3e!E7Ks@_" x="-670" y="98">
     <field name="NAME">RIGHT_CLICK</field>
     <statement name="BLOCKS">
       <block type="variables_set_float" id="rQX%8`#i:r(JRV#F~`tz">
@@ -238,7 +238,7 @@
       </block>
     </statement>
   </block>
-  <block type="hio_battery_event" id="VwCaNF)7_U`$-w88z0Kz" x="-675" y="236">
+  <block type="hio_battery_event" id="VwCaNF)7_U`$-w88z0Kz" x="-671" y="309">
     <field name="NAME">UPDATE</field>
     <statement name="BLOCKS">
       <block type="hio_battery_publish_voltage" id="7*ze(;FQ.|.#f_1wW+A%"></block>

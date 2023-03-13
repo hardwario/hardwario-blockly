@@ -234,6 +234,9 @@ class CodeGenerator {
 
     generate_variables(variables) {
         for (let variable in variables) {
+            if(!variables[variable]['type']) {
+                variables[variable]['type'] = 'Float';
+            }
             this.variables[variables[variable]['id']] = { 'name': variables[variable]['name'], 'type': variables[variable]['type'] };
             this.global_variable.push(("{variable_type} {variable_name} = 0;".format({ variable_type: this.variable_types[variables[variable]['type']], variable_name: variables[variable]['name'] })));
         }
@@ -381,7 +384,7 @@ class CodeGenerator {
             }
         }
         else if (block['type'] == 'logic_negate') {
-            return '(!({condition}))'.format({ condition: self.generate_sub_section(block['inputs']['BOOL']['block']) })
+            return '(!({condition}))'.format({ condition: this.generate_sub_section(block['inputs']['BOOL']['block']) })
         }
         else if (block['type'].includes('variables_get')) {
             return this.variables[block['fields']['VAR']['id']]['name']
@@ -420,7 +423,7 @@ class CodeGenerator {
                     }
                 }
                 else if (if_json['type'] == 'logic_negate') {
-                    condition = '(!({condition}))'.format({ condition: self.generate_sub_section(if_json['inputs']['BOOL']['block']) })
+                    condition = '(!({condition}))'.format({ condition: this.generate_sub_section(if_json['inputs']['BOOL']['block']) })
                 }
 
                 else if (if_json['type'].startswith('hio_') && if_json['type'].endswith('_value')) {
@@ -465,7 +468,7 @@ class CodeGenerator {
                     }
                 }
                 else if (if_json['type'] == 'logic_negate') {
-                    condition = '(!({condition}))'.format({ condition: self.generate_sub_section(if_json['inputs']['BOOL']['block']) })
+                    condition = '(!({condition}))'.format({ condition: this.generate_sub_section(if_json['inputs']['BOOL']['block']) })
                 }
 
                 else if (if_json['type'].startswith('hio_') && if_json['type'].endswith('_value')) {

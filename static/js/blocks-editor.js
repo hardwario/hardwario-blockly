@@ -304,6 +304,9 @@ function onBlockEvent(event) {
 }
 
 function checkInitializations(block, event) {
+  if (!block.includes('hio_')) {
+    return;
+  }
   if (block.includes('init')) {
     var block_type = block.split('_')[1];
     var warning = null;
@@ -330,6 +333,10 @@ function checkInitializations(block, event) {
     var warning = null;
     var valid = true;
 
+    if (block_type == "task") {
+      return;
+    }
+
     var module_initialized = false;
 
     for (const block of workspace.blockDB.values()) {
@@ -340,13 +347,12 @@ function checkInitializations(block, event) {
 
     var block = workspace.getBlockById(event.ids[0]);
 
-    if(block)
-    {
+    if (block) {
       if (module_initialized === false) {
         warning = "This module is not initialized.\nPlease initialize it first by finding corresponding initialization block \nin the toolbox and dragging it into the workspace.";
         valid = false;
       }
-  
+
       block.setWarningText(warning);
       block.setEnabled(valid);
     }
@@ -396,13 +402,18 @@ function update_code() {
 function exportWorkspace() {
   var xml = Blockly.Xml.workspaceToDom(workspace);
   var xml_text = Blockly.Xml.domToPrettyText(xml);
-  var blob = new Blob([xml_text], { type: "text/plain;charset=utf-8" });
+  var blob = new Blob([xml_text], { type: "text/xml;charset=utf-8" });
 
-  const link = document.createElement('a')
-  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
 
-  link.href = url
-  link.download = project + ".xml";
+  link.href = url;
+  if (project !== "") {
+    link.download = project + ".xml";
+  }
+  else if (example !== "") {
+    link.download = example + ".xml";
+  }
   document.body.appendChild(link)
   link.click()
 
@@ -412,7 +423,7 @@ function exportWorkspace() {
 
 function importWorkspace() {
   Blockly.getMainWorkspace().clear()
-  var file = document.getElementById('importFile').files[0];
+  var file = document.getElementById('file-upload').files[0];
   var reader = new FileReader();
   reader.onload = function (e) {
     var contents = e.target.result;

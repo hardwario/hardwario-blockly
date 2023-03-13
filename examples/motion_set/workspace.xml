@@ -10,7 +10,7 @@
               <block type="hio_button_initialize" id="|?HdV[d=y.F/+]971[tF">
                 <field name="GPIO">TWR_GPIO_BUTTON</field>
                 <field name="PULL">TWR_GPIO_PULL_DOWN</field>
-                <field name="STATE">TRUE</field>
+                <field name="DEFAULT_STATE">TRUE</field>
                 <next>
                   <block type="hio_battery_initialize" id="#pQt#LU8tBH3]YXCP.Z!">
                     <field name="UPDATE_INTERVAL">5000</field>
@@ -33,19 +33,19 @@
       </block>
     </statement>
   </block>
-  <block type="hio_pir_event" id="i-(Y[|R8m+Um/oH2Gzkt" x="-271" y="-270">
+  <block type="hio_pir_event" id="i-(Y[|R8m+Um/oH2Gzkt" x="148" y="-714">
     <field name="NAME">MOTION</field>
     <statement name="BLOCKS">
       <block type="hio_pir_publish_motion_count" id="?Hy~L?D#g$f=xv3nt2u:"></block>
     </statement>
   </block>
-  <block type="hio_coreTmp112_event" id="Q,+s|L2HTe7^ZYAaJX|H" x="36" y="-154">
+  <block type="hio_coreTmp112_event" id="Q,+s|L2HTe7^ZYAaJX|H" x="147" y="-567">
     <field name="NAME">UPDATE</field>
     <statement name="BLOCKS">
       <block type="hio_coreTmp112_publish_temperature_value" id="9m)AhuvW_rz?-nQF7Xmj"></block>
     </statement>
   </block>
-  <block type="hio_battery_event" id=";o@+/,{prETxdpxvCrO." x="-291" y="-136">
+  <block type="hio_battery_event" id=";o@+/,{prETxdpxvCrO." x="147" y="-421">
     <field name="NAME">UPDATE</field>
     <statement name="BLOCKS">
       <block type="hio_battery_publish_voltage" id="0.z@/H6!@E.DXD``QFn}"></block>
