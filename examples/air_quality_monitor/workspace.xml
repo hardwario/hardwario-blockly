@@ -1,0 +1,675 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable type="Integer" id="|T2J~TbMl+Kb8KMsXU9r">page_index</variable>
+    <variable type="Float" id="x,8jcZGR8uHcQMym~1?q">core_tmp112_value</variable>
+    <variable type="Float" id="Jw7#`SP380W3`TPw6+#X">co2_value</variable>
+    <variable type="Float" id="3l`A2B8H4q#r*{D/=k,N">tag_barometer_pascal</variable>
+    <variable type="Float" id="6_oZVD?qYJT8T6tb.dQH">battery_voltage_value</variable>
+    <variable type="Float" id="t[4}h!rmXW.5oN9WIFOr">tag_humidity</variable>
+    <variable type="Float" id="Pv|U#ByYU^WcR4]+n35C">tag_barometer_meters</variable>
+  </variables>
+  <block type="hio_application_initialize" id="b/MsKpaM)mqd3%~LNQFx" x="56" y="-32">
+    <statement name="BLOCKS">
+      <block type="hio_logging_initialize" id="^9P17J*H{A2~eZI)L[sn">
+        <next>
+          <block type="hio_led_initialize" id="Jl]yj3-Hu1L~7SdtM/8P">
+            <next>
+              <block type="hio_radio_initialize" id="bG`_2Qh9$_P4ATc.CxMu">
+                <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>
+                <field name="FIRMWARE_NAME">air-quality-monitor</field>
+                <next>
+                  <block type="hio_coreTmp112_initialize" id="mLaEqMMh7YFPZ}iW;F#-">
+                    <field name="UPDATE_INTERVAL">5000</field>
+                    <next>
+                      <block type="hio_humidityTag_initialize" id="w}-Z2[SF]n]ZxzBr0S*U">
+                        <field name="REVISION">TWR_TAG_HUMIDITY_REVISION_R3</field>
+                        <field name="UPDATE_INTERVAL">5000</field>
+                        <next>
+                          <block type="hio_barometerTag_initialize" id="Sxbi_3xjQ^$sY/8qonRG">
+                            <field name="UPDATE_INTERVAL">5000</field>
+                            <next>
+                              <block type="hio_co2_initialize" id="6f%PY5(UQ6#5[SCZ3ZCe">
+                                <field name="UPDATE_INTERVAL">5000</field>
+                                <next>
+                                  <block type="hio_lcd_initialize" id="hP+Q7QDgE0`dpup^OEY/">
+                                    <next>
+                                      <block type="hio_battery_initialize" id="PH0WMDdRY=E3AK[oLH7V">
+                                        <field name="UPDATE_INTERVAL">5000</field>
+                                        <next>
+                                          <block type="variables_set_integer" id="2Ixp@Dx+~OuvM19IJPc?">
+                                            <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                                            <value name="VALUE">
+                                              <block type="math_arithmetic" id="bytDVOmf+dR,[jJ=DLHS">
+                                                <field name="OP">MINUS</field>
+                                                <value name="A">
+                                                  <block type="math_number" id="XNwhv7.?20j+R4c+0%Zp">
+                                                    <field name="NUM">1</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number" id="OLf2Cr=qW$^#*@5m:0Pp">
+                                                    <field name="NUM">1</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_application_task" id="Y90JA!fX@BoRl__.I:J^" x="1357" y="-21">
+    <field name="TASK_INTERVAL">1000</field>
+    <statement name="BLOCKS">
+      <block type="hio_lcd_clear" id="bRd^q[-HeJqdc4wl9BOO">
+        <next>
+          <block type="controls_if" id="{2_g$X76,c3weTp8xD^S">
+            <mutation elseif="3"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="s(:71XN}}o{$v{X)|o8Y">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get_integer" id="z)[-G6Uo0fq;4efkC9JF">
+                    <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_arithmetic" id="DglQ2}u=C5@O+NOOsxd$">
+                    <field name="OP">MINUS</field>
+                    <value name="A">
+                      <block type="math_number" id="TNaOw+r^iv0w@.z(?buF">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="gC6#/H~hh6Jwc#t~fXUi">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="hio_lcd_set_font" id=";$Msm.mUOV3#Z|0^XieO">
+                <field name="FONT">twr_font_ubuntu_15</field>
+                <next>
+                  <block type="hio_lcd_draw_string" id="qU0VmJp6:F;GB.G5uoEu" inline="true">
+                    <field name="STRING">Temperature</field>
+                    <field name="LEFT">10</field>
+                    <field name="TOP">5</field>
+                    <next>
+                      <block type="hio_lcd_set_font" id="BE`LkBqu{By`2IgsZ#%}">
+                        <field name="FONT">twr_font_ubuntu_28</field>
+                        <next>
+                          <block type="hio_lcd_printf" id="-Hl}%U92$,Kxw%$o-rQK" inline="true">
+                            <field name="LEFT">25</field>
+                            <field name="TOP">25</field>
+                            <value name="VARIABLE">
+                              <block type="variables_get_float" id="WnCL]?Lm0O~as1*Tbb6I">
+                                <field name="VAR" id="x,8jcZGR8uHcQMym~1?q" variabletype="Float">core_tmp112_value</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="hio_lcd_set_font" id="[zjTZQ=cR;uo6yO-JAXS">
+                                <field name="FONT">twr_font_ubuntu_15</field>
+                                <next>
+                                  <block type="hio_lcd_draw_string" id="-VG3_u@IYTDoYNigoQ7D" inline="true">
+                                    <field name="STRING">\xb0 C</field>
+                                    <field name="LEFT">90</field>
+                                    <field name="TOP">35</field>
+                                    <next>
+                                      <block type="hio_lcd_draw_string" id="!4Cs)G)e7Ud)5D)VOAy|" inline="true">
+                                        <field name="STRING">Humidity</field>
+                                        <field name="LEFT">10</field>
+                                        <field name="TOP">55</field>
+                                        <next>
+                                          <block type="hio_lcd_set_font" id="O_w/T%#LRW}`3Ge=u7V|">
+                                            <field name="FONT">twr_font_ubuntu_28</field>
+                                            <next>
+                                              <block type="hio_lcd_printf" id="*!4o3ireMVz}-VW8|d#D" inline="true">
+                                                <field name="LEFT">25</field>
+                                                <field name="TOP">75</field>
+                                                <value name="VARIABLE">
+                                                  <block type="variables_get_float" id="Ym^k.=]PIK.TjF72GkiA">
+                                                    <field name="VAR" id="t[4}h!rmXW.5oN9WIFOr" variabletype="Float">tag_humidity</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="hio_lcd_set_font" id="$n*x5WuKiXyAhPO{:(4p">
+                                                    <field name="FONT">twr_font_ubuntu_15</field>
+                                                    <next>
+                                                      <block type="hio_lcd_draw_string" id="5KI)]?B%y9A+7g_Ux:~[" inline="true">
+                                                        <field name="STRING">%</field>
+                                                        <field name="LEFT">90</field>
+                                                        <field name="TOP">85</field>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="logic_compare" id=")Ij#7~q,g6ZJ#1xU6=+X">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get_integer" id="WiAVq6w*HG|2cQTq`4hz">
+                    <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="M6t-d*-v*)5:]JWKC77^">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="hio_lcd_set_font" id="ke2}_n2a(3|]9b}9/2@X">
+                <field name="FONT">twr_font_ubuntu_15</field>
+                <next>
+                  <block type="hio_lcd_draw_string" id="`+0hh+Fi+N$z5d*efJ2~" inline="true">
+                    <field name="STRING">CO2</field>
+                    <field name="LEFT">10</field>
+                    <field name="TOP">5</field>
+                    <next>
+                      <block type="hio_lcd_set_font" id="_=2/tewoUPbRA@va3$!-">
+                        <field name="FONT">twr_font_ubuntu_28</field>
+                        <next>
+                          <block type="hio_lcd_printf" id="~{AVK.w2[}7XSi};1Z/H" inline="true">
+                            <field name="LEFT">25</field>
+                            <field name="TOP">25</field>
+                            <value name="VARIABLE">
+                              <block type="variables_get_float" id="QwQBt@m#:5TJ,@W)fi2%">
+                                <field name="VAR" id="Jw7#`SP380W3`TPw6+#X" variabletype="Float">co2_value</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="hio_lcd_set_font" id="rKgpBGuB(`X@K5X?4,9Y">
+                                <field name="FONT">twr_font_ubuntu_15</field>
+                                <next>
+                                  <block type="hio_lcd_draw_string" id="RZqKaz6!OXdht,^#5%}[" inline="true">
+                                    <field name="STRING">ppm</field>
+                                    <field name="LEFT">90</field>
+                                    <field name="TOP">35</field>
+                                    <next>
+                                      <block type="hio_lcd_draw_string" id="r;6V2e|cSBSV}hG]npfK" inline="true">
+                                        <field name="STRING">TVOC</field>
+                                        <field name="LEFT">10</field>
+                                        <field name="TOP">55</field>
+                                        <next>
+                                          <block type="hio_lcd_set_font" id="P%v%-:)0/ly8#B==DEop">
+                                            <field name="FONT">twr_font_ubuntu_28</field>
+                                            <next>
+                                              <block type="hio_lcd_printf" id="0tPZ~X|].B0|@_vb[]*N" inline="true">
+                                                <field name="LEFT">25</field>
+                                                <field name="TOP">75</field>
+                                                <value name="VARIABLE">
+                                                  <block type="math_number" id="dA1LD4=yLk-,iuz*WVwV">
+                                                    <field name="NUM">5</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="hio_lcd_set_font" id="KQBu,Wg#XLH=Chp5yM,+">
+                                                    <field name="FONT">twr_font_ubuntu_15</field>
+                                                    <next>
+                                                      <block type="hio_lcd_draw_string" id="_$T8E*]T(~XLVFS*Q1Xa" inline="true">
+                                                        <field name="STRING">ppb</field>
+                                                        <field name="LEFT">90</field>
+                                                        <field name="TOP">85</field>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="IF2">
+              <block type="logic_compare" id="!8zRN-3NJaUIoU_8garT">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get_integer" id="V1|7P_|*s6[sWy~V9_l+">
+                    <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="{2{_;ir3Y?d%hjs^}N5[">
+                    <field name="NUM">2</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO2">
+              <block type="hio_lcd_set_font" id="w2I!~Gmf9h/VtHNux{Ft">
+                <field name="FONT">twr_font_ubuntu_15</field>
+                <next>
+                  <block type="hio_lcd_draw_string" id=",5t+GhmNA[rjbX|TU143" inline="true">
+                    <field name="STRING">Pressure</field>
+                    <field name="LEFT">10</field>
+                    <field name="TOP">5</field>
+                    <next>
+                      <block type="hio_lcd_set_font" id="+^l2a9_F}::%vZOe:r3M">
+                        <field name="FONT">twr_font_ubuntu_28</field>
+                        <next>
+                          <block type="hio_lcd_printf" id="U?YO5$?85]Q@$x2F-rIx" inline="true">
+                            <field name="LEFT">25</field>
+                            <field name="TOP">25</field>
+                            <value name="VARIABLE">
+                              <block type="variables_get_float" id="|rCLyK$vI[%j#2luX?h8">
+                                <field name="VAR" id="3l`A2B8H4q#r*{D/=k,N" variabletype="Float">tag_barometer_pascal</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="hio_lcd_set_font" id="RYRKp5^3}W{p/RAG`$|}">
+                                <field name="FONT">twr_font_ubuntu_15</field>
+                                <next>
+                                  <block type="hio_lcd_draw_string" id="8G*O:)pW)R`_Dvg4#}Hw" inline="true">
+                                    <field name="STRING">hPa</field>
+                                    <field name="LEFT">90</field>
+                                    <field name="TOP">35</field>
+                                    <next>
+                                      <block type="hio_lcd_draw_string" id="RA;OTh4SamR5uCBiNzII" inline="true">
+                                        <field name="STRING">Altitude</field>
+                                        <field name="LEFT">10</field>
+                                        <field name="TOP">55</field>
+                                        <next>
+                                          <block type="hio_lcd_set_font" id="Pe6=yTO+:n?)=*=P_e.S">
+                                            <field name="FONT">twr_font_ubuntu_28</field>
+                                            <next>
+                                              <block type="hio_lcd_printf" id="L)KB_uOWK%2%b,Gp4!Rz" inline="true">
+                                                <field name="LEFT">25</field>
+                                                <field name="TOP">75</field>
+                                                <value name="VARIABLE">
+                                                  <block type="variables_get_float" id="Q;IRXy,yG)05=;](1%#n">
+                                                    <field name="VAR" id="Pv|U#ByYU^WcR4]+n35C" variabletype="Float">tag_barometer_meters</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="hio_lcd_set_font" id="tTls6c_ipZJ0S}z}[._b">
+                                                    <field name="FONT">twr_font_ubuntu_15</field>
+                                                    <next>
+                                                      <block type="hio_lcd_draw_string" id="t?jLcb:HW*U6EZRin.!`" inline="true">
+                                                        <field name="STRING">m</field>
+                                                        <field name="LEFT">90</field>
+                                                        <field name="TOP">85</field>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="IF3">
+              <block type="logic_compare" id="QK4O?zaIA*}f6l^Dyrt*">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get_integer" id="r5/BEiW|.#pd)$/*{4?2">
+                    <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id=")c0pA}cDOf_8AL5$PeM9">
+                    <field name="NUM">3</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO3">
+              <block type="hio_lcd_set_font" id="t`I_4sW}Xng.oAKR//~M">
+                <field name="FONT">twr_font_ubuntu_15</field>
+                <next>
+                  <block type="hio_lcd_draw_string" id="af}D9.*OYDr,9UBK%VS#" inline="true">
+                    <field name="STRING">Voltage</field>
+                    <field name="LEFT">10</field>
+                    <field name="TOP">5</field>
+                    <next>
+                      <block type="hio_lcd_set_font" id="{)@%}lZnFY)=^c7#1TW(">
+                        <field name="FONT">twr_font_ubuntu_28</field>
+                        <next>
+                          <block type="hio_lcd_printf" id="0:f7Ar6Wh|h6=k.YRvyE" inline="true">
+                            <field name="LEFT">25</field>
+                            <field name="TOP">25</field>
+                            <value name="VARIABLE">
+                              <block type="variables_get_float" id="iT*mp9U174bxetQxE){;">
+                                <field name="VAR" id="6_oZVD?qYJT8T6tb.dQH" variabletype="Float">battery_voltage_value</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="hio_lcd_set_font" id="|GILW83+!6W#9T.~}%Zu">
+                                <field name="FONT">twr_font_ubuntu_15</field>
+                                <next>
+                                  <block type="hio_lcd_draw_string" id="UMUfEW`[]=]x,0H_}jGH" inline="true">
+                                    <field name="STRING">V</field>
+                                    <field name="LEFT">90</field>
+                                    <field name="TOP">35</field>
+                                    <next>
+                                      <block type="hio_lcd_draw_string" id="kZHw1_W*FvMvtu`ul_!2" inline="true">
+                                        <field name="STRING">Percentage</field>
+                                        <field name="LEFT">10</field>
+                                        <field name="TOP">55</field>
+                                        <next>
+                                          <block type="hio_lcd_set_font" id="8ZBS7|x[B1,%ZNJ:F@)K">
+                                            <field name="FONT">twr_font_ubuntu_28</field>
+                                            <next>
+                                              <block type="hio_lcd_printf" id="/K{pN[TYn}WWI[={RB4L" inline="true">
+                                                <field name="LEFT">25</field>
+                                                <field name="TOP">75</field>
+                                                <value name="VARIABLE">
+                                                  <block type="math_number" id="jol-/Ge+7=2?R_l$$N$0">
+                                                    <field name="NUM">100</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="hio_lcd_set_font" id="eF2RGp,!PJ5*fku.%uY*">
+                                                    <field name="FONT">twr_font_ubuntu_15</field>
+                                                    <next>
+                                                      <block type="hio_lcd_draw_string" id="!AC?r1-|g@WoqRDGHMAP" inline="true">
+                                                        <field name="STRING">%</field>
+                                                        <field name="LEFT">90</field>
+                                                        <field name="TOP">90</field>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="hio_lcd_set_font" id="s6]ebT?7qL[MBe+;WL%y">
+                <field name="FONT">twr_font_ubuntu_13</field>
+                <next>
+                  <block type="hio_lcd_printf" id="peM{Ue}!z#lC0mX3.~3$" inline="true">
+                    <field name="LEFT">52</field>
+                    <field name="TOP">115</field>
+                    <value name="VARIABLE">
+                      <block type="math_arithmetic" id="_:7FftH9+6Fw71S$pd7Y">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get_integer" id="3Q*-iIt)o(WppzGfu+:l">
+                            <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="^f4;K_p:pKUbeG97E_pW">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="hio_lcd_draw_string" id="boXJ]Lyjz)vfauDnw_7B" inline="true">
+                        <field name="STRING">/4</field>
+                        <field name="LEFT">58</field>
+                        <field name="TOP">115</field>
+                        <next>
+                          <block type="hio_lcd_update" id="d9kX#qeY:@/44$:qq{dp"></block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_lcd_event" id="jNSST,5+vrumW!{5LsfH" x="578" y="197">
+    <field name="NAME">LEFT_CLICK</field>
+    <statement name="BLOCKS">
+      <block type="variables_set_integer" id="r1@H02.8$pPh:k[P+-Th">
+        <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+        <value name="VALUE">
+          <block type="math_arithmetic" id="RZ~)_KhMN$v_t+om#)X6">
+            <field name="OP">MINUS</field>
+            <value name="A">
+              <block type="variables_get_integer" id="7wh=*c$28!CE5Y{bf]*w">
+                <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="~;}T)LG,ya]}:!*wCYH#">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="ms4dsS%gGnyK:Lm/~g5_">
+            <value name="IF0">
+              <block type="logic_compare" id="zte4q7Y8Rk6v_A]ZWYVw">
+                <field name="OP">LT</field>
+                <value name="A">
+                  <block type="variables_get_integer" id="26NH0{}n5aE9S!m!g?lO">
+                    <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_arithmetic" id="eykrO{KZDghCS6+aj5K!">
+                    <field name="OP">MINUS</field>
+                    <value name="A">
+                      <block type="math_number" id="J^L.y?.(uw`?q1n%qZ~O">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="V#_$XOwB=5.JI6S,h?vV">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set_integer" id="E2|+USy{X.77|-i/L-)T">
+                <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                <value name="VALUE">
+                  <block type="math_number" id="3n0N|Ky/~/j))tbTO?d%">
+                    <field name="NUM">3</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="hio_task_run_application_task" id=")p,J~54PW]{RJ5qpP_}w"></block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_lcd_event" id="lT`PcqLzF*k:a(u|LfzR" x="575" y="532">
+    <field name="NAME">RIGHT_CLICK</field>
+    <statement name="BLOCKS">
+      <block type="variables_set_integer" id="T.)mkCu8zfdR*?KLMEu3">
+        <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+        <value name="VALUE">
+          <block type="math_arithmetic" id="(ISW$.:3zt@Ey._`%ggS">
+            <field name="OP">ADD</field>
+            <value name="A">
+              <block type="variables_get_integer" id="PGlw?_g!y$0I`;9;O}2|">
+                <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="ZPm|yCMl|0JjoR1/Q,8s">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="=0Wf3Xb58jEQOm8{{Gdf">
+            <value name="IF0">
+              <block type="logic_compare" id="ElQ~QcG.1S}Wt[LitzE)">
+                <field name="OP">GT</field>
+                <value name="A">
+                  <block type="variables_get_integer" id="?10w]%5RGRh!:jiyw=2z">
+                    <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id=",H.#}]zpCtP;8Hc-jS3S">
+                    <field name="NUM">3</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set_integer" id="A-WBD3{[QCg?HK?G74~:">
+                <field name="VAR" id="|T2J~TbMl+Kb8KMsXU9r" variabletype="Integer">page_index</field>
+                <value name="VALUE">
+                  <block type="math_arithmetic" id="roKm_Wc``x^mlLM!Cf)R">
+                    <field name="OP">MINUS</field>
+                    <value name="A">
+                      <block type="math_number" id="6b%d(m.$w6o@/yYH/x,F">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="D5n=8Q#/t)X(OzH~0X8n">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="hio_task_run_application_task" id=")~bAN%sC58QYdU94G?4o"></block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_battery_event" id="nmjBj;yS,!O:-mjixo]G" x="46" y="890">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_battery_publish_voltage" id="anLSvIFLg/g=GAh+Dh@D">
+        <next>
+          <block type="hio_task_run_application_task" id="0_?qj2pnEz[ME%k.7W*W"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_co2_event" id="LD!8$cj5,6]zq06H^%AU" x="401" y="887">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_co2_publish_co2" id="_Fd[h_ty8EmuF8_I{{=`">
+        <next>
+          <block type="hio_task_run_application_task" id="|pnN97=M~m%;Al~D_r(S"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_coreTmp112_event" id="zDuw3;Nk8_T}_dd}!_tE" x="750" y="889">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_coreTmp112_publish_temperature_value" id="L3~CB7fgTm,s^cngJYQN">
+        <next>
+          <block type="hio_task_run_application_task" id="V~+hW2}@|m|)Pwo+FwA,"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_barometerTag_event" id="?x:zWpvvz=0(K@U4!Q5w" x="48" y="1097">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_barometerTag_publish_barometer_value" id="=HlpXyf!0~t?[EVDIV[.">
+        <next>
+          <block type="hio_task_run_application_task" id="L4jy{s[!%;(mUM2AGlC5"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_humidityTag_event" id="6Z|gIK7QjctE69nrHg8q" x="408" y="1104">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_humidityTag_publish_humidity_value" id="PTP.Sg]ET,Y0.*]3181!">
+        <next>
+          <block type="hio_task_run_application_task" id="s;@E2!QL?3DzcQN3r5`7"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

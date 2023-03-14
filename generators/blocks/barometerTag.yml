@@ -18,7 +18,7 @@ barometerTag:
           max: 1000000
           value: 5000
     code:   
-      - twr_tag_barometer_init(&barometer_tag, TWR_I2C_I2C1);
+      - twr_tag_barometer_init(&barometer_tag, TWR_I2C_I2C0);
       - twr_tag_barometer_set_event_handler(&barometer_tag, barometer_tag_event_handler, NULL);
       - twr_tag_barometer_set_update_interval(&barometer_tag, {UPDATE_INTERVAL});
   handler:
