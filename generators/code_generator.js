@@ -373,7 +373,7 @@ class CodeGenerator {
             }
         }
         else if (block['type'] == 'math_number') {
-            return block['fields']['NUM']
+            return String(block['fields']['NUM']);
         }
         else if (block['type'] == 'logic_boolean') {
             if (block['fields']['BOOL'] == 'TRUE') {

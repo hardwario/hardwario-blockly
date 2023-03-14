@@ -231,6 +231,15 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": ""
     },
     {
+        "type": "hio_battery_publish_percentage",
+        "message0": "Publish Battery Percentage Over the Radio",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#125f44",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
         "type": "hio_button_initialize",
         "message0": "Initialize Button %1 Button GPIO %2 %3 Button Pull %4 %5 Default State %6",
         "args0": [
@@ -1142,6 +1151,24 @@ Blockly.defineBlocksWithJsonArray([
                 ]
             }
         ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#5A1AA1",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_lcd_enable_pll",
+        "message0": "Enable PLL",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#5A1AA1",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_lcd_disable_pll",
+        "message0": "Disable PLL",
         "previousStatement": "null",
         "nextStatement": "null",
         "colour": "#5A1AA1",

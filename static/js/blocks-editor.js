@@ -241,6 +241,7 @@ function checkCategories() {
     else if (block.type == 'hio_battery_initialize') {
       categories['blockly-b'] = true;
       workspace.createVariable('battery_voltage_value', 'Float');
+      workspace.createVariable('battery_percentage_value', 'Integer');
     }
     else if (block.type == 'hio_co2_initialize') {
       categories['blockly-c'] = true;

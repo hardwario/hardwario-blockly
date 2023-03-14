@@ -30,7 +30,6 @@ lcd:
       prefix: TWR_MODULE_LCD_EVENT_
       enum:
         LEFT_PRESS:
-          - 'int lcd_left_press_count = 0;'
         LEFT_RELEASE:
         LEFT_CLICK:
         LEFT_HOLD:
@@ -310,3 +309,15 @@ lcd:
               - ["TOGGLE", "TWR_LED_MODE_TOGGLE"]
       code:
         - twr_led_set_mode(&{LED}, {MODE});
+    enable_pll:
+      block:
+        text:
+          - Enable PLL
+      code:
+        - twr_system_pll_enable();
+    disable_pll:
+      block:
+        text:
+          - Disable PLL
+      code:
+        - twr_system_pll_disable();

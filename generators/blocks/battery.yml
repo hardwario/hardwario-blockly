@@ -28,8 +28,10 @@ battery:
       enum:
         UPDATE:
           - float voltage;
-          - if (twr_module_battery_get_voltage(&voltage)) {
+          - int percentage;
+          - if (twr_module_battery_get_voltage(&voltage) && twr_module_battery_get_charge_level(&percentage)) {
           - battery_voltage_value = voltage;
+          - battery_percentage_value = percentage;
           - "}"
   action:
     publish_voltage:
@@ -38,3 +40,9 @@ battery:
           - Publish Battery Voltage Over the Radio
       code:
         - twr_radio_pub_battery(&battery_voltage_value);
+    publish_percentage:
+      block:
+        text:
+          - Publish Battery Percentage Over the Radio
+      code:
+        - twr_radio_pub_int("battery/-/percentage", &battery_percentage_value);
