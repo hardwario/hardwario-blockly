@@ -172,7 +172,7 @@
       document.getElementById("compileAndDownload").style.display = "none";
       $.ajax({
         url: "/parse_code",
-        type: "GET",
+        type: "POST",
         data: {
           Code: exportJSON(),
         },
@@ -192,7 +192,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  
+  <div id="message"></div>
+
   <input id="compileAndDownload" type="button" class="btn btn-success" value="Compile And Flash"
   onclick="parse_code();" />
   

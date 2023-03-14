@@ -55,12 +55,12 @@ const init = () => {
     res.render('yamlEditor', { root: __dirname, user_block: req.query.user_block, pre_made_block: req.query.pre_made_block });
   });
 
-  app.get('/parse_code', async (req, res) => {
-    if (req.query.Code === undefined) {
+  app.post('/parse_code', async (req, res) => {
+    if (req.body.Code === undefined) {
       res.send("No code to parse");
     }
     else {
-      await code_generator.generate_code(req.query.Code, true);
+      await code_generator.generate_code(req.body.Code, true);
       res.send(path.join(__dirname, 'skeleton', 'firmware.bin'));
     }
   });
@@ -70,9 +70,9 @@ const init = () => {
     res.download(file);
   });
 
-  app.get('/update_code', async (req, res) => {
+  app.post('/update_code', async (req, res) => {
     try {
-      let code = await code_generator.generate_code(req.query.Code, false);
+      let code = await code_generator.generate_code(req.body.Code, false);
       res.send(code);
     }
     catch (e) {
