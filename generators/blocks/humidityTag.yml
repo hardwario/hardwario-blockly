@@ -8,17 +8,24 @@ humidityTag:
     block:
       text:
         - Initialize Humidity Tag %1
-        - With Update interval %2 ms
+        - Revision %2
+        - With Update interval %3 ms
       arguments:
         NEW_LINE:
           type: new_line
+        REVISION: 
+          type: dropdown
+          options:
+            - ["R1", "TWR_TAG_HUMIDITY_REVISION_R1"]
+            - ["R2", "TWR_TAG_HUMIDITY_REVISION_R2"]
+            - ["R3", "TWR_TAG_HUMIDITY_REVISION_R3"]
         UPDATE_INTERVAL:
           type: number
           min: 1
           max: 1000000
           value: 5000
     code:   
-      - twr_tag_humidity_init(&humidity_tag, TWR_TAG_HUMIDITY_REVISION_R3, TWR_I2C_I2C1, TWR_TAG_HUMIDITY_I2C_ADDRESS_DEFAULT);
+      - twr_tag_humidity_init(&humidity_tag, {REVISION}, TWR_I2C_I2C0, TWR_TAG_HUMIDITY_I2C_ADDRESS_DEFAULT);
       - twr_tag_humidity_set_event_handler(&humidity_tag, humidity_tag_event_handler, NULL);
       - twr_tag_humidity_set_update_interval(&humidity_tag, {UPDATE_INTERVAL});
   handler:

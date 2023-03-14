@@ -41,5 +41,5 @@ barometerTag:
         text:
           - Publish Barometer Over the Radio
       code:
-        - twr_radio_pub_barometer(param->channel, &tag_barometer_pascal, &tag_barometer_meters);
+        - twr_radio_pub_barometer(TWR_RADIO_PUB_CHANNEL_R1_I2C1_ADDRESS_DEFAULT, &tag_barometer_pascal, &tag_barometer_meters);
 

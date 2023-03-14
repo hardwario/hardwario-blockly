@@ -34,6 +34,8 @@ categories:
     colour: '#336F87'
   Barometer Tag:
     colour: '#AD6469'
+  Lux Meter Tag:
+    colour: '#2B8C3B'
   Logic:
     colour: '#5B80A5'
   Math:

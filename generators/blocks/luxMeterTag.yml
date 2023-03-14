@@ -1,0 +1,43 @@
+---
+luxMeterTag:
+  category:
+    - Lux Meter Tag
+  global_variable:
+    - twr_opt3001_t lux_meter_tag;
+  application_init:
+    block:
+      text:
+        - Initialize Lux Meter Tag %1
+        - With Update interval %2 ms
+      arguments:
+        NEW_LINE:
+          type: new_line
+        UPDATE_INTERVAL:
+          type: number
+          min: 1
+          max: 1000000
+          value: 5000
+    code:   
+      - twr_tag_lux_meter_init(&lux_meter_tag, TWR_I2C_I2C0, TWR_TAG_LUX_METER_I2C_ADDRESS_DEFAULT);
+      - twr_tag_lux_meter_set_event_handler(&lux_meter_tag, lux_module_event_handler, NULL);
+      - twr_tag_lux_meter_set_update_interval(&lux_meter_tag, {UPDATE_INTERVAL});
+  handler:
+    block:
+      text: On Lux Meter %1
+    declaration: void lux_module_event_handler(twr_tag_lux_meter_t *self, twr_tag_lux_meter_event_t event, void *event_param) {
+    events:
+      prefix: TWR_TAG_LUX_METER_EVENT_
+      enum:
+        UPDATE:
+          - float illumination = 0.0;
+          - if (twr_tag_lux_meter_get_illuminance_lux(self, &value_meters)) {
+          - tag_lux = illumination;
+          - "}"
+  action:
+    publish_lux_value:
+      block:
+        text:
+          - Publish Lux Over the Radio
+      code:
+        - twr_radio_pub_luminosity(TWR_RADIO_PUB_CHANNEL_R1_I2C1_ADDRESS_DEFAULT, &tag_lux);
+

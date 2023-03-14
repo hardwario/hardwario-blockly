@@ -557,10 +557,28 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
         "type": "hio_humidityTag_initialize",
-        "message0": "Initialize Humidity Tag %1 With Update interval %2 ms",
+        "message0": "Initialize Humidity Tag %1 Revision %2 With Update interval %3 ms",
         "args0": [
             {
                 "type": "input_dummy"
+            },
+            {
+                "type": "field_dropdown",
+                "name": "REVISION",
+                "options": [
+                    [
+                        "R1",
+                        "TWR_TAG_HUMIDITY_REVISION_R1"
+                    ],
+                    [
+                        "R2",
+                        "TWR_TAG_HUMIDITY_REVISION_R2"
+                    ],
+                    [
+                        "R3",
+                        "TWR_TAG_HUMIDITY_REVISION_R3"
+                    ]
+                ]
             },
             {
                 "type": "field_number",
@@ -1362,6 +1380,62 @@ Blockly.defineBlocksWithJsonArray([
         "previousStatement": "null",
         "nextStatement": "null",
         "colour": "#FFA500",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_luxMeterTag_initialize",
+        "message0": "Initialize Lux Meter Tag %1 With Update interval %2 ms",
+        "args0": [
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "field_number",
+                "name": "UPDATE_INTERVAL",
+                "value": 5000,
+                "min": 1,
+                "max": 1000000
+            }
+        ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#2B8C3B",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_luxMeterTag_event",
+        "message0": "On Lux Meter %1 %2 %3",
+        "args0": [
+            {
+                "type": "field_dropdown",
+                "name": "NAME",
+                "options": [
+                    [
+                        "UPDATE",
+                        "UPDATE"
+                    ]
+                ]
+            },
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "input_statement",
+                "name": "BLOCKS"
+            }
+        ],
+        "colour": "#2B8C3B",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_luxMeterTag_publish_lux_value",
+        "message0": "Publish Lux Over the Radio",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#2B8C3B",
         "tooltip": "",
         "helpUrl": ""
     },
