@@ -11,12 +11,14 @@ function set_form() {
         event.preventDefault();
         const name = createModuleBlock.elements["name"].value;
         if (name == null || name == "") {
-            alert("Name of the block cannot be empty");
+            document.querySelector(".name-error").innerHTML = "Please enter a module name";
+            document.querySelector(".name-error").style.display = "block";
         }
         else {
             // Check if the block already exists
             if (user_blocks_list.includes(name)) {
-                alert("Block already exists");
+                document.querySelector(".name-error").innerHTML = "Module already exists";
+                document.querySelector(".name-error").style.display = "block";
             }
             else {
                 // Create the block
@@ -60,18 +62,16 @@ function load_saved_blocks() {
 }
 
 function delete_user_block(name) {
-    if (confirm("Are you sure you want to delete the block '" + name + "'?")) {
-        // Send request to delete the block with ajax
-        $.ajax({
-            url: "/delete_user_block",
-            type: "GET",
-            data: { name: name },
-            success: function (data) {
-                // Reload the list of projects
-                window.location.href = "/blocks_creator";
-            }
-        });
-    }
+    // Send request to delete the block with ajax
+    $.ajax({
+        url: "/delete_user_block",
+        type: "GET",
+        data: { name: name },
+        success: function (data) {
+            // Reload the list of projects
+            window.location.href = "/blocks_creator";
+        }
+    });
 }
 
 function load_pre_made_blocks() {

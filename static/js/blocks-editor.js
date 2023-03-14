@@ -381,7 +381,7 @@ function switchCode() {
 function update_code() {
   $.ajax({
     url: "/update_code",
-    type: "GET",
+    type: "POST",
     data: {
       Code: exportJSON(),
     },
@@ -481,21 +481,17 @@ function saveWorkspace() {
       data: xml_text,
       name: project
     },
-  }).done(function (data) {
-    alert(data);
-  }
-  );
-}
+    success: function (data) {
+      // Display success message
+      var message = document.getElementById("message");
+      message.innerHTML = "Saved";
+      setTimeout(function () {
+        message.innerHTML = "";
+      }
 
-function restore() {
-  Blockly.getMainWorkspace().clear();
-  if (typeof (Storage) !== "undefined") {
-    if (localStorage.length > 0) {
-      var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
-      var xml = Blockly.Xml.textToDom(localStorage.getItem("hio_project_" + nameOfTheProject));
-      Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+        , 2000);
     }
-  }
+  });
 }
 
 function loadProject(name) {
@@ -519,19 +515,6 @@ function deleteSavedProjects() {
       }
     }
   }
-}
-
-function clear() {
-  if (typeof (Storage) !== "undefined") {
-    if (localStorage.length > 0) {
-      var nameOfTheProject = prompt("Please enter the name of the project", "workspace");
-      localStorage.removeItem("hio_project_" + nameOfTheProject);
-    }
-  }
-}
-
-async function connectDevices() {
-  navigator.serial.requestPort();
 }
 
 function exportJSON() {

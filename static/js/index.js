@@ -12,15 +12,17 @@ function set_form() {
   createProjectForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const name = createProjectForm.elements["name"].value;
-  
+
     // Ask user for name of the project
     if (name == null || name == "") {
-      alert("Name of the project cannot be empty");
+      document.querySelector(".name-error").innerHTML = "Please enter a project name";
+      document.querySelector(".name-error").style.display = "block";
     }
     else {
-      // Check if the project already exists
+      // Check if the project already exists  
       if (user_projects_list.includes(name)) {
-        alert("Project already exists");
+        document.querySelector(".name-error").innerHTML = "Project already exists";
+        document.querySelector(".name-error").style.display = "block";
       }
       else {
         // Create the project
@@ -39,37 +41,16 @@ function select_project(name) {
 }
 
 function delete_project(name) {
-  var r = confirm("Are you sure you want to delete the project " + name + "?");
-  if (r == true) {
-    // Send request to delete the project with ajax
-    $.ajax({
-      url: "/delete_project",
-      type: "GET",
-      data: { project: name },
-      success: function (data) {
-        // Reload the list of projects
-        window.location.href = "/";
-      }
-    });
-  }
-}
-
-function new_project() {
-  // Ask user for name of the project
-  var name = prompt("Please enter the name of the project", "My project");
-  if (name == null || name == "") {
-    alert("Name of the project cannot be empty");
-  }
-  else {
-    // Check if the project already exists
-    if (user_projects_list.includes(name)) {
-      alert("Project already exists");
+  // Send request to delete the project with ajax
+  $.ajax({
+    url: "/delete_project",
+    type: "GET",
+    data: { project: name },
+    success: function (data) {
+      // Reload the list of projects
+      window.location.href = "/";
     }
-    else {
-      // Create the project
-      window.location.href = "/blocks_editor?project=" + name;
-    }
-  }
+  });
 }
 
 function load_examples() {
