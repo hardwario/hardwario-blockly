@@ -57,33 +57,23 @@ Blockly.svgResize(workspace);
 
 checkCategories();
 
-workspace.registerButtonCallback('createInteger', createIntegerVariable)
 workspace.addChangeListener(Blockly.Events.disableOrphans);
-
-function createIntegerVariable() {
-  Blockly.Variables.createVariableButtonHandler(workspace, null, 'Integer');
-}
-
-workspace.registerButtonCallback('createFloat', createFloatVariable)
-
-function createFloatVariable() {
-  Blockly.Variables.createVariableButtonHandler(workspace, null, 'Float');
-}
 
 // Returns an arry of XML nodes.
 var variablesFlyout = function (workspace) {
   var blockList = [];
+
+  var button = document.createElement('button');
+  button.setAttribute('text', 'Create Typed Variable');
+  button.setAttribute('callbackKey', 'callbackName');
+
+  blockList.push(button);
 
   var label = document.createElement('label');
   label.setAttribute('text', 'Integer Variables');
   blockList.push(label);
 
   var integerVariablesList = workspace.getVariablesOfType('Integer');
-  var button = document.createElement('button');
-  button.setAttribute('text', 'Create Integer');
-  button.setAttribute('callbackKey', 'createInteger');
-
-  blockList.push(button);
 
   if (integerVariablesList.length != 0) {
     var block = document.createElement('block');
@@ -113,11 +103,6 @@ var variablesFlyout = function (workspace) {
   blockList.push(label);
 
   var floatVariablesList = workspace.getVariablesOfType('Float');
-  var button = document.createElement('button');
-  button.setAttribute('text', 'Create Float');
-  button.setAttribute('callbackKey', 'createFloat');
-
-  blockList.push(button);
 
   if (floatVariablesList.length != 0) {
     var block = document.createElement('block');
@@ -155,6 +140,9 @@ var floatVariablesFlyout = function (workspace) {
 
 workspace.registerToolboxCategoryCallback(
   'VARIABLES', variablesFlyout);
+
+const typedVarModal = new TypedVariableModal(workspace, 'callbackName', [["Integer", "Integer"], ["Float", "Float"]]);
+typedVarModal.init();
 
 function checkUniqueBlock(block_type, event) {
   for (const block of workspace.blockDB.values()) {
@@ -197,8 +185,8 @@ function checkCategories() {
     if (block.type == 'hio_button_initialize') {
       categories['blockly-2'] = true;
       document.getElementById('blockly-2').style.display = '';
-      //workspace.createVariable('button_click_count', 'Integer');
-      //workspace.createVariable('button_hold_count', 'Integer');
+      workspace.createVariable('button_click_count', 'Integer');
+      workspace.createVariable('button_hold_count', 'Integer');
     }
     else if (block.type == 'hio_radio_initialize') {
       categories['blockly-3'] = true;

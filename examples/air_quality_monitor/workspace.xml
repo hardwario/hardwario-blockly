@@ -1,9 +1,9 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
   <variables>
     <variable type="Integer" id="|T2J~TbMl+Kb8KMsXU9r">page_index</variable>
+    <variable type="Float" id="3l`A2B8H4q#r*{D/=k,N">tag_barometer_pascal</variable>
     <variable type="Float" id="x,8jcZGR8uHcQMym~1?q">core_tmp112_value</variable>
     <variable type="Float" id="Jw7#`SP380W3`TPw6+#X">co2_value</variable>
-    <variable type="Float" id="3l`A2B8H4q#r*{D/=k,N">tag_barometer_pascal</variable>
     <variable type="Float" id="6_oZVD?qYJT8T6tb.dQH">battery_voltage_value</variable>
     <variable type="Float" id="t[4}h!rmXW.5oN9WIFOr">tag_humidity</variable>
     <variable type="Float" id="Pv|U#ByYU^WcR4]+n35C">tag_barometer_meters</variable>
@@ -621,17 +621,37 @@
       </block>
     </statement>
   </block>
-  <block type="hio_barometerTag_event" id="?x:zWpvvz=0(K@U4!Q5w" x="48" y="1097">
+  <block type="hio_barometerTag_event" id="?x:zWpvvz=0(K@U4!Q5w" x="40" y="1096">
     <field name="NAME">UPDATE</field>
     <statement name="BLOCKS">
       <block type="hio_barometerTag_publish_barometer_value" id="=HlpXyf!0~t?[EVDIV[.">
         <next>
-          <block type="hio_task_run_application_task" id="L4jy{s[!%;(mUM2AGlC5"></block>
+          <block type="variables_set_float" id="!/I^K?l+@diYby+6Bpi1">
+            <field name="VAR" id="3l`A2B8H4q#r*{D/=k,N" variabletype="Float">tag_barometer_pascal</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="|!SKkWXwT5PjlfpPy4^j">
+                <field name="OP">DIVIDE</field>
+                <value name="A">
+                  <block type="variables_get_float" id="MVJuEg@4CtkllCP@vqQj">
+                    <field name="VAR" id="3l`A2B8H4q#r*{D/=k,N" variabletype="Float">tag_barometer_pascal</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="]w?^X6%_=K~`viGSwzz8">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="hio_task_run_application_task" id="L4jy{s[!%;(mUM2AGlC5"></block>
+            </next>
+          </block>
         </next>
       </block>
     </statement>
   </block>
-  <block type="hio_humidityTag_event" id="6Z|gIK7QjctE69nrHg8q" x="408" y="1104">
+  <block type="hio_humidityTag_event" id="6Z|gIK7QjctE69nrHg8q" x="758" y="1110">
     <field name="NAME">UPDATE</field>
     <statement name="BLOCKS">
       <block type="hio_humidityTag_publish_humidity_value" id="PTP.Sg]ET,Y0.*]3181!">
