@@ -38,25 +38,6 @@
     </script>
   </div>
 
-  <script>
-    function parse_code() {
-      document.getElementById("loader").style.display = "inline-block";
-      document.getElementById("compileAndDownload").style.display = "none";
-      $.ajax({
-        url: "/parse_code",
-        type: "POST",
-        data: {
-          Code: exportJSON(),
-        },
-
-      }).done(function (data) {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("compileAndDownload").style.display = "inline-block";
-        window.parent.postMessage({path: data}, '*');
-      });
-    }
-  </script>
-
   <script src="https://unpkg.com/blockly"></script>
   <script src="https://unpkg.com/@blockly/plugin-typed-variable-modal"></script>
   <script src="/js/blocks-json.js"></script>
@@ -75,6 +56,7 @@
   <button class="btn btn-warning" onclick="saveWorkspace()" id="saveWorkspaceButton">Save Workspace</button>
 
   <button class="btn btn-warning" onclick="exportWorkspace()">Export Workspace</button>
+  <button class="btn btn-warning" onclick="createProjectFromExample()" id="createFromExampleButton">Project From Example</button>
   <label for="file-upload" class="custom-file-upload">
     Import Workspace
   </label>

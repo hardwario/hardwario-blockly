@@ -65,6 +65,19 @@ const init = () => {
     }
   });
 
+  app.post('/create_project_from_example', (req, res) => {
+    var data = req.body.data;
+    var name = req.body.name + '_example';
+
+    if (!fs.existsSync(path.join(user_projects_folder_path, name))) {
+      fs.mkdirSync(path.join(user_projects_folder_path, name));
+    }
+
+    fs.writeFileSync(path.join(user_projects_folder_path, name, 'workspace.xml'), data);
+    res.send("Project created");
+  });
+
+
   app.get('/download_code', (req, res) => {
     const file = `${__dirname}/skeleton/out/debug/firmware.bin`;
     res.download(file);

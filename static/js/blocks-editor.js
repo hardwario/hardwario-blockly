@@ -388,6 +388,23 @@ function update_code() {
   });
 }
 
+function parse_code() {
+  document.getElementById("loader").style.display = "inline-block";
+  document.getElementById("compileAndDownload").style.display = "none";
+  $.ajax({
+    url: "/parse_code",
+    type: "POST",
+    data: {
+      Code: exportJSON(),
+    },
+
+  }).done(function (data) {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("compileAndDownload").style.display = "inline-block";
+    window.parent.postMessage({ path: data }, '*');
+  });
+}
+
 function exportWorkspace() {
   var xml = Blockly.Xml.workspaceToDom(workspace);
   var xml_text = Blockly.Xml.domToPrettyText(xml);
@@ -436,6 +453,7 @@ function loadWorkspace() {
     }).done(function (data) {
       var xml = Blockly.Xml.textToDom(data);
       Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+      document.getElementById('createFromExampleButton').style.display = 'none';
       projectLoaded = true;
       saveWorkspace();
     }
@@ -450,6 +468,7 @@ function loadWorkspace() {
       },
     }).done(function (data) {
       document.getElementById('saveWorkspaceButton').style.display = 'none';
+      document.getElementById('createFromExampleButton').style.display = 'inline-block';
       console.log(data);
       var xml = Blockly.Xml.textToDom(data);
       Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
@@ -517,6 +536,24 @@ function exportJSON() {
   var json = JSON.stringify(jsonOriginal);
 
   return json;
+}
+
+function createProjectFromExample() {
+  var xml = Blockly.Xml.workspaceToDom(workspace);
+  var xml_text = Blockly.Xml.domToPrettyText(xml);
+
+  //Send data to server
+  $.ajax({
+    url: "/create_project_from_example",
+    type: "POST",
+    data: {
+      data: xml_text,
+      name: example
+    },
+    success: function (data) {
+      window.location.href = "/blocks_editor?project=" + example + '_example';
+    }
+  });
 }
 
 document.addEventListener('keydown', e => {
