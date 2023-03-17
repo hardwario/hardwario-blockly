@@ -131,13 +131,6 @@ var variablesFlyout = function (workspace) {
   return blockList;
 };
 
-var floatVariablesFlyout = function (workspace) {
-  var blockList = [];
-
-
-  return blockList;
-};
-
 workspace.registerToolboxCategoryCallback(
   'VARIABLES', variablesFlyout);
 
@@ -174,6 +167,7 @@ function checkCategories() {
     'blockly-e': false,
     'blockly-f': false,
     'blockly-g': false,
+    'blockly-h': false,
   }
   for (const category of workspace.toolbox_.contents_) {
     if (category.toolboxItemDef_.kind == 'SEP') {
@@ -251,6 +245,11 @@ function checkCategories() {
       workspace.createVariable('tag_barometer_meters', 'Float');
       workspace.createVariable('tag_barometer_pascal', 'Float');
     }
+    else if (block.type == 'hio_luxMeterTag_initialize') {
+      categories['blockly-h'] = true;
+      workspace.createVariable('tag_lux', 'Float');
+    }
+
   }
   for (const [key, value] of Object.entries(categories)) {
     if (value == false) {
@@ -288,6 +287,7 @@ function onBlockEvent(event) {
     event.type == Blockly.Events.BLOCK_CHANGE || event.type == Blockly.Events.BLOCK_MOVE ||
     event.type == Blockly.Events.VAR_CREATE || event.type == Blockly.Events.VAR_DELETE ||
     event.type == Blockly.Events.VAR_RENAME) {
+    saveWorkspace();
     update_code();
   }
 }
@@ -436,6 +436,8 @@ function loadWorkspace() {
     }).done(function (data) {
       var xml = Blockly.Xml.textToDom(data);
       Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+      projectLoaded = true;
+      saveWorkspace();
     }
     );
   }
@@ -459,6 +461,9 @@ function loadWorkspace() {
 workspace.addChangeListener(onBlockEvent);
 
 function saveWorkspace() {
+  if (project === "" || projectLoaded === false) {
+    return;
+  }
   var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
   var xml_text = Blockly.Xml.domToPrettyText(xml);
 
