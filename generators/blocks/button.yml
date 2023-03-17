@@ -4,8 +4,6 @@ button:
     - Button
   global_variable:
     - twr_button_t button;
-    - uint16_t button_click_count = 0;
-    - uint16_t button_hold_count = 0;
   application_init:
     block:
       text:

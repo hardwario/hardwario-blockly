@@ -95,9 +95,9 @@ const init = () => {
   });
 
   app.get('/examples_list', (req, res) => {
-    var files = fs.readdirSync(`${__dirname}/examples`);
+    var files = fs.readdirSync(`${__dirname}/example_projects`);
     files.forEach(function (directory, index) {
-      if (fs.existsSync(`${__dirname}/examples/${directory}/workspace.xml`)) {
+      if (fs.existsSync(`${__dirname}/example_projects/${directory}/workspace.xml`)) {
         files[index] = files[index];
       }
       else {
@@ -130,8 +130,8 @@ const init = () => {
   });
 
   app.get('/load_example', (req, res) => {
-    console.log(`${__dirname}/examples/${req.query.name}/workspace.xml`);
-    var data = fs.readFileSync(`${__dirname}/examples/${req.query.name}/workspace.xml`, 'utf8');
+    console.log(`${__dirname}/example_projects/${req.query.name}/workspace.xml`);
+    var data = fs.readFileSync(`${__dirname}/example_projects/${req.query.name}/workspace.xml`, 'utf8');
     console.log(data);
     res.send(data);
   });
@@ -203,9 +203,9 @@ if (require.main === module) {
 }
 
 function get_examples_list() {
-  var files = fs.readdirSync(`${__dirname}/examples`);
+  var files = fs.readdirSync(`${__dirname}/example_projects`);
   files.forEach(function (directory, index) {
-    if (fs.existsSync(`${__dirname}/examples/${directory}/workspace.xml`)) {
+    if (fs.existsSync(`${__dirname}/example_projects/${directory}/workspace.xml`)) {
       files[index] = files[index];
     }
     else {
