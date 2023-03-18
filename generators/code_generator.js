@@ -121,15 +121,15 @@ class CodeGenerator {
 
     compile_code(output) {
         return new Promise((resolve, reject) => {
-            shell.cd(path.join(__dirname, '..'));
-            if (!fs.existsSync((path.join(__dirname, '..', 'skeleton')))) {
+            shell.cd(path.join(this.user_folder));
+            if (!fs.existsSync((path.join(this.user_folder, 'skeleton')))) {
                 shell.exec('git clone --recursive https://github.com/hardwario/twr-skeleton.git skeleton', (error, stdout, stderr) => {
                     if (error) {
                         console.warn(error);
                     }
                     console.log(stdout ? stdout : stderr);
-                    fs.writeFileSync(path.join(__dirname, '..', 'skeleton', 'src', 'application.c'), output, 'utf8');
-                    shell.cd('./skeleton');
+                    fs.writeFileSync(path.join(this.user_folder, 'skeleton', 'src', 'application.c'), output, 'utf8');
+                    shell.cd(path.join(this.user_folder, 'skeleton'));
 
                     shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug', (error, stdout, stderr) => {
                         if (error) {
@@ -147,8 +147,8 @@ class CodeGenerator {
                 });
             }
             else {
-                fs.writeFileSync(path.join(__dirname, '..', 'skeleton', 'src', 'application.c'), output, 'utf8');
-                shell.cd('./skeleton');
+                fs.writeFileSync(path.join(this.user_folder, 'skeleton', 'src', 'application.c'), output, 'utf8');
+                shell.cd(path.join(this.user_folder, 'skeleton'));
                 shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug', (error, stdout, stderr) => {
                     if (error) {
                         console.warn(error);

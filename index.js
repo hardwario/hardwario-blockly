@@ -61,7 +61,7 @@ const init = () => {
     }
     else {
       await code_generator.generate_code(req.body.Code, true);
-      res.send(path.join(__dirname, 'skeleton', 'firmware.bin'));
+      res.send(path.join(user_folder, 'skeleton', 'firmware.bin'));
     }
   });
 
@@ -79,7 +79,7 @@ const init = () => {
 
 
   app.get('/download_code', (req, res) => {
-    const file = `${__dirname}/skeleton/out/debug/firmware.bin`;
+    const file = `${user_folder}/skeleton/firmware.bin`;
     res.download(file);
   });
 
