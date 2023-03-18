@@ -453,7 +453,6 @@ function loadWorkspace() {
     }).done(function (data) {
       var xml = Blockly.Xml.textToDom(data);
       Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
-      document.getElementById('createFromExampleButton').style.display = 'none';
       projectLoaded = true;
       saveWorkspace();
     }
@@ -505,16 +504,6 @@ function saveWorkspace() {
         , 2000);
     }
   });
-}
-
-function loadProject(name) {
-  Blockly.getMainWorkspace().clear();
-  if (typeof (Storage) !== "undefined") {
-    if (localStorage.length > 0) {
-      var xml = Blockly.Xml.textToDom(localStorage.getItem("hio_project_" + name));
-      Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
-    }
-  }
 }
 
 function deleteSavedProjects() {
