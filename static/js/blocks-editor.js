@@ -30,6 +30,8 @@ var options = {
 window.addEventListener('load', switchCode);
 window.addEventListener('load', loadWorkspace);
 
+var projectLoaded = false;
+
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
 var workspace = Blockly.inject('blocklyDiv', options);
