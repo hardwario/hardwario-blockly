@@ -453,8 +453,10 @@ function loadWorkspace() {
         name: project
       },
     }).done(function (data) {
-      var xml = Blockly.Xml.textToDom(data);
-      Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+      if(data !== "Project not found"){
+        var xml = Blockly.Xml.textToDom(data);
+        Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
+      }
       projectLoaded = true;
       saveWorkspace();
     }

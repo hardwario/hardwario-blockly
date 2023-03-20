@@ -120,7 +120,16 @@ const init = () => {
   });
 
   app.get('/load_project', (req, res) => {
-    var data = fs.readFileSync(path.join(user_projects_folder_path, req.query.name, 'workspace.xml'), 'utf8');
+    try
+    {
+      var data = fs.readFileSync(path.join(user_projects_folder_path, req.query.name, 'workspace.xml'), 'utf8');
+    }
+    catch (e)
+    {
+      console.log(e);
+      res.send("Project not found");
+      return;
+    }
     res.send(data);
   });
 
