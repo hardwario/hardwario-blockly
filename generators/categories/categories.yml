@@ -36,6 +36,8 @@ categories:
     colour: '#AD6469'
   Lux Meter Tag:
     colour: '#2B8C3B'
+  Flood Detector:
+    colour: '#5B3F4F'
   Logic:
     colour: '#5B80A5'
   Math:

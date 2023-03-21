@@ -1,0 +1,40 @@
+---
+floodDetector:
+  category:
+    - Flood Detector
+  global_variable:
+    - twr_flood_detector_t flood_detector;
+  application_init:
+    block:
+      text:
+        - Initialize Flood Detector %1
+        - With Update interval %2 ms %3
+        - On Sensor Module Channel %4
+      arguments:
+        NEW_LINE:
+          type: new_line
+        UPDATE_INTERVAL:
+          type: number
+          min: 1
+          max: 1000000
+          value: 5000
+        NEW_LINE_2:
+          type: new_line
+        CHANNEL:
+          type: dropdown
+          options:
+            - ['A', 'TWR_FLOOD_DETECTOR_TYPE_LD_81_SENSOR_MODULE_CHANNEL_A']
+            - ['B', 'TWR_FLOOD_DETECTOR_TYPE_LD_81_SENSOR_MODULE_CHANNEL_B']
+    code:
+      - twr_flood_detector_init(&flood_detector, {CHANNEL});
+      - twr_flood_detector_set_event_handler(&flood_detector, flood_detector_event_handler, NULL);
+      - twr_flood_detector_set_update_interval(&flood_detector, {UPDATE_INTERVAL});
+  handler:
+    block:
+      text: On Flood Detector %1
+    declaration: void flood_detector_event_handler(twr_flood_detector_t *self, twr_flood_detector_event_t event, void *event_param)
+    events:
+      prefix: TWR_FLOOD_DETECTOR_EVENT_
+      enum:
+        UPDATE:
+          - flood_alarm = twr_flood_detector_is_alarm(self);

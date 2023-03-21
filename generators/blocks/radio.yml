@@ -86,7 +86,7 @@ radio:
             type: new_line
           SUBTOPIC:
             type: text
-            value: string
+            value: boolean
       code:
         - bool {RANDOM_VARIABLE} = (bool)({BOOL_TO_BE_SEND});
         - twr_radio_pub_bool("{SUBTOPIC}", &{RANDOM_VARIABLE});

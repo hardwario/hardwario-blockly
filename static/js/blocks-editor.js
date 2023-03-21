@@ -170,6 +170,7 @@ function checkCategories() {
     'blockly-f': false,
     'blockly-g': false,
     'blockly-h': false,
+    'blockly-i': false,
   }
   for (const category of workspace.toolbox_.contents_) {
     if (category.toolboxItemDef_.kind == 'SEP') {
@@ -250,6 +251,10 @@ function checkCategories() {
     else if (block.type == 'hio_luxMeterTag_initialize') {
       categories['blockly-h'] = true;
       workspace.createVariable('tag_lux', 'Float');
+    }
+    else if(block.type == 'hio_floodDetector_initialize') {
+      categories['blockly-i'] = true;
+      workspace.createVariable('flood_alarm', 'Integer');
     }
 
   }

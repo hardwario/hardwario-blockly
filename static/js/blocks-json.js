@@ -565,6 +565,70 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": ""
     },
     {
+        "type": "hio_floodDetector_initialize",
+        "message0": "Initialize Flood Detector %1 With Update interval %2 ms %3 On Sensor Module Channel %4",
+        "args0": [
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "field_number",
+                "name": "UPDATE_INTERVAL",
+                "value": 5000,
+                "min": 1,
+                "max": 1000000
+            },
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "field_dropdown",
+                "name": "CHANNEL",
+                "options": [
+                    [
+                        "A",
+                        "TWR_FLOOD_DETECTOR_TYPE_LD_81_SENSOR_MODULE_CHANNEL_A"
+                    ],
+                    [
+                        "B",
+                        "TWR_FLOOD_DETECTOR_TYPE_LD_81_SENSOR_MODULE_CHANNEL_B"
+                    ]
+                ]
+            }
+        ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#5B3F4F",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_floodDetector_event",
+        "message0": "On Flood Detector %1 %2 %3",
+        "args0": [
+            {
+                "type": "field_dropdown",
+                "name": "NAME",
+                "options": [
+                    [
+                        "UPDATE",
+                        "UPDATE"
+                    ]
+                ]
+            },
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "input_statement",
+                "name": "BLOCKS"
+            }
+        ],
+        "colour": "#5B3F4F",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
         "type": "hio_humidityTag_initialize",
         "message0": "Initialize Humidity Tag %1 Revision %2 With Update interval %3 ms",
         "args0": [
@@ -1691,7 +1755,7 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "field_input",
                 "name": "SUBTOPIC",
-                "text": "string"
+                "text": "boolean"
             }
         ],
         "previousStatement": "null",
