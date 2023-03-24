@@ -8,7 +8,7 @@ class BlockGenerator {
     constructor() {
         this.modules_path = path.join(__dirname, 'blocks');
         this.categories_path = path.join(__dirname, 'categories');
-        
+
         const appDataPath = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share");
         this.user_folder = path.join(appDataPath, 'HARDWARIO Blockly');
         this.user_blocks_path = path.join(appDataPath, 'HARDWARIO Blockly', 'blocks');
@@ -25,7 +25,7 @@ class BlockGenerator {
 
         this.load_modules();
         this.load_user_modules();
-  
+
         this.load_categories();
 
         this.generate_static_blocks();
@@ -61,7 +61,7 @@ class BlockGenerator {
             }
             catch (e) {
                 console.log(e);
-            } 
+            }
         });
     }
 
@@ -87,7 +87,7 @@ class BlockGenerator {
         let not_separated = true;
         let xml = '<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">';
         for (const [category, _] of Object.entries(this.categories)) {
-            if(category in this.user_categories && not_separated) {
+            if (category in this.user_categories && not_separated) {
                 xml += `<sep></sep>`;
                 not_separated = false;
             }
@@ -99,11 +99,11 @@ class BlockGenerator {
             if (category == 'Variables') {
                 xml += `<category name="${category}" colour="${colour}" custom="VARIABLES">`;
             }
-            else if (category == 'Float Variables') {
-                xml += `<category name="${category}" colour="${colour}" custom="FLOAT_PALETTE">`;
-            }
             else if (category == 'Functions') {
                 xml += `<category name="${category}" colour="${colour}" custom="PROCEDURE">`;
+            }
+            else if (category == 'Task') {
+                xml += `<category name="${category}" colour="${colour}" custom="TASK">`;
             }
             else {
                 xml += `<category name="${category}" colour="${colour}">`;
@@ -201,6 +201,55 @@ class BlockGenerator {
         block["colour"] = colour;
         this.blocks.push(block);
         this.categories['Task']['blocks'].push(block['type']);
+
+        block = {};
+        block['type'] = 'hio_task_do';
+        block['message0'] = 'Task %1 %2 %3';
+        block['args0'] = [
+            {
+                "type": "field_variable",
+                "name": "TASK_NAME",
+                "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+                "variableTypes": ["Task"],
+                "defaultType": "Task"
+            },
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "input_statement",
+                "name": "BLOCKS"
+            }
+        ];
+        block['tooltip'] = 'Task';
+        block['helpUrl'] = '';
+        colour = '#000000';
+        if (this.categories['Task']['configuration'] !== null && 'colour' in this.categories['Task']['configuration']) {
+            colour = this.categories['Task']['configuration']['colour'];
+        }
+        block["colour"] = colour;
+        this.blocks.push(block);
+
+        block = {
+            "type": "variables_get_task",
+            "message0": "%1",
+            "args0": [
+                {
+                    "type": "field_variable",
+                    "name": "VAR",
+                    "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+                    "variableTypes": ["Task"],
+                    "defaultType": "Task"
+                }
+            ],
+            "output": "Task",
+        }
+        colour = '#000000';
+        if (this.categories['Task']['configuration'] !== null && 'colour' in this.categories['Task']['configuration']) {
+            colour = this.categories['Task']['configuration']['colour'];
+        }
+        block["colour"] = colour;
+        this.blocks.push(block);
 
         block = {
             "type": "variables_get_integer",
@@ -401,8 +450,7 @@ class BlockGenerator {
         else {
             let colour = '#000000';
             let category = module_content['category'][0];
-            if(category in this.categories)
-            {
+            if (category in this.categories) {
                 if (this.categories[category]['configuration'] !== null && 'colour' in this.categories[category]['configuration']) {
                     colour = this.categories[category]['configuration']['colour'];
                 }

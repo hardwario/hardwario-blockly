@@ -30,6 +30,12 @@ var options = {
 window.addEventListener('load', switchCode);
 window.addEventListener('load', loadWorkspace);
 
+// resize every second
+setInterval(function () {
+  onresize();
+}, 1000);
+
+
 var projectLoaded = false;
 
 var blocklyArea = document.getElementById('blocklyArea');
@@ -67,7 +73,7 @@ var variablesFlyout = function (workspace) {
 
   var button = document.createElement('button');
   button.setAttribute('text', 'Create Typed Variable');
-  button.setAttribute('callbackKey', 'callbackName');
+  button.setAttribute('callbackKey', 'createTypedVariable');
 
   blockList.push(button);
 
@@ -133,11 +139,81 @@ var variablesFlyout = function (workspace) {
   return blockList;
 };
 
+var taskFlyout = function (workspace) {
+  var blockList = [];
+
+  var block = document.createElement('block');
+  block.setAttribute('type', 'hio_application_task');
+  blockList.push(block);
+
+  var block = document.createElement('block');
+  block.setAttribute('type', 'hio_task_run_application_task');
+  blockList.push(block);
+
+  var block = document.createElement('block');
+  block.setAttribute('type', 'hio_task_run_task_now');
+  blockList.push(block);
+
+  var block = document.createElement('block');
+  block.setAttribute('type', 'hio_task_run_task_in_time');
+  blockList.push(block);
+
+  var block = document.createElement('block');
+  block.setAttribute('type', 'hio_task_run_current_task_now');
+  blockList.push(block);
+
+  var block = document.createElement('block');
+  block.setAttribute('type', 'hio_task_run_current_task_in_time');
+  blockList.push(block);
+
+  var label = document.createElement('label');
+  label.setAttribute('text', 'Tasks');
+  blockList.push(label);
+
+  var button = document.createElement('button');
+  button.setAttribute('text', 'Create Task');
+  button.setAttribute('callbackKey', 'createTask');
+
+  blockList.push(button);
+
+  var tasksList = workspace.getVariablesOfType('Task');
+
+  for (var i = 0; i < tasksList.length; i++) {
+    var block = document.createElement('block');
+    block.setAttribute('type', 'hio_task_do');
+    var field = document.createElement('field');
+    field.setAttribute('name', 'TASK_NAME');
+    field.setAttribute('id', tasksList[i].getId());
+    field.setAttribute('variabletype', 'Task');
+    field.innerText = tasksList[i].name;
+    block.appendChild(field);
+    blockList.push(block);
+
+    var block = document.createElement('block');
+    block.setAttribute('type', 'variables_get_task');
+    var field = document.createElement('field');
+    field.setAttribute('name', 'VAR');
+    field.setAttribute('id', tasksList[i].getId());
+    field.setAttribute('variabletype', 'Task');
+    field.innerText = tasksList[i].name;
+    block.appendChild(field);
+    blockList.push(block);
+  }
+
+  return blockList;
+};
+
 workspace.registerToolboxCategoryCallback(
   'VARIABLES', variablesFlyout);
 
-const typedVarModal = new TypedVariableModal(workspace, 'callbackName', [["Integer", "Integer"], ["Float", "Float"]]);
+workspace.registerToolboxCategoryCallback(
+  'TASK', taskFlyout);
+
+const typedVarModal = new TypedVariableModal(workspace, 'createTypedVariable', [["Integer", "Integer"], ["Float", "Float"]]);
 typedVarModal.init();
+
+const taskModal = new TypedVariableModal(workspace, 'createTask', [["Task", "Task"], ['', '']]);
+taskModal.init();
 
 function checkUniqueBlock(block_type, event) {
   for (const block of workspace.blockDB.values()) {
@@ -252,7 +328,7 @@ function checkCategories() {
       categories['blockly-h'] = true;
       workspace.createVariable('tag_lux', 'Float');
     }
-    else if(block.type == 'hio_floodDetector_initialize') {
+    else if (block.type == 'hio_floodDetector_initialize') {
       categories['blockly-i'] = true;
       workspace.createVariable('flood_alarm', 'Integer');
     }
@@ -458,7 +534,7 @@ function loadWorkspace() {
         name: project
       },
     }).done(function (data) {
-      if(data !== "Project not found"){
+      if (data !== "Project not found") {
         var xml = Blockly.Xml.textToDom(data);
         Blockly.Xml.domToWorkspace(xml, Blockly.getMainWorkspace());
       }

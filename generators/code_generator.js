@@ -19,7 +19,7 @@ class CodeGenerator {
 
         this.blocks = {};
 
-        this.variable_types = { 'Integer': 'int', 'Float': 'float' };
+        this.variable_types = { 'Integer': 'int', 'Float': 'float', 'Task': 'twr_scheduler_task_id_t' };
 
         this.indent = 0;
 
@@ -66,6 +66,7 @@ class CodeGenerator {
         this.application_init = []
         this.application_task = []
         this.event_handlers = {}
+        this.tasks = {}
 
         if ('variables' in data) {
             this.generate_variables(data['variables'])
@@ -102,6 +103,18 @@ class CodeGenerator {
                     if ('inputs' in block) {
                         this.indent = 2
                         this.next(block['inputs']['BLOCKS'], this.event_handlers[name + '_handler'][full_event_name])
+                    }
+                    this.indent = 0;
+                }
+
+                if(block['type'] === 'hio_task_do') {
+                    let task = this.variables[block['fields']['TASK_NAME']['id']]['name'] + '_task';
+                    if (!(task in this.tasks)) {
+                        this.tasks[task] = [];
+                    }
+                    if ('inputs' in block) {
+                        this.indent = 1;
+                        this.next(block['inputs']['BLOCKS'], this.tasks[task]);
                     }
                     this.indent = 0;
                 }
@@ -215,7 +228,30 @@ class CodeGenerator {
             }
         }
 
+        for (let task in this.tasks) {
+            if (this.tasks[task].length == 0) {
+                continue;
+            }
+
+            output += 'void ' + task + '() {\n'
+            for (let code of this.tasks[task]) {
+                output += code + '\n'
+            }
+            output += '}\n\n'
+        }
+
         output += 'void application_init(void) {\n'
+
+        for (let task in this.tasks) {
+            if (this.tasks[task].length == 0) {
+                continue;
+            }
+
+            let task_name = task.split('_')[0];
+
+            output += '\t' + task_name + '_task_id = twr_scheduler_register(' + task + ', NULL, TWR_TICK_INFINITY);\n'
+        }
+
         for (let code of this.application_init) {
             output += code + '\n'
         }
@@ -234,6 +270,11 @@ class CodeGenerator {
 
     generate_variables(variables) {
         for (let variable in variables) {
+            if(variables[variable]['type'] == 'Task') {
+                this.variables[variables[variable]['id']] = { 'name': variables[variable]['name'], 'type': variables[variable]['type'] };
+                this.global_variable.push(("{variable_type} {variable_name}_task_id = 0;".format({ variable_type: this.variable_types[variables[variable]['type']], variable_name: variables[variable]['name'] })));
+                continue;
+            }
             if(!variables[variable]['type']) {
                 variables[variable]['type'] = 'Float';
             }
@@ -333,8 +374,49 @@ class CodeGenerator {
                                     block['fields']['FORMAT_STRING'] = format_string
                                 }
                             }
-                            block['fields']['RANDOM_VARIABLE'] = random_variable_name
-                            code = code.format(block['fields'])
+                            block['fields']['RANDOM_VARIABLE'] = random_variable_name;
+                            code = code.format(block['fields']);
+                        }
+                        else if('inputs' in block) {
+                            block['fields'] = {};
+                            for (let input in block['inputs']) {
+                                let format_string = '';
+                                var input_data = undefined;
+                                if(block['inputs'][input]['block'] != null && block['inputs'][input]['block'] != undefined)
+                                {
+                                    input_data = this.generate_sub_section(block['inputs'][input]['block']);
+                                }
+                                if(input_data != undefined) {
+                                    block['fields'][input] = input_data;
+                                    if (code.search('FORMAT_STRING')) {
+                                        if ('VAR' in block['inputs'][input]['block']['fields']) {
+                                            if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Integer') {
+                                                format_string = '%d';
+                                            }
+                                            else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Float') {
+                                                format_string = '%.1f';
+                                            }
+                                        }
+                                        else {
+                                            format_string = '%d';
+                                        }
+                                        block['fields']['FORMAT_STRING'] = format_string;
+                                    }
+                                }
+                            }
+                            if ('VALUE' in block['inputs']) {
+                                let variable = this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['name'];
+                                let format_string = '';
+                                if (this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['type'] == 'Integer') {
+                                    format_string = '%d'
+                                }
+                                else if (this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['type'] == 'Float') {
+                                    format_string = '%.1f'
+                                }
+                                block['fields']['FORMAT_STRING'] = format_string
+                            }
+                            block['fields']['RANDOM_VARIABLE'] = random_variable_name;
+                            code = code.format(block['fields']);
                         }
                         event_handler.push(('\t'.repeat(this.indent)) + code);
                     }

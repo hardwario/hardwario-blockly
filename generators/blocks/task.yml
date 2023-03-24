@@ -6,6 +6,47 @@ task:
     run_application_task:
       block:
         text: 
-          - Run Application Task now
+          - Run Application Task Now
       code:
         - twr_scheduler_plan_now(0);
+    run_task_now:
+      block:
+        text:
+          - Run Task %1 Now
+        arguments:  
+          TASK:
+            type: input
+      code: 
+        - twr_scheduler_plan_now({TASK}_task_id);
+    run_task_in_time:
+      block:
+        text:
+          - Run Task %1 %2 ms From Now
+        arguments:  
+          TASK:
+            type: input
+          TIME:
+            type: number
+            min: 1
+            max: 1000000
+            value: 5000
+      code: 
+        - twr_scheduler_plan_relative({TASK}_task_id, {TIME});
+    run_current_task_now:
+      block:
+        text:
+          - Run Current Task Now
+      code:
+        - twr_scheduler_plan_current_now();
+    run_current_task_in_time:
+      block:
+        text:
+          - Run Current Task %1 ms From Now
+        arguments:  
+          TIME:
+            type: number
+            min: 1
+            max: 1000000
+            value: 5000
+      code:
+        - twr_scheduler_plan_current_relative({TIME});

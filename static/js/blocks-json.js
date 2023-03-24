@@ -41,6 +41,48 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A50427"
     },
     {
+        "type": "hio_task_do",
+        "message0": "Task %1 %2 %3",
+        "args0": [
+            {
+                "type": "field_variable",
+                "name": "TASK_NAME",
+                "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+                "variableTypes": [
+                    "Task"
+                ],
+                "defaultType": "Task"
+            },
+            {
+                "type": "input_dummy"
+            },
+            {
+                "type": "input_statement",
+                "name": "BLOCKS"
+            }
+        ],
+        "tooltip": "Task",
+        "helpUrl": "",
+        "colour": "#A50427"
+    },
+    {
+        "type": "variables_get_task",
+        "message0": "%1",
+        "args0": [
+            {
+                "type": "field_variable",
+                "name": "VAR",
+                "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+                "variableTypes": [
+                    "Task"
+                ],
+                "defaultType": "Task"
+            }
+        ],
+        "output": "Task",
+        "colour": "#A50427"
+    },
+    {
         "type": "variables_get_integer",
         "message0": "%1",
         "args0": [
@@ -1877,7 +1919,71 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
         "type": "hio_task_run_application_task",
-        "message0": "Run Application Task now",
+        "message0": "Run Application Task Now",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#A50427",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_task_run_task_now",
+        "message0": "Run Task %1 Now",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "TASK"
+            }
+        ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#A50427",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_task_run_task_in_time",
+        "message0": "Run Task %1 %2 ms From Now",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "TASK"
+            },
+            {
+                "type": "field_number",
+                "name": "TIME",
+                "value": 5000,
+                "min": 1,
+                "max": 1000000
+            }
+        ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#A50427",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_task_run_current_task_now",
+        "message0": "Run Current Task Now",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#A50427",
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "hio_task_run_current_task_in_time",
+        "message0": "Run Current Task %1 ms From Now",
+        "args0": [
+            {
+                "type": "field_number",
+                "name": "TIME",
+                "value": 5000,
+                "min": 1,
+                "max": 1000000
+            }
+        ],
         "previousStatement": "null",
         "nextStatement": "null",
         "colour": "#A50427",
