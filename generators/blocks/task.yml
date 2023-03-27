@@ -16,6 +16,7 @@ task:
         arguments:  
           TASK:
             type: input
+            check: Task
       code: 
         - twr_scheduler_plan_now({TASK}_task_id);
     run_task_in_time:
@@ -25,6 +26,7 @@ task:
         arguments:  
           TASK:
             type: input
+            check: Task
           TIME:
             type: number
             min: 1

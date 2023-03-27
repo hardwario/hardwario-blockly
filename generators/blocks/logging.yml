@@ -21,7 +21,8 @@ logging:
           X:
             type: new_line
           MESSAGE:
-            type: text
+            type: input
+            check: String
             value: Info
           Y:
             type: new_line
@@ -40,7 +41,8 @@ logging:
           X:
             type: new_line
           MESSAGE:
-            type: text
+            type: input
+            check: String
             value: Debug
           Y:
             type: new_line
@@ -59,7 +61,8 @@ logging:
           X:
             type: new_line
           MESSAGE:
-            type: text
+            type: input
+            check: String
             value: Error
           Y:
             type: new_line
@@ -78,7 +81,8 @@ logging:
           X:
             type: new_line
           MESSAGE:
-            type: text
+            type: input
+            check: String
             value: Warning
           Y:
             type: new_line

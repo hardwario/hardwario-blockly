@@ -13,9 +13,8 @@ barometerTag:
         NEW_LINE:
           type: new_line
         UPDATE_INTERVAL:
-          type: number
-          min: 1
-          max: 1000000
+          type: input
+          check: Number
           value: 5000
     code:   
       - twr_tag_barometer_init(&barometer_tag, TWR_I2C_I2C0);

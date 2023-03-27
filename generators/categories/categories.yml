@@ -44,6 +44,8 @@ categories:
     colour: '#5B67A5'
   Loops:
     colour: '#5BA65B'
+  Text:
+    colour: '#5BA58C'
   Variables:
     colour: '#A55B80'
   Functions:

@@ -42,26 +42,21 @@ lcd:
     draw_string:
       block:
         text:
-          - Draw String %1 on LCD %2
-          - "%3 Pixels from Left %4"
-          - "%5 Pixels from Top"
+          - Draw String on LCD %1
+          - "Pixels from Left %2"
+          - "Pixels from Top %3"
         arguments:
           STRING:
-            type: text
+            type: input
+            check: String
             value: string
-          X:
-            type: new_line
           LEFT:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
-          Y:
-            type: new_line
           TOP:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
       code:
         - twr_gfx_draw_string(pgfx, {LEFT}, {TOP}, "{STRING}", true);
@@ -69,27 +64,22 @@ lcd:
       block:
         text:
           - Draw Circle on LCD %1
-          - "Center: x: %2 y: %3 %4"
-          - "Radius: %5"
+          - "Center: x: %2 y: %3"
+          - "Radius: %4"
         arguments:
           X:
             type: new_line
           CENTER_X:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
           CENTER_Y:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
-          Y:
-            type: new_line
           RADIUS:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
       code:
         - twr_gfx_draw_circle(pgfx, {CENTER_X}, {CENTER_Y}, {RADIUS}, true);
@@ -97,88 +87,72 @@ lcd:
       block:
         text:
           - Draw Line on LCD %1
-          - "Start: x: %2 y: %3 %4"
-          - "End: x: %5 y: %6"
+          - "Start: x: %2 y: %3"
+          - "End: x: %4 y: %5"
         arguments:
           X:
             type: new_line
           START_X:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
           START_Y:
-            type: number
-            min: 0
-            max: 128
-            value: 0
-          Y:
-            type: new_line
+            type: input
+            check: Number
+            value: 128
           END_X:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
           END_Y:
-            type: number
-            min: 0
-            max: 128
-            value: 0
+            type: input
+            check: Number
+            value: 128
       code:
         - twr_gfx_draw_line(pgfx, {START_X}, {START_Y}, {END_X}, {END_Y}, true);
     draw_rectangle:
       block:
         text:
           - Draw Rectangle on LCD %1
-          - "Start: x: %2 y: %3 %4"
-          - "End: x: %5 y: %6"
+          - "Start: x: %2 y: %3"
+          - "End: x: %4 y: %5"
         arguments:
           X:
             type: new_line
           START_X:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
           START_Y:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
-          Y:
-            type: new_line
           END_X:
-            type: number
-            min: 0
-            max: 128
-            value: 0
+            type: input
+            check: Number
+            value: 128
           END_Y:
-            type: number
-            min: 0
-            max: 128
-            value: 0
+            type: input
+            check: Number
+            value: 128
       code:
         - twr_gfx_draw_rectangle(pgfx, {START_X}, {START_Y}, {END_X}, {END_Y}, true);
     draw_pixel:
       block:
         text:
           - Draw Pixel on LCD %1
-          - "%2 Pixels from Left %3"
-          - "%4 Pixels from Top"
+          - "Pixels from Left %2"
+          - "Pixels from Top %3"
         arguments:
           X:
             type: new_line
           LEFT:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
-          Y:
-            type: new_line
           TOP:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
       code:
         - twr_gfx_draw_pixel(pgfx, {LEFT}, {TOP}, true);
@@ -226,26 +200,20 @@ lcd:
       block:
         text:
           - Print variable on LCD %1
-          - "%2 Pixels from Left %3"
-          - "%4 Pixels from Top %5"
-          - 'Variable: %6'
+          - "Pixels from Left %2"
+          - "Pixels from Top %3"
+          - 'Variable: %4'
         arguments:
           X:
             type: new_line
           LEFT:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
-          Y:
-            type: new_line
           TOP:
-            type: number
-            min: 0
-            max: 128
+            type: input
+            check: Number
             value: 0
-          Z:
-            type: new_line
           VARIABLE:
             type: input
       code:
@@ -262,9 +230,8 @@ lcd:
               - ["GREEN", "lcdLedGreen"]
               - ["BLUE", "lcdLedBlue"]
           COUNT:
-            type: number
-            min: 1
-            max: 50
+            type: input
+            check: Number
             value: 5
       code:
         - twr_led_blink(&{LED}, {COUNT});
@@ -280,9 +247,8 @@ lcd:
               - ["GREEN", "lcdLedGreen"]
               - ["BLUE", "lcdLedBlue"]
           DURATION:
-            type: number
-            min: 1
-            max: 1000000
+            type: input
+            check: Number
             value: 1000
       code:
         - twr_led_pulse(&{LED}, {DURATION});

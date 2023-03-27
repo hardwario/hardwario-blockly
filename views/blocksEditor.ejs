@@ -30,24 +30,96 @@
       <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="Initialization" colour="#A50427">
         <block type="hio_application_initialize"></block>
-        <block type="hio_barometerTag_initialize"></block>
-        <block type="hio_battery_initialize"></block>
+        <block type="hio_barometerTag_initialize">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_battery_initialize">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
         <block type="hio_button_initialize"></block>
-        <block type="hio_climate_initialize"></block>
-        <block type="hio_co2_initialize"></block>
-        <block type="hio_coreTmp112_initialize"></block>
-        <block type="hio_floodDetector_initialize"></block>
-        <block type="hio_humidityTag_initialize"></block>
+        <block type="hio_climate_initialize">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_co2_initialize">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_coreTmp112_initialize">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_floodDetector_initialize">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_humidityTag_initialize">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
         <block type="hio_lcd_initialize"></block>
         <block type="hio_led_initialize"></block>
         <block type="hio_ledStrip_initialize"></block>
         <block type="hio_logging_initialize"></block>
-        <block type="hio_luxMeterTag_initialize"></block>
+        <block type="hio_luxMeterTag_initialize">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
         <block type="hio_pir_initialize"></block>
         <block type="hio_power_initialize"></block>
         <block type="hio_radio_initialize"></block>
         <block type="hio_relay_initialize"></block>
-        <block type="hio_temperatureTag_initialize"></block>
+        <block type="hio_temperatureTag_initialize">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Task" colour="#A50427" custom="TASK">
         <block type="hio_application_task"></block>
@@ -63,25 +135,142 @@
         <block type="hio_button_publish_hold_count"></block>
     </category>
     <category name="Radio" colour="#C54F38">
-        <block type="hio_radio_send_string"></block>
-        <block type="hio_radio_send_integer"></block>
-        <block type="hio_radio_send_float"></block>
-        <block type="hio_radio_send_boolean"></block>
+        <block type="hio_radio_send_string">
+            <value name="STRING_TO_BE_SEND">
+                <block type="text">
+                    <field name="TEXT">
+                        STRING
+                    </field>
+                </block>
+            </value>
+            <value name="SUBTOPIC">
+                <block type="text">
+                    <field name="TEXT">
+                        string
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_radio_send_integer">
+            <value name="INT_TO_BE_SEND">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="SUBTOPIC">
+                <block type="text">
+                    <field name="TEXT">
+                        integer
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_radio_send_float">
+            <value name="FLOAT_TO_BE_SEND">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="SUBTOPIC">
+                <block type="text">
+                    <field name="TEXT">
+                        float
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_radio_send_boolean">
+            <value name="SUBTOPIC">
+                <block type="text">
+                    <field name="TEXT">
+                        boolean
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="LED" colour="#571E00">
-        <block type="hio_led_blink"></block>
-        <block type="hio_led_pulse"></block>
+        <block type="hio_led_blink">
+            <value name="COUNT">
+                <block type="math_number">
+                    <field name="NUM">
+                        5
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_led_pulse">
+            <value name="DURATION">
+                <block type="math_number">
+                    <field name="NUM">
+                        1000
+                    </field>
+                </block>
+            </value>
+        </block>
         <block type="hio_led_set_mode"></block>
     </category>
     <category name="Logging" colour="#052F38">
-        <block type="hio_logging_info"></block>
-        <block type="hio_logging_debug"></block>
-        <block type="hio_logging_error"></block>
-        <block type="hio_logging_warning"></block>
+        <block type="hio_logging_info">
+            <value name="MESSAGE">
+                <block type="text">
+                    <field name="TEXT">
+                        Info
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_logging_debug">
+            <value name="MESSAGE">
+                <block type="text">
+                    <field name="TEXT">
+                        Debug
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_logging_error">
+            <value name="MESSAGE">
+                <block type="text">
+                    <field name="TEXT">
+                        Error
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_logging_warning">
+            <value name="MESSAGE">
+                <block type="text">
+                    <field name="TEXT">
+                        Warning
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Core TMP112" colour="#4A0C1B">
-        <block type="hio_coreTmp112_event"></block>
-        <block type="hio_coreTmp112_publish_temperature_value"></block>
+        <block type="hio_coreTmp112_event">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_coreTmp112_publish_temperature_value">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Motion Detector" colour="#5F5F0D">
         <block type="hio_pir_event"></block>
@@ -92,61 +281,369 @@
     </category>
     <category name="LCD Module" colour="#5A1AA1">
         <block type="hio_lcd_event"></block>
-        <block type="hio_lcd_draw_string"></block>
-        <block type="hio_lcd_draw_circle"></block>
-        <block type="hio_lcd_draw_line"></block>
-        <block type="hio_lcd_draw_rectangle"></block>
-        <block type="hio_lcd_draw_pixel"></block>
+        <block type="hio_lcd_draw_string">
+            <value name="STRING">
+                <block type="text">
+                    <field name="TEXT">
+                        string
+                    </field>
+                </block>
+            </value>
+            <value name="LEFT">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="TOP">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_lcd_draw_circle">
+            <value name="CENTER_X">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="CENTER_Y">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="RADIUS">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_lcd_draw_line">
+            <value name="START_X">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="START_Y">
+                <block type="math_number">
+                    <field name="NUM">
+                        128
+                    </field>
+                </block>
+            </value>
+            <value name="END_X">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="END_Y">
+                <block type="math_number">
+                    <field name="NUM">
+                        128
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_lcd_draw_rectangle">
+            <value name="START_X">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="START_Y">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="END_X">
+                <block type="math_number">
+                    <field name="NUM">
+                        128
+                    </field>
+                </block>
+            </value>
+            <value name="END_Y">
+                <block type="math_number">
+                    <field name="NUM">
+                        128
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_lcd_draw_pixel">
+            <value name="LEFT">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="TOP">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+        </block>
         <block type="hio_lcd_set_power_state"></block>
         <block type="hio_lcd_clear"></block>
         <block type="hio_lcd_update"></block>
         <block type="hio_lcd_set_font"></block>
-        <block type="hio_lcd_printf"></block>
-        <block type="hio_lcd_led_blink"></block>
-        <block type="hio_lcd_led_pulse"></block>
+        <block type="hio_lcd_printf">
+            <value name="LEFT">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+            <value name="TOP">
+                <block type="math_number">
+                    <field name="NUM">
+                        0
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_lcd_led_blink">
+            <value name="COUNT">
+                <block type="math_number">
+                    <field name="NUM">
+                        5
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_lcd_led_pulse">
+            <value name="DURATION">
+                <block type="math_number">
+                    <field name="NUM">
+                        1000
+                    </field>
+                </block>
+            </value>
+        </block>
         <block type="hio_lcd_led_set_mode"></block>
         <block type="hio_lcd_enable_pll"></block>
         <block type="hio_lcd_disable_pll"></block>
     </category>
     <category name="Climate Module" colour="#873467">
-        <block type="hio_climate_event"></block>
-        <block type="hio_climate_publish_temperature"></block>
-        <block type="hio_climate_publish_humidity"></block>
-        <block type="hio_climate_publish_luminosity"></block>
-        <block type="hio_climate_publish_barometer"></block>
+        <block type="hio_climate_event">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_climate_publish_temperature">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_climate_publish_humidity">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_climate_publish_luminosity">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_climate_publish_barometer">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Battery Module" colour="#125f44">
-        <block type="hio_battery_event"></block>
-        <block type="hio_battery_publish_voltage"></block>
-        <block type="hio_battery_publish_percentage"></block>
+        <block type="hio_battery_event">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_battery_publish_voltage">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_battery_publish_percentage">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="CO2 Module" colour="#844F19">
-        <block type="hio_co2_event"></block>
-        <block type="hio_co2_publish_co2"></block>
+        <block type="hio_co2_event">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_co2_publish_co2">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Relay Module" colour="#A01D09">
         <block type="hio_relay_set_state"></block>
-        <block type="hio_relay_pulse"></block>
+        <block type="hio_relay_pulse">
+            <value name="DURATION">
+                <block type="math_number">
+                    <field name="NUM">
+                        100
+                    </field>
+                </block>
+            </value>
+        </block>
         <block type="hio_relay_toggle"></block>
     </category>
     <category name="Temperature Tag" colour="#733794">
-        <block type="hio_temperatureTag_event"></block>
-        <block type="hio_temperatureTag_publish_temperature_value"></block>
+        <block type="hio_temperatureTag_event">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_temperatureTag_publish_temperature_value">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Humidity Tag" colour="#336F87">
-        <block type="hio_humidityTag_event"></block>
-        <block type="hio_humidityTag_publish_humidity_value"></block>
+        <block type="hio_humidityTag_event">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_humidityTag_publish_humidity_value">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Barometer Tag" colour="#AD6469">
-        <block type="hio_barometerTag_event"></block>
-        <block type="hio_barometerTag_publish_barometer_value"></block>
+        <block type="hio_barometerTag_event">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_barometerTag_publish_barometer_value">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Lux Meter Tag" colour="#2B8C3B">
-        <block type="hio_luxMeterTag_event"></block>
-        <block type="hio_luxMeterTag_publish_lux_value"></block>
+        <block type="hio_luxMeterTag_event">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
+        <block type="hio_luxMeterTag_publish_lux_value">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Flood Detector" colour="#5B3F4F">
-        <block type="hio_floodDetector_event"></block>
+        <block type="hio_floodDetector_event">
+            <value name="UPDATE_INTERVAL">
+                <block type="math_number">
+                    <field name="NUM">
+                        5000
+                    </field>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Logic" colour="#5B80A5">
         <block type="controls_if"></block>
@@ -163,6 +660,9 @@
         <block type="controls_repeat_ext"></block>
         <block type="controls_whileUntil"></block>
         <block type="controls_for"></block>
+    </category>
+    <category name="Text" colour="#5BA58C">
+        <block type="text"></block>
     </category>
     <category name="Variables" colour="#A55B80" custom="VARIABLES"></category>
     <category name="Functions" colour="#995ba5" custom="PROCEDURE"></category>

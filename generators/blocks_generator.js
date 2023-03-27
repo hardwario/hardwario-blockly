@@ -105,6 +105,7 @@ class BlockGenerator {
             else if (category == 'Task') {
                 xml += `<category name="${category}" colour="${colour}" custom="TASK">`;
             }
+
             else {
                 xml += `<category name="${category}" colour="${colour}">`;
             }
@@ -124,9 +125,67 @@ class BlockGenerator {
                 xml += `<block type="math_number"></block>`;
                 xml += `<block type="math_arithmetic"></block>`;
             }
+            else if (category == 'Text') {
+                xml += `<block type="text"></block>`;
+            }
             else {
                 for (const block of this.categories[category]['blocks']) {
-                    xml += `<block type="${block}"></block>`;
+                    xml += `<block type="${block}">`;
+                    let name = block.substring("hio_".length, block.length);
+                    let action = name.substring(name.indexOf('_') + 1, name.length);
+                    let module = name.substring(0, name.indexOf('_'));
+                    if (this.modules[module] != undefined &&
+                        this.modules[module]['action'] != undefined &&
+                        this.modules[module]['action'][action] != undefined &&
+                        this.modules[module]['action'][action]['block'] != undefined &&
+                        this.modules[module]['action'][action]['block']['arguments'] != undefined) {
+                        for (const argument of Object.entries(this.modules[module]['action'][action]['block']['arguments'])) {
+                            var argument_name = argument[0];
+                            var argument_values = argument[1];
+                            if (argument_values.type == 'input') {
+                                if (argument_values.check == 'String') {
+                                    xml += `<value name="${argument_name}">`;
+                                    xml += `<block type="text">`;
+                                    xml += `<field name="TEXT">${argument_values.value}</field>`;
+                                    xml += `</block>`;
+                                    xml += `</value>`;
+                                }
+                                else if (argument_values.check == 'Number') {
+                                    xml += `<value name="${argument_name}">`;
+                                    xml += `<block type="math_number">`;
+                                    xml += `<field name="NUM">${argument_values.value}</field>`;
+                                    xml += `</block>`;
+                                    xml += `</value>`;
+                                }
+                            }
+                        }
+                    }
+                    else if (this.modules[module] != undefined &&
+                        this.modules[module]['application_init'] != undefined &&
+                        this.modules[module]['application_init']['block'] != undefined &&
+                        this.modules[module]['application_init']['block']['arguments'] != undefined) {
+                        for (const argument of Object.entries(this.modules[module]['application_init']['block']['arguments'])) {
+                            var argument_name = argument[0];
+                            var argument_values = argument[1];
+                            if (argument_values.type == 'input') {
+                                if (argument_values.check == 'String') {
+                                    xml += `<value name="${argument_name}">`;
+                                    xml += `<block type="text">`;
+                                    xml += `<field name="TEXT">${argument_values.value}</field>`;
+                                    xml += `</block>`;
+                                    xml += `</value>`;
+                                }
+                                else if (argument_values.check == 'Number') {
+                                    xml += `<value name="${argument_name}">`;
+                                    xml += `<block type="math_number">`;
+                                    xml += `<field name="NUM">${argument_values.value}</field>`;
+                                    xml += `</block>`;
+                                    xml += `</value>`;
+                                }
+                            }
+                        }
+                    }
+                    xml += `</block>`;
                 }
             }
             xml += '</category>';
@@ -163,6 +222,7 @@ class BlockGenerator {
         ];
         block['tooltip'] = 'Application Initialization';
         block['helpUrl'] = '';
+        block['inputsInline'] = false;
         let colour = '#000000';
         if (this.categories['Initialization']['configuration'] !== null && 'colour' in this.categories['Initialization']['configuration']) {
             colour = this.categories['Initialization']['configuration']['colour'];
@@ -194,6 +254,7 @@ class BlockGenerator {
         ];
         block['tooltip'] = 'Application Task';
         block['helpUrl'] = '';
+        block['inputsInline'] = false;
         colour = '#000000';
         if (this.categories['Task']['configuration'] !== null && 'colour' in this.categories['Task']['configuration']) {
             colour = this.categories['Task']['configuration']['colour'];
@@ -223,6 +284,7 @@ class BlockGenerator {
         ];
         block['tooltip'] = 'Task';
         block['helpUrl'] = '';
+        block['inputsInline'] = false;
         colour = '#000000';
         if (this.categories['Task']['configuration'] !== null && 'colour' in this.categories['Task']['configuration']) {
             colour = this.categories['Task']['configuration']['colour'];
@@ -286,6 +348,7 @@ class BlockGenerator {
                 {
                     "type": "input_value",
                     "name": "VALUE",
+                    "check": "Number"
                 }
             ],
             "previousStatement": 'null',
@@ -333,6 +396,7 @@ class BlockGenerator {
                 {
                     "type": "input_value",
                     "name": "VALUE",
+                    "check": "Number"
                 }
             ],
             "previousStatement": "null",
@@ -437,6 +501,7 @@ class BlockGenerator {
                     block['args0'].push({
                         'type': 'input_value',
                         'name': argument,
+                        'check': argument_yaml['check']
                     });
                 }
             }
@@ -459,6 +524,7 @@ class BlockGenerator {
         }
         block["tooltip"] = "";
         block["helpUrl"] = "";
+        block['inputsInline'] = false;
         this.blocks.push(block);
         this.categories['Initialization']['blocks'].push(block['type']);
     }
@@ -503,6 +569,7 @@ class BlockGenerator {
         }
         block["tooltip"] = "";
         block["helpUrl"] = "";
+        block['inputsInline'] = false;
         this.blocks.push(block);
         this.categories[category]['blocks'].push(block['type']);
     }
@@ -560,6 +627,7 @@ class BlockGenerator {
                         block['args0'].push({
                             'type': 'input_value',
                             'name': argument,
+                            'check': argument_yaml['check']
                         });
                     }
                 }
@@ -579,6 +647,7 @@ class BlockGenerator {
             }
             block["tooltip"] = "";
             block["helpUrl"] = "";
+            block['inputsInline'] = false;
             this.blocks.push(block);
             this.categories[category]['blocks'].push(block['type']);
         }

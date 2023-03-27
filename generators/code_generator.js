@@ -313,6 +313,53 @@ class CodeGenerator {
                                 block['fields']['RANDOM_VARIABLE'] = random_variable_name
                                 code = code.format(block['fields'])
                             }
+                            if('inputs' in block) {
+                                block['fields'] = {};
+                                for (let input in block['inputs']) {
+                                    let format_string = '';
+                                    var input_data = undefined;
+                                    if(block['inputs'][input]['block'] != null && block['inputs'][input]['block'] != undefined)
+                                    {
+                                        input_data = this.generate_sub_section(block['inputs'][input]['block']);
+                                    }
+                                    if(input_data != undefined) {
+                                        block['fields'][input] = input_data;
+                                        if (code.search('FORMAT_STRING')) {
+                                            if ('VAR' in block['inputs'][input]['block']['fields']) {
+                                                if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Integer') {
+                                                    format_string = '%d';
+                                                }
+                                                else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Float') {
+                                                    format_string = '%.1f';
+                                                }
+                                                else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'String') {
+                                                    format_string = '%s';
+                                                }
+                                            }
+                                            else {
+                                                format_string = '%d';
+                                            }
+                                            block['fields']['FORMAT_STRING'] = format_string;
+                                        }
+                                    }
+                                }
+                                if ('VALUE' in block['inputs']) {
+                                    let variable = this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['name'];
+                                    let format_string = '';
+                                    if (this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['type'] == 'Integer') {
+                                        format_string = '%d'
+                                    }
+                                    else if (this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['type'] == 'Float') {
+                                        format_string = '%.1f'
+                                    }
+                                    else if (this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['type'] == 'String') {
+                                        format_string = '%s'
+                                    }
+                                    block['fields']['FORMAT_STRING'] = format_string
+                                }
+                                block['fields']['RANDOM_VARIABLE'] = random_variable_name;
+                                code = code.format(block['fields']);
+                            }
                             this.application_init.push(('\t'.repeat(this.indent)) + code);
                         }
                         this.application_init.push('');
@@ -353,6 +400,9 @@ class CodeGenerator {
                                                 else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Float') {
                                                     format_string = '%.1f';
                                                 }
+                                                else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'String') {
+                                                    format_string = '%s';
+                                                }
                                             }
                                             else {
                                                 format_string = '%d';
@@ -369,6 +419,9 @@ class CodeGenerator {
                                     }
                                     else if (this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['type'] == 'Float') {
                                         format_string = '%.1f'
+                                    }
+                                    else if (this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['type'] == 'String') {
+                                        format_string = '%s'
                                     }
                                     block['fields']['VARIABLE'] = variable
                                     block['fields']['FORMAT_STRING'] = format_string
@@ -396,6 +449,9 @@ class CodeGenerator {
                                             else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'Float') {
                                                 format_string = '%.1f';
                                             }
+                                            else if (this.variables[block['inputs'][input]['block']['fields']['VAR']['id']]['type'] == 'String') {
+                                                format_string = '%s';
+                                            }
                                         }
                                         else {
                                             format_string = '%d';
@@ -412,6 +468,9 @@ class CodeGenerator {
                                 }
                                 else if (this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['type'] == 'Float') {
                                     format_string = '%.1f'
+                                }
+                                else if (this.variables[block['inputs']['VALUE']['block']['fields']['VAR']['id']]['type'] == 'String') {
+                                    format_string = '%s'
                                 }
                                 block['fields']['FORMAT_STRING'] = format_string
                             }
@@ -456,6 +515,9 @@ class CodeGenerator {
         }
         else if (block['type'] == 'math_number') {
             return String(block['fields']['NUM']);
+        }
+        else if (block['type'] == 'text') {
+            return String(block['fields']['TEXT']);
         }
         else if (block['type'] == 'logic_boolean') {
             if (block['fields']['BOOL'] == 'TRUE') {

@@ -11,9 +11,8 @@ battery:
         NEW_LINE:
           type: new_line
         UPDATE_INTERVAL:
-          type: number
-          min: 1
-          max: 1000000
+          type: input
+          check: Number
           value: 5000
     code:
       - twr_module_battery_init();

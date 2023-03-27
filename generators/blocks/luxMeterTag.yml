@@ -13,9 +13,8 @@ luxMeterTag:
         NEW_LINE:
           type: new_line
         UPDATE_INTERVAL:
-          type: number
-          min: 1
-          max: 1000000
+          type: input
+          check: Number
           value: 5000
     code:   
       - twr_tag_lux_meter_init(&lux_meter_tag, TWR_I2C_I2C0, TWR_TAG_LUX_METER_I2C_ADDRESS_DEFAULT);

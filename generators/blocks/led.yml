@@ -18,9 +18,8 @@ led:
           - LED Blink %1 Times
         arguments:
           COUNT:
-            type: number
-            min: 1
-            max: 50
+            type: input
+            check: Number
             value: 5
       code:
         - twr_led_blink(&led, {COUNT});
@@ -30,9 +29,8 @@ led:
           - LED Pulse For %1 ms
         arguments:
           DURATION:
-            type: number
-            min: 1
-            max: 1000000
+            type: input
+            check: Number
             value: 1000
       code:
         - twr_led_pulse(&led, {DURATION});

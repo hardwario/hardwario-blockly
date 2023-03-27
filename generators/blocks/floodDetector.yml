@@ -8,15 +8,14 @@ floodDetector:
     block:
       text:
         - Initialize Flood Detector %1
-        - With Update interval %2 ms %3
+        - With Update interval (ms) %2 %3
         - On Sensor Module Channel %4
       arguments:
         NEW_LINE:
           type: new_line
         UPDATE_INTERVAL:
-          type: number
-          min: 1
-          max: 1000000
+          type: input
+          check: Number
           value: 5000
         NEW_LINE_2:
           type: new_line

@@ -32,12 +32,14 @@ radio:
           - with Subtopic %3
         arguments:
           STRING_TO_BE_SEND:
-            type: text
+            type: input
+            check: String
             value: STRING
           X:
             type: new_line
           SUBTOPIC:
-            type: text
+            type: input
+            check: String
             value: string
       code:
         - twr_radio_pub_string("{SUBTOPIC}", "{STRING_TO_BE_SEND}");
@@ -49,10 +51,13 @@ radio:
         arguments:
           INT_TO_BE_SEND:
             type: input
+            check: Number
+            value: 0
           X:
             type: new_line
           SUBTOPIC:
-            type: text
+            type: input
+            check: String
             value: integer
       code:
         - int {RANDOM_VARIABLE} = (int)({INT_TO_BE_SEND});
@@ -65,10 +70,13 @@ radio:
         arguments:
           FLOAT_TO_BE_SEND:
             type: input
+            check: Number
+            value: 0
           X:
             type: new_line
           SUBTOPIC:
-            type: text
+            type: input
+            check: String
             value: float
       code:
         - float {RANDOM_VARIABLE} = (float)({FLOAT_TO_BE_SEND});
@@ -80,12 +88,14 @@ radio:
           - with Subtopic %3
         arguments:
           BOOL_TO_BE_SEND:
-            INT_TO_BE_SEND:
             type: input
+            check: Boolean
+            value: 0
           X:
             type: new_line
           SUBTOPIC:
-            type: text
+            type: input
+            check: String
             value: boolean
       code:
         - bool {RANDOM_VARIABLE} = (bool)({BOOL_TO_BE_SEND});

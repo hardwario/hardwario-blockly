@@ -13,9 +13,8 @@ coreTmp112:
         NEW_LINE:
           type: new_line
         UPDATE_INTERVAL:
-          type: number
-          min: 1
-          max: 1000000
+          type: input
+          check: Number
           value: 5000
     code:
       - twr_tmp112_init(&core_tmp112, TWR_I2C_I2C0, TWR_TAG_TEMPERATURE_I2C_ADDRESS_ALTERNATE);
