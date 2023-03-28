@@ -195,7 +195,9 @@ class BlockGenerator {
         }
         xml += '</xml>';
 
-        xml = format(xml);
+        xml = format(xml, {
+            collapseContent: true,
+        });
 
         fs.readFile(path.join(__dirname, '..', 'views', 'blocksEditor.template.ejs'), 'utf8', function (err, data) {
             if (err) {
