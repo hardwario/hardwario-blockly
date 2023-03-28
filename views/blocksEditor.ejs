@@ -215,42 +215,10 @@
         <block type="hio_led_set_mode"></block>
     </category>
     <category name="Logging" colour="#052F38">
-        <block type="hio_logging_info">
-            <value name="MESSAGE">
-                <block type="text">
-                    <field name="TEXT">
-                        Info
-                    </field>
-                </block>
-            </value>
-        </block>
-        <block type="hio_logging_debug">
-            <value name="MESSAGE">
-                <block type="text">
-                    <field name="TEXT">
-                        Debug
-                    </field>
-                </block>
-            </value>
-        </block>
-        <block type="hio_logging_error">
-            <value name="MESSAGE">
-                <block type="text">
-                    <field name="TEXT">
-                        Error
-                    </field>
-                </block>
-            </value>
-        </block>
-        <block type="hio_logging_warning">
-            <value name="MESSAGE">
-                <block type="text">
-                    <field name="TEXT">
-                        Warning
-                    </field>
-                </block>
-            </value>
-        </block>
+        <block type="hio_logging_info"></block>
+        <block type="hio_logging_debug"></block>
+        <block type="hio_logging_error"></block>
+        <block type="hio_logging_warning"></block>
     </category>
     <category name="Core TMP112" colour="#4A0C1B">
         <block type="hio_coreTmp112_event">
@@ -661,7 +629,7 @@
         <block type="controls_whileUntil"></block>
         <block type="controls_for"></block>
     </category>
-    <category name="Text" colour="#5BA58C">
+    <category name="Text" colour="#5BA58C" custom="TEXT">
         <block type="text"></block>
     </category>
     <category name="Variables" colour="#A55B80" custom="VARIABLES"></category>

@@ -105,6 +105,9 @@ class BlockGenerator {
             else if (category == 'Task') {
                 xml += `<category name="${category}" colour="${colour}" custom="TASK">`;
             }
+            else if(category == 'Text') {
+                xml += `<category name="${category}" colour="${colour}" custom="TEXT">`;
+            }
 
             else {
                 xml += `<category name="${category}" colour="${colour}">`;
@@ -222,7 +225,7 @@ class BlockGenerator {
         ];
         block['tooltip'] = 'Application Initialization';
         block['helpUrl'] = '';
-        block['inputsInline'] = false;
+        block['inputsInline'] = true;
         let colour = '#000000';
         if (this.categories['Initialization']['configuration'] !== null && 'colour' in this.categories['Initialization']['configuration']) {
             colour = this.categories['Initialization']['configuration']['colour'];
@@ -254,7 +257,7 @@ class BlockGenerator {
         ];
         block['tooltip'] = 'Application Task';
         block['helpUrl'] = '';
-        block['inputsInline'] = false;
+        block['inputsInline'] = true;
         colour = '#000000';
         if (this.categories['Task']['configuration'] !== null && 'colour' in this.categories['Task']['configuration']) {
             colour = this.categories['Task']['configuration']['colour'];
@@ -284,7 +287,7 @@ class BlockGenerator {
         ];
         block['tooltip'] = 'Task';
         block['helpUrl'] = '';
-        block['inputsInline'] = false;
+        block['inputsInline'] = true;
         colour = '#000000';
         if (this.categories['Task']['configuration'] !== null && 'colour' in this.categories['Task']['configuration']) {
             colour = this.categories['Task']['configuration']['colour'];
@@ -408,6 +411,54 @@ class BlockGenerator {
         }
         block["colour"] = colour;
         this.blocks.push(block);
+
+        block = {
+            "type": "variables_get_string",
+            "message0": "%1",
+            "args0": [
+                {
+                    "type": "field_variable",
+                    "name": "VAR",
+                    "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+                    "variableTypes": ["String"],
+                    "defaultType": "String"
+                }
+            ],
+            "output": "String",
+        }
+        colour = '#000000';
+        if (this.categories['Text']['configuration'] !== null && 'colour' in this.categories['Text']['configuration']) {
+            colour = this.categories['Text']['configuration']['colour'];
+        }
+        block["colour"] = colour;
+        this.blocks.push(block);
+
+        block = {
+            "type": "variables_set_string",
+            "message0": "%{BKY_VARIABLES_SET}",
+            "args0": [
+                {
+                    "type": "field_variable",
+                    "name": "VAR",
+                    "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+                    "variableTypes": ["String"],
+                    "defaultType": "String"
+                },
+                {
+                    "type": "input_value",
+                    "name": "VALUE",
+                    "check": "String"
+                }
+            ],
+            "previousStatement": 'null',
+            "nextStatement": 'null',
+        }
+        colour = '#000000';
+        if (this.categories['Text']['configuration'] !== null && 'colour' in this.categories['Text']['configuration']) {
+            colour = this.categories['Text']['configuration']['colour'];
+        }
+        block["colour"] = colour;
+        this.blocks.push(block);
     }
 
     generate_dynamic_blocks() {
@@ -524,7 +575,7 @@ class BlockGenerator {
         }
         block["tooltip"] = "";
         block["helpUrl"] = "";
-        block['inputsInline'] = false;
+        block['inputsInline'] = true;
         this.blocks.push(block);
         this.categories['Initialization']['blocks'].push(block['type']);
     }
@@ -569,7 +620,7 @@ class BlockGenerator {
         }
         block["tooltip"] = "";
         block["helpUrl"] = "";
-        block['inputsInline'] = false;
+        block['inputsInline'] = true;
         this.blocks.push(block);
         this.categories[category]['blocks'].push(block['type']);
     }
@@ -647,7 +698,7 @@ class BlockGenerator {
             }
             block["tooltip"] = "";
             block["helpUrl"] = "";
-            block['inputsInline'] = false;
+            block['inputsInline'] = true;
             this.blocks.push(block);
             this.categories[category]['blocks'].push(block['type']);
         }

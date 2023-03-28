@@ -42,7 +42,7 @@ radio:
             check: String
             value: string
       code:
-        - twr_radio_pub_string("{SUBTOPIC}", "{STRING_TO_BE_SEND}");
+        - twr_radio_pub_string({SUBTOPIC}, {STRING_TO_BE_SEND});
     send_integer:
       block:
         text:
@@ -61,7 +61,7 @@ radio:
             value: integer
       code:
         - int {RANDOM_VARIABLE} = (int)({INT_TO_BE_SEND});
-        - twr_radio_pub_int("{SUBTOPIC}", &{RANDOM_VARIABLE});
+        - twr_radio_pub_int({SUBTOPIC}, &{RANDOM_VARIABLE});
     send_float:
       block:
         text:
@@ -80,7 +80,7 @@ radio:
             value: float
       code:
         - float {RANDOM_VARIABLE} = (float)({FLOAT_TO_BE_SEND});
-        - twr_radio_pub_float("{SUBTOPIC}", &{RANDOM_VARIABLE});
+        - twr_radio_pub_float({SUBTOPIC}, &{RANDOM_VARIABLE});
     send_boolean:
       block:
         text:
@@ -99,4 +99,4 @@ radio:
             value: boolean
       code:
         - bool {RANDOM_VARIABLE} = (bool)({BOOL_TO_BE_SEND});
-        - twr_radio_pub_bool("{SUBTOPIC}", &{RANDOM_VARIABLE});
+        - twr_radio_pub_bool({SUBTOPIC}, &{RANDOM_VARIABLE});

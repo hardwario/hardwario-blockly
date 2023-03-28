@@ -21,9 +21,8 @@ logging:
           X:
             type: new_line
           MESSAGE:
-            type: input
-            check: String
-            value: Info
+            type: text
+            value: info
           Y:
             type: new_line
           VARIABLE:
@@ -41,9 +40,8 @@ logging:
           X:
             type: new_line
           MESSAGE:
-            type: input
-            check: String
-            value: Debug
+            type: text
+            value: debug
           Y:
             type: new_line
           VARIABLE:
@@ -61,9 +59,8 @@ logging:
           X:
             type: new_line
           MESSAGE:
-            type: input
-            check: String
-            value: Error
+            type: text
+            value: error
           Y:
             type: new_line
           VARIABLE:
@@ -81,9 +78,8 @@ logging:
           X:
             type: new_line
           MESSAGE:
-            type: input
-            check: String
-            value: Warning
+            type: text
+            value: warning
           Y:
             type: new_line
           VARIABLE:

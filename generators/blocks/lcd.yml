@@ -59,7 +59,7 @@ lcd:
             check: Number
             value: 0
       code:
-        - twr_gfx_draw_string(pgfx, {LEFT}, {TOP}, "{STRING}", true);
+        - twr_gfx_draw_string(pgfx, {LEFT}, {TOP}, {STRING}, true);
     draw_circle:
       block:
         text:

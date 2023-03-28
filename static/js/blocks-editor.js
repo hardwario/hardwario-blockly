@@ -203,17 +203,66 @@ var taskFlyout = function (workspace) {
   return blockList;
 };
 
-workspace.registerToolboxCategoryCallback(
-  'VARIABLES', variablesFlyout);
+var textFlyout = function (workspace) {
+  var blockList = [];
 
-workspace.registerToolboxCategoryCallback(
-  'TASK', taskFlyout);
+  var block = document.createElement('block');
+  block.setAttribute('type', 'text');
+  blockList.push(block);
+
+  var label = document.createElement('label');
+  label.setAttribute('text', 'Text variables');
+  blockList.push(label);
+
+  var button = document.createElement('button');
+  button.setAttribute('text', 'Create Text Variable');
+  button.setAttribute('callbackKey', 'createString');
+
+  blockList.push(button);
+
+  var stringList = workspace.getVariablesOfType('String');
+
+  if (stringList.length != 0) {
+    var block = document.createElement('block');
+    block.setAttribute('type', 'variables_set_string');
+    var field = document.createElement('field');
+    field.setAttribute('name', 'VAR');
+    field.setAttribute('id', stringList[0].getId());
+    field.setAttribute('variabletype', 'String');
+    field.innerText = stringList[0].name;
+    block.appendChild(field);
+    blockList.push(block);
+  }
+
+  for (var i = 0; i < stringList.length; i++) {
+    var block = document.createElement('block');
+    block.setAttribute('type', 'variables_get_string');
+    var field = document.createElement('field');
+    field.setAttribute('name', 'VAR');
+    field.setAttribute('id', stringList[i].getId());
+    field.setAttribute('variabletype', 'String');
+    field.innerText = stringList[i].name;
+    block.appendChild(field);
+    blockList.push(block);
+  }
+
+  return blockList;
+};
+
+workspace.registerToolboxCategoryCallback('VARIABLES', variablesFlyout);
+
+workspace.registerToolboxCategoryCallback('TASK', taskFlyout);
+
+workspace.registerToolboxCategoryCallback('TEXT', textFlyout);
 
 const typedVarModal = new TypedVariableModal(workspace, 'createTypedVariable', [["Integer", "Integer"], ["Float", "Float"]]);
 typedVarModal.init();
 
 const taskModal = new TypedVariableModal(workspace, 'createTask', [["Task", "Task"], ['', '']]);
 taskModal.init();
+
+const textModal = new TypedVariableModal(workspace, 'createString', [["String", "String"], ['', '']]);
+textModal.init();
 
 function checkUniqueBlock(block_type, event) {
   for (const block of workspace.blockDB.values()) {

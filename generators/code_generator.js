@@ -19,7 +19,7 @@ class CodeGenerator {
 
         this.blocks = {};
 
-        this.variable_types = { 'Integer': 'int', 'Float': 'float', 'Task': 'twr_scheduler_task_id_t' };
+        this.variable_types = { 'Integer': 'int', 'Float': 'float', 'Task': 'twr_scheduler_task_id_t', 'String': 'char' };
 
         this.indent = 0;
 
@@ -67,6 +67,7 @@ class CodeGenerator {
         this.application_task = []
         this.event_handlers = {}
         this.tasks = {}
+        this.functions = {}
 
         if ('variables' in data) {
             this.generate_variables(data['variables'])
@@ -87,7 +88,7 @@ class CodeGenerator {
         if ('blocks' in data) {
             for (let block in data['blocks']['blocks']) {
                 block = data['blocks']['blocks'][block]
-                if (block['type'] == 'hio_application_task') {
+                if (block['type'] === 'hio_application_task') {
                     if ('inputs' in block) {
                         this.indent = 1
                         this.application_init.push('\ttwr_scheduler_plan_from_now(0, {TASK_INTERVAL});'.format(block['fields']))
@@ -107,7 +108,7 @@ class CodeGenerator {
                     this.indent = 0;
                 }
 
-                if(block['type'] === 'hio_task_do') {
+                if (block['type'] === 'hio_task_do') {
                     let task = this.variables[block['fields']['TASK_NAME']['id']]['name'] + '_task';
                     if (!(task in this.tasks)) {
                         this.tasks[task] = [];
@@ -115,6 +116,18 @@ class CodeGenerator {
                     if ('inputs' in block) {
                         this.indent = 1;
                         this.next(block['inputs']['BLOCKS'], this.tasks[task]);
+                    }
+                    this.indent = 0;
+                }
+
+                if (block['type'] === 'procedures_defnoreturn') {
+                    let name = block['fields']['NAME'].replace(/ /g, '_');
+                    if (!(name in this.functions)) {
+                        this.functions[name] = [];
+                    }
+                    if ('inputs' in block) {
+                        this.indent = 1;
+                        this.next(block['inputs']['STACK'], this.functions[name]);
                     }
                     this.indent = 0;
                 }
@@ -189,8 +202,22 @@ class CodeGenerator {
         for (let variable of this.global_variable) {
             output += variable + '\n'
         }
-
         output += '\n'
+
+        for (let func in this.functions) {
+            output += 'void ' + func + '();\n'
+        }
+        output += '\n'
+
+        for (let func in this.functions) {
+            output += 'void ' + func + '() {\n'
+            for (let line of this.functions[func]) {
+                output += line + '\n'
+            }
+            output += '}\n'
+        }
+        output += '\n'
+
         for (let event_handler in this.event_handlers) {
             let name = event_handler.split('_')[0];
             let block_definition = this.blocks[name];
@@ -270,16 +297,21 @@ class CodeGenerator {
 
     generate_variables(variables) {
         for (let variable in variables) {
-            if(variables[variable]['type'] == 'Task') {
+            if (variables[variable]['type'] == 'Task') {
                 this.variables[variables[variable]['id']] = { 'name': variables[variable]['name'], 'type': variables[variable]['type'] };
                 this.global_variable.push(("{variable_type} {variable_name}_task_id = 0;".format({ variable_type: this.variable_types[variables[variable]['type']], variable_name: variables[variable]['name'] })));
                 continue;
             }
-            if(!variables[variable]['type']) {
+            if (!variables[variable]['type']) {
                 variables[variable]['type'] = 'Float';
             }
             this.variables[variables[variable]['id']] = { 'name': variables[variable]['name'], 'type': variables[variable]['type'] };
-            this.global_variable.push(("{variable_type} {variable_name} = 0;".format({ variable_type: this.variable_types[variables[variable]['type']], variable_name: variables[variable]['name'] })));
+            if(variables[variable]['type'] != 'String') {
+                this.global_variable.push(("{variable_type} {variable_name} = 0;".format({ variable_type: this.variable_types[variables[variable]['type']], variable_name: variables[variable]['name'] })));
+            }
+            else {
+                this.global_variable.push(("{variable_type} {variable_name}[100] = \"\";".format({ variable_type: this.variable_types[variables[variable]['type']], variable_name: variables[variable]['name'] })));
+            }
         }
     }
 
@@ -313,16 +345,15 @@ class CodeGenerator {
                                 block['fields']['RANDOM_VARIABLE'] = random_variable_name
                                 code = code.format(block['fields'])
                             }
-                            if('inputs' in block) {
+                            if ('inputs' in block) {
                                 block['fields'] = {};
                                 for (let input in block['inputs']) {
                                     let format_string = '';
                                     var input_data = undefined;
-                                    if(block['inputs'][input]['block'] != null && block['inputs'][input]['block'] != undefined)
-                                    {
+                                    if (block['inputs'][input]['block'] != null && block['inputs'][input]['block'] != undefined) {
                                         input_data = this.generate_sub_section(block['inputs'][input]['block']);
                                     }
-                                    if(input_data != undefined) {
+                                    if (input_data != undefined) {
                                         block['fields'][input] = input_data;
                                         if (code.search('FORMAT_STRING')) {
                                             if ('VAR' in block['inputs'][input]['block']['fields']) {
@@ -386,11 +417,10 @@ class CodeGenerator {
                                 for (let input in block['inputs']) {
                                     let format_string = '';
                                     var input_data = undefined;
-                                    if(block['inputs'][input]['block'] != null && block['inputs'][input]['block'] != undefined)
-                                    {
+                                    if (block['inputs'][input]['block'] != null && block['inputs'][input]['block'] != undefined) {
                                         input_data = this.generate_sub_section(block['inputs'][input]['block']);
                                     }
-                                    if(input_data != undefined) {
+                                    if (input_data != undefined) {
                                         block['fields'][input] = input_data;
                                         if (code.search('FORMAT_STRING')) {
                                             if ('VAR' in block['inputs'][input]['block']['fields']) {
@@ -430,16 +460,15 @@ class CodeGenerator {
                             block['fields']['RANDOM_VARIABLE'] = random_variable_name;
                             code = code.format(block['fields']);
                         }
-                        else if('inputs' in block) {
+                        else if ('inputs' in block) {
                             block['fields'] = {};
                             for (let input in block['inputs']) {
                                 let format_string = '';
                                 var input_data = undefined;
-                                if(block['inputs'][input]['block'] != null && block['inputs'][input]['block'] != undefined)
-                                {
+                                if (block['inputs'][input]['block'] != null && block['inputs'][input]['block'] != undefined) {
                                     input_data = this.generate_sub_section(block['inputs'][input]['block']);
                                 }
-                                if(input_data != undefined) {
+                                if (input_data != undefined) {
                                     block['fields'][input] = input_data;
                                     if (code.search('FORMAT_STRING')) {
                                         if ('VAR' in block['inputs'][input]['block']['fields']) {
@@ -495,6 +524,15 @@ class CodeGenerator {
                     let code = '{variable} = (float)({value});'.format({ variable: this.variables[block['fields']['VAR']['id']]['name'], value: this.generate_sub_section(block['inputs']['VALUE']['block']) })
                     event_handler.push(('\t'.repeat(this.indent)) + code)
                 }
+                else if (block['type'] == 'variables_set_string') {
+                    let code = 'strcpy({variable}, {value});'.format({ variable: this.variables[block['fields']['VAR']['id']]['name'], value: this.generate_sub_section(block['inputs']['VALUE']['block']) })
+                    event_handler.push(('\t'.repeat(this.indent)) + code)
+                }
+                else if (block['type'] == 'procedures_callnoreturn') {
+                    let function_name = block['extraState']['name'].replace(/ /g, '_');
+                    let code = '{function_name}();'.format({ function_name: function_name })
+                    event_handler.push(('\t'.repeat(this.indent)) + code)
+                }
             }
         }
         if ((block != undefined && block != null) && 'next' in block) {
@@ -505,11 +543,11 @@ class CodeGenerator {
     generate_sub_section(block) {
         if (block['type'] == 'logic_compare' || block['type'] == 'logic_operation' || block['type'] == 'math_arithmetic') {
             if (block['fields']['OP'] == 'POWER') {
-                if(('inputs' in block) && 'B' in block['inputs'] && 'A' in block['inputs'])
+                if (('inputs' in block) && 'B' in block['inputs'] && 'A' in block['inputs'])
                     return 'pow(({left_side}), ({right_side}))'.format({ left_side: this.generate_sub_section(block['inputs']['A']['block']), right_side: this.generate_sub_section(block['inputs']['B']['block']) })
             }
             else {
-                if(('inputs' in block) && 'B' in block['inputs'] && 'A' in block['inputs'])
+                if (('inputs' in block) && 'B' in block['inputs'] && 'A' in block['inputs'])
                     return '({left_side}) {operator} ({right_side})'.format({ left_side: this.generate_sub_section(block['inputs']['A']['block']), operator: this.operators[block['type']][block['fields']['OP']], right_side: this.generate_sub_section(block['inputs']['B']['block']) })
             }
         }
@@ -517,7 +555,7 @@ class CodeGenerator {
             return String(block['fields']['NUM']);
         }
         else if (block['type'] == 'text') {
-            return String(block['fields']['TEXT']);
+            return "\"" + String(block['fields']['TEXT']) + "\"";
         }
         else if (block['type'] == 'logic_boolean') {
             if (block['fields']['BOOL'] == 'TRUE') {

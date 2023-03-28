@@ -13,7 +13,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "tooltip": "Application Initialization",
         "helpUrl": "",
-        "inputsInline": false,
+        "inputsInline": true,
         "colour": "#A50427"
     },
     {
@@ -39,7 +39,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "tooltip": "Application Task",
         "helpUrl": "",
-        "inputsInline": false,
+        "inputsInline": true,
         "colour": "#A50427"
     },
     {
@@ -65,7 +65,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "tooltip": "Task",
         "helpUrl": "",
-        "inputsInline": false,
+        "inputsInline": true,
         "colour": "#A50427"
     },
     {
@@ -166,6 +166,46 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A55B80"
     },
     {
+        "type": "variables_get_string",
+        "message0": "%1",
+        "args0": [
+            {
+                "type": "field_variable",
+                "name": "VAR",
+                "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+                "variableTypes": [
+                    "String"
+                ],
+                "defaultType": "String"
+            }
+        ],
+        "output": "String",
+        "colour": "#5BA58C"
+    },
+    {
+        "type": "variables_set_string",
+        "message0": "%{BKY_VARIABLES_SET}",
+        "args0": [
+            {
+                "type": "field_variable",
+                "name": "VAR",
+                "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+                "variableTypes": [
+                    "String"
+                ],
+                "defaultType": "String"
+            },
+            {
+                "type": "input_value",
+                "name": "VALUE",
+                "check": "String"
+            }
+        ],
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#5BA58C"
+    },
+    {
         "type": "hio_barometerTag_initialize",
         "message0": "Initialize Barometer Tag %1 With Update interval %2 ms",
         "args0": [
@@ -183,7 +223,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#AD6469",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_barometerTag_event",
@@ -210,7 +250,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#AD6469",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_barometerTag_publish_barometer_value",
@@ -220,7 +260,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#AD6469",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_battery_initialize",
@@ -240,7 +280,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#125f44",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_battery_event",
@@ -267,7 +307,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#125f44",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_battery_publish_voltage",
@@ -277,7 +317,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#125f44",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_battery_publish_percentage",
@@ -287,7 +327,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#125f44",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_button_initialize",
@@ -350,7 +390,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#1D5310",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_button_event",
@@ -389,7 +429,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#1D5310",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_button_publish_click_count",
@@ -399,7 +439,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#1D5310",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_button_publish_hold_count",
@@ -409,7 +449,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#1D5310",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_climate_initialize",
@@ -429,7 +469,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#873467",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_climate_event",
@@ -468,7 +508,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#873467",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_climate_publish_temperature",
@@ -478,7 +518,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#873467",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_climate_publish_humidity",
@@ -488,7 +528,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#873467",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_climate_publish_luminosity",
@@ -498,7 +538,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#873467",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_climate_publish_barometer",
@@ -508,7 +548,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#873467",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_co2_initialize",
@@ -528,7 +568,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#844F19",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_co2_event",
@@ -555,7 +595,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#844F19",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_co2_publish_co2",
@@ -565,7 +605,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#844F19",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_coreTmp112_initialize",
@@ -585,7 +625,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#4A0C1B",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_coreTmp112_event",
@@ -612,7 +652,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#4A0C1B",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_coreTmp112_publish_temperature_value",
@@ -622,7 +662,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#4A0C1B",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_floodDetector_initialize",
@@ -659,7 +699,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5B3F4F",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_floodDetector_event",
@@ -686,7 +726,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5B3F4F",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_humidityTag_initialize",
@@ -724,7 +764,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#336F87",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_humidityTag_event",
@@ -751,7 +791,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#336F87",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_humidityTag_publish_humidity_value",
@@ -761,7 +801,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#336F87",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_initialize",
@@ -771,7 +811,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_event",
@@ -830,7 +870,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_draw_string",
@@ -857,7 +897,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_draw_circle",
@@ -887,7 +927,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_draw_line",
@@ -922,7 +962,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_draw_rectangle",
@@ -957,7 +997,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_draw_pixel",
@@ -982,7 +1022,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_set_power_state",
@@ -1008,7 +1048,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_clear",
@@ -1018,7 +1058,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_update",
@@ -1028,7 +1068,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_set_font",
@@ -1070,7 +1110,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_printf",
@@ -1099,7 +1139,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_led_blink",
@@ -1134,7 +1174,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_led_pulse",
@@ -1169,7 +1209,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_led_set_mode",
@@ -1233,7 +1273,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_enable_pll",
@@ -1243,7 +1283,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_lcd_disable_pll",
@@ -1253,7 +1293,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5A1AA1",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_led_initialize",
@@ -1263,7 +1303,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#571E00",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_led_blink",
@@ -1280,7 +1320,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#571E00",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_led_pulse",
@@ -1297,7 +1337,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#571E00",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_led_set_mode",
@@ -1343,7 +1383,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#571E00",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_ledStrip_initialize",
@@ -1376,7 +1416,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#000000",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_logging_initialize",
@@ -1386,7 +1426,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#052F38",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_logging_info",
@@ -1396,9 +1436,9 @@ Blockly.defineBlocksWithJsonArray([
                 "type": "input_dummy"
             },
             {
-                "type": "input_value",
+                "type": "field_input",
                 "name": "MESSAGE",
-                "check": "String"
+                "text": "info"
             },
             {
                 "type": "input_dummy"
@@ -1413,7 +1453,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#008000",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_logging_debug",
@@ -1423,9 +1463,9 @@ Blockly.defineBlocksWithJsonArray([
                 "type": "input_dummy"
             },
             {
-                "type": "input_value",
+                "type": "field_input",
                 "name": "MESSAGE",
-                "check": "String"
+                "text": "debug"
             },
             {
                 "type": "input_dummy"
@@ -1440,7 +1480,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#BF40BF",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_logging_error",
@@ -1450,9 +1490,9 @@ Blockly.defineBlocksWithJsonArray([
                 "type": "input_dummy"
             },
             {
-                "type": "input_value",
+                "type": "field_input",
                 "name": "MESSAGE",
-                "check": "String"
+                "text": "error"
             },
             {
                 "type": "input_dummy"
@@ -1467,7 +1507,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#FF0000",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_logging_warning",
@@ -1477,9 +1517,9 @@ Blockly.defineBlocksWithJsonArray([
                 "type": "input_dummy"
             },
             {
-                "type": "input_value",
+                "type": "field_input",
                 "name": "MESSAGE",
-                "check": "String"
+                "text": "warning"
             },
             {
                 "type": "input_dummy"
@@ -1494,7 +1534,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#FFA500",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_luxMeterTag_initialize",
@@ -1514,7 +1554,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#2B8C3B",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_luxMeterTag_event",
@@ -1541,7 +1581,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#2B8C3B",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_luxMeterTag_publish_lux_value",
@@ -1551,7 +1591,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#2B8C3B",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_pir_initialize",
@@ -1588,7 +1628,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5F5F0D",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_pir_event",
@@ -1615,7 +1655,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5F5F0D",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_pir_publish_motion_count",
@@ -1625,7 +1665,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#5F5F0D",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_power_initialize",
@@ -1635,7 +1675,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#64391F",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_power_relay_state_set",
@@ -1661,7 +1701,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#64391F",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_radio_initialize",
@@ -1698,7 +1738,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#C54F38",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_radio_send_string",
@@ -1723,7 +1763,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#C54F38",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_radio_send_integer",
@@ -1748,7 +1788,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#C54F38",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_radio_send_float",
@@ -1773,7 +1813,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#C54F38",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_radio_send_boolean",
@@ -1798,7 +1838,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#C54F38",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_relay_initialize",
@@ -1841,7 +1881,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A01D09",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_relay_set_state",
@@ -1867,7 +1907,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A01D09",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_relay_pulse",
@@ -1901,7 +1941,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A01D09",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_relay_toggle",
@@ -1911,7 +1951,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A01D09",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_task_run_application_task",
@@ -1921,7 +1961,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A50427",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_task_run_task_now",
@@ -1938,7 +1978,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A50427",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_task_run_task_in_time",
@@ -1962,7 +2002,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A50427",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_task_run_current_task_now",
@@ -1972,7 +2012,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A50427",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_task_run_current_task_in_time",
@@ -1991,7 +2031,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#A50427",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_temperatureTag_initialize",
@@ -2011,7 +2051,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#733794",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_temperatureTag_event",
@@ -2038,7 +2078,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#733794",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     },
     {
         "type": "hio_temperatureTag_publish_temperature_value",
@@ -2048,6 +2088,6 @@ Blockly.defineBlocksWithJsonArray([
         "colour": "#733794",
         "tooltip": "",
         "helpUrl": "",
-        "inputsInline": false
+        "inputsInline": true
     }
 ]);
