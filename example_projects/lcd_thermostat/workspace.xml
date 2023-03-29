@@ -3,42 +3,6 @@
     <variable type="Float" id="pW|gS!qStA2dqCzQjr^S">temperature_set_point</variable>
     <variable type="Float" id="ebnR-AssyX9acvs=/yuI">core_tmp112_value</variable>
   </variables>
-  <block type="hio_application_initialize" id="[|9xE]^Nf[bw0H|XV_]T" x="-664" y="-660">
-    <statement name="BLOCKS">
-      <block type="hio_led_initialize" id="mO+S=ct.5/E-P,)LKB([">
-        <next>
-          <block type="hio_radio_initialize" id="22#mH?OKF`@ADiD.#oQh">
-            <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>
-            <field name="FIRMWARE_NAME">lcd-thermostat</field>
-            <next>
-              <block type="hio_coreTmp112_initialize" id="7mw[FWVb/r:6p^eB@54P">
-                <field name="UPDATE_INTERVAL">5000</field>
-                <next>
-                  <block type="hio_lcd_initialize" id="~{tz-9#ECWp/q5kwS3`0">
-                    <next>
-                      <block type="variables_set_float" id="^k|u1r^1VHmBCOu20iFW">
-                        <field name="VAR" id="pW|gS!qStA2dqCzQjr^S" variabletype="Float">temperature_set_point</field>
-                        <value name="VALUE">
-                          <block type="math_number" id="hS*^h8]lxA`|eVx?W)5=">
-                            <field name="NUM">25</field>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="hio_battery_initialize" id="!t*symsw(ZC+5ln_YQAL">
-                            <field name="UPDATE_INTERVAL">5000</field>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
   <block type="hio_application_task" id="KLgtrE4{8!qcxz69,7lh" x="60" y="-668">
     <field name="TASK_INTERVAL">1000</field>
     <statement name="BLOCKS">
@@ -48,8 +12,16 @@
             <field name="FONT">twr_font_ubuntu_33</field>
             <next>
               <block type="hio_lcd_printf" id="z|@V_TZIVzVk~)4g/U2V">
-                <field name="LEFT">20</field>
-                <field name="TOP">20</field>
+                <value name="LEFT">
+                  <block type="math_number" id="rn5$Rv_B(:1lYzSjFXup">
+                    <field name="NUM">20</field>
+                  </block>
+                </value>
+                <value name="TOP">
+                  <block type="math_number" id="3:*)Kqn9NSzQ_3??vrP6">
+                    <field name="NUM">20</field>
+                  </block>
+                </value>
                 <value name="VARIABLE">
                   <block type="variables_get_float" id=":7G!gPorkvRshATrCE4D">
                     <field name="VAR" id="ebnR-AssyX9acvs=/yuI" variabletype="Float">core_tmp112_value</field>
@@ -60,21 +32,53 @@
                     <field name="FONT">twr_font_ubuntu_24</field>
                     <next>
                       <block type="hio_lcd_draw_string" id=";zD)`B$mJ(_F*nP5)%qg">
-                        <field name="STRING">\xb0 C</field>
-                        <field name="LEFT">80</field>
-                        <field name="TOP">25</field>
+                        <value name="STRING">
+                          <block type="text" id="*1ZcMhKkBT+QHL/hmBRY">
+                            <field name="TEXT">\xb0 C</field>
+                          </block>
+                        </value>
+                        <value name="LEFT">
+                          <block type="math_number" id="f[chUOspD)0R6^sz.Sk)">
+                            <field name="NUM">80</field>
+                          </block>
+                        </value>
+                        <value name="TOP">
+                          <block type="math_number" id="wbF0o{)uj6VNJU(UW$2`">
+                            <field name="NUM">25</field>
+                          </block>
+                        </value>
                         <next>
                           <block type="hio_lcd_set_font" id="N@jI`XsRt$tllP9T,}!_">
                             <field name="FONT">twr_font_ubuntu_15</field>
                             <next>
                               <block type="hio_lcd_draw_string" id="aj(axSUHc,jC0!xif/i+">
-                                <field name="STRING">Set temperature</field>
-                                <field name="LEFT">10</field>
-                                <field name="TOP">80</field>
+                                <value name="STRING">
+                                  <block type="text" id="P4.BFPzGq-lm~d/*[-ac">
+                                    <field name="TEXT">Set temperature</field>
+                                  </block>
+                                </value>
+                                <value name="LEFT">
+                                  <block type="math_number" id="Y$09LpRLs/YV1`6[3glL">
+                                    <field name="NUM">10</field>
+                                  </block>
+                                </value>
+                                <value name="TOP">
+                                  <block type="math_number" id="o/Z^h8J,wA=5h:0kYRWd">
+                                    <field name="NUM">80</field>
+                                  </block>
+                                </value>
                                 <next>
                                   <block type="hio_lcd_printf" id="Oq)#!h.]s!N_GyS0Bb,z">
-                                    <field name="LEFT">40</field>
-                                    <field name="TOP">100</field>
+                                    <value name="LEFT">
+                                      <block type="math_number" id=":T~W?Dbs$BcXj@_!2Sru">
+                                        <field name="NUM">40</field>
+                                      </block>
+                                    </value>
+                                    <value name="TOP">
+                                      <block type="math_number" id="uJCJh#0z{mS5HWgwRaay">
+                                        <field name="NUM">100</field>
+                                      </block>
+                                    </value>
                                     <value name="VARIABLE">
                                       <block type="variables_get_float" id="@Y29ZgZ*bK}pvux$K%=/">
                                         <field name="VAR" id="pW|gS!qStA2dqCzQjr^S" variabletype="Float">temperature_set_point</field>
@@ -82,9 +86,21 @@
                                     </value>
                                     <next>
                                       <block type="hio_lcd_draw_string" id="W8=*hN6I6ofvWWr)o~V(">
-                                        <field name="STRING">\xb0 C</field>
-                                        <field name="LEFT">70</field>
-                                        <field name="TOP">100</field>
+                                        <value name="STRING">
+                                          <block type="text" id="S0#+7u^bpY(YkrjxQ/cR">
+                                            <field name="TEXT">\xb0 C</field>
+                                          </block>
+                                        </value>
+                                        <value name="LEFT">
+                                          <block type="math_number" id="w*)i7H$fSH894(r4:^q%">
+                                            <field name="NUM">70</field>
+                                          </block>
+                                        </value>
+                                        <value name="TOP">
+                                          <block type="math_number" id="bnWX$R]#Z|PzL=Rm1HJ0">
+                                            <field name="NUM">100</field>
+                                          </block>
+                                        </value>
                                         <next>
                                           <block type="hio_lcd_update" id="MdG07*h.9X)auyg8Kbvn"></block>
                                         </next>
@@ -107,63 +123,46 @@
       </block>
     </statement>
   </block>
-  <block type="hio_coreTmp112_event" id="SMirRX5ew@0T{i%(0wni" x="482" y="-666">
-    <field name="NAME">UPDATE</field>
+  <block type="hio_application_initialize" id="[|9xE]^Nf[bw0H|XV_]T" x="-666" y="-518">
     <statement name="BLOCKS">
-      <block type="controls_if" id="G?SS@#}ve+.a7*x:x0@{">
-        <mutation elseif="1"></mutation>
-        <value name="IF0">
-          <block type="logic_compare" id="ir_m$!!~M:}N@Lv!I$;D">
-            <field name="OP">GTE</field>
-            <value name="A">
-              <block type="variables_get_float" id="CG]F5Ul17Kxmo8+_fX5W">
-                <field name="VAR" id="ebnR-AssyX9acvs=/yuI" variabletype="Float">core_tmp112_value</field>
-              </block>
-            </value>
-            <value name="B">
-              <block type="variables_get_float" id="c/n4R=X;e-5I#z/e]V_T">
-                <field name="VAR" id="pW|gS!qStA2dqCzQjr^S" variabletype="Float">temperature_set_point</field>
-              </block>
-            </value>
-          </block>
-        </value>
-        <statement name="DO0">
-          <block type="hio_radio_send_boolean" id="ZHI@2wx~OCK51i+019I5">
-            <field name="SUBTOPIC">heating</field>
-            <value name="BOOL_TO_BE_SEND">
-              <block type="logic_boolean" id="LKGp?6dw]wgs]L`Lv_0W">
-                <field name="BOOL">FALSE</field>
-              </block>
-            </value>
-          </block>
-        </statement>
-        <value name="IF1">
-          <block type="logic_compare" id="XVw$!E`DnTI4FhTvy$|V">
-            <field name="OP">LT</field>
-            <value name="A">
-              <block type="variables_get_float" id="ve.6L[nIapKi7%=[S^Kk">
-                <field name="VAR" id="ebnR-AssyX9acvs=/yuI" variabletype="Float">core_tmp112_value</field>
-              </block>
-            </value>
-            <value name="B">
-              <block type="variables_get_float" id=":pzD[;Ubxq-OT~(^E7jk">
-                <field name="VAR" id="pW|gS!qStA2dqCzQjr^S" variabletype="Float">temperature_set_point</field>
-              </block>
-            </value>
-          </block>
-        </value>
-        <statement name="DO1">
-          <block type="hio_radio_send_boolean" id="w.J*R{t~]8c0z8;(|*XP">
-            <field name="SUBTOPIC">heating</field>
-            <value name="BOOL_TO_BE_SEND">
-              <block type="logic_boolean" id="wI23S8;L57jcSgk7;X0f">
-                <field name="BOOL">TRUE</field>
-              </block>
-            </value>
-          </block>
-        </statement>
+      <block type="hio_led_initialize" id="mO+S=ct.5/E-P,)LKB([">
         <next>
-          <block type="hio_coreTmp112_publish_temperature_value" id="lbBl8zX$^9X%Yy!H=]W?"></block>
+          <block type="hio_radio_initialize" id="22#mH?OKF`@ADiD.#oQh">
+            <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>
+            <field name="FIRMWARE_NAME">lcd-thermostat</field>
+            <next>
+              <block type="hio_coreTmp112_initialize" id="7mw[FWVb/r:6p^eB@54P">
+                <value name="UPDATE_INTERVAL">
+                  <block type="math_number" id="MY1o-!b*(+LOrTKX[7ZT">
+                    <field name="NUM">5000</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="hio_lcd_initialize" id="~{tz-9#ECWp/q5kwS3`0">
+                    <next>
+                      <block type="variables_set_float" id="^k|u1r^1VHmBCOu20iFW">
+                        <field name="VAR" id="pW|gS!qStA2dqCzQjr^S" variabletype="Float">temperature_set_point</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="hS*^h8]lxA`|eVx?W)5=">
+                            <field name="NUM">25</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="hio_battery_initialize" id="!t*symsw(ZC+5ln_YQAL">
+                            <value name="UPDATE_INTERVAL">
+                              <block type="math_number" id="VjwxI/%F/GP_{q3OAWu,">
+                                <field name="NUM">5000</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
         </next>
       </block>
     </statement>
@@ -197,8 +196,81 @@
         <next>
           <block type="hio_lcd_led_pulse" id="RgRomSu!d_%.Nl-A1%vj">
             <field name="LED">lcdLedBlue</field>
-            <field name="DURATION">30</field>
+            <value name="DURATION">
+              <block type="math_number" id="2DNqRn/qL7O|4a2Y0=mu">
+                <field name="NUM">30</field>
+              </block>
+            </value>
           </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_coreTmp112_event" id="SMirRX5ew@0T{i%(0wni" x="57" y="-63">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="controls_if" id="G?SS@#}ve+.a7*x:x0@{">
+        <mutation elseif="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="ir_m$!!~M:}N@Lv!I$;D">
+            <field name="OP">GTE</field>
+            <value name="A">
+              <block type="variables_get_float" id="CG]F5Ul17Kxmo8+_fX5W">
+                <field name="VAR" id="ebnR-AssyX9acvs=/yuI" variabletype="Float">core_tmp112_value</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="variables_get_float" id="c/n4R=X;e-5I#z/e]V_T">
+                <field name="VAR" id="pW|gS!qStA2dqCzQjr^S" variabletype="Float">temperature_set_point</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="hio_radio_send_boolean" id="ZHI@2wx~OCK51i+019I5">
+            <value name="BOOL_TO_BE_SEND">
+              <block type="logic_boolean" id="LKGp?6dw]wgs]L`Lv_0W">
+                <field name="BOOL">FALSE</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="5kP1x=;AJKCt(];)KH,M">
+                <field name="TEXT">heating</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="logic_compare" id="XVw$!E`DnTI4FhTvy$|V">
+            <field name="OP">LT</field>
+            <value name="A">
+              <block type="variables_get_float" id="ve.6L[nIapKi7%=[S^Kk">
+                <field name="VAR" id="ebnR-AssyX9acvs=/yuI" variabletype="Float">core_tmp112_value</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="variables_get_float" id=":pzD[;Ubxq-OT~(^E7jk">
+                <field name="VAR" id="pW|gS!qStA2dqCzQjr^S" variabletype="Float">temperature_set_point</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="hio_radio_send_boolean" id="w.J*R{t~]8c0z8;(|*XP">
+            <value name="BOOL_TO_BE_SEND">
+              <block type="logic_boolean" id="wI23S8;L57jcSgk7;X0f">
+                <field name="BOOL">TRUE</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="HadEJrd4.pE/f(T*c(sE">
+                <field name="TEXT">heating</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="hio_coreTmp112_publish_temperature_value" id="lbBl8zX$^9X%Yy!H=]W?"></block>
         </next>
       </block>
     </statement>
@@ -232,7 +304,11 @@
         <next>
           <block type="hio_lcd_led_pulse" id="EP,6A,3IOVZl92DH(fbj">
             <field name="LED">lcdLedRed</field>
-            <field name="DURATION">30</field>
+            <value name="DURATION">
+              <block type="math_number" id="b1o4.[mTMr_^eCHssOTy">
+                <field name="NUM">30</field>
+              </block>
+            </value>
           </block>
         </next>
       </block>

@@ -1,16 +1,14 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
-  <block type="hio_battery_event" id="!ZaZU%:il1-A^Cegkm%N" x="-108" y="-756">
-    <field name="NAME">UPDATE</field>
-    <statement name="BLOCKS">
-      <block type="hio_battery_publish_voltage" id=".~6=cpb(Xa$`tVpAd4{h"></block>
-    </statement>
-  </block>
-  <block type="hio_application_initialize" id="iV*t1gIOKs`d4-COFMT-" x="-500" y="-646">
+  <block type="hio_application_initialize" id="iV*t1gIOKs`d4-COFMT-" x="-457" y="-593">
     <statement name="BLOCKS">
       <block type="hio_led_initialize" id="f*4Y.-Nge[dU]ZPg)k*?">
         <next>
           <block type="hio_coreTmp112_initialize" id="_0pR0f*gPE$P}[^Oz]~_">
-            <field name="UPDATE_INTERVAL">5000</field>
+            <value name="UPDATE_INTERVAL">
+              <block type="math_number" id="c%Fy?9Gv$KGV;KS,^Cj3">
+                <field name="NUM">5000</field>
+              </block>
+            </value>
             <next>
               <block type="hio_radio_initialize" id="t(c{5dB)+*}[l[A3Oe)N">
                 <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>
@@ -22,10 +20,18 @@
                     <field name="DEFAULT_STATE">TRUE</field>
                     <next>
                       <block type="hio_battery_initialize" id="P9*HiY2;F1TU[:%T(:pR">
-                        <field name="UPDATE_INTERVAL">10000</field>
+                        <value name="UPDATE_INTERVAL">
+                          <block type="math_number" id="J%5Q`QOo3O~{/0.oY=}8">
+                            <field name="NUM">5000</field>
+                          </block>
+                        </value>
                         <next>
                           <block type="hio_climate_initialize" id="-clPen|8NW3Ehe*WG@Uo">
-                            <field name="UPDATE_INTERVAL">10000</field>
+                            <value name="UPDATE_INTERVAL">
+                              <block type="math_number" id="BF7pcd8(,G4]Ma$[[MoY">
+                                <field name="NUM">5000</field>
+                              </block>
+                            </value>
                           </block>
                         </next>
                       </block>
@@ -39,36 +45,46 @@
       </block>
     </statement>
   </block>
-  <block type="hio_climate_event" id="^):xMhq.%ES/zRrdH+*m" x="-106" y="-611">
+  <block type="hio_battery_event" id="!ZaZU%:il1-A^Cegkm%N" x="302" y="-612">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_battery_publish_voltage" id=".~6=cpb(Xa$`tVpAd4{h"></block>
+    </statement>
+  </block>
+  <block type="hio_climate_event" id="^):xMhq.%ES/zRrdH+*m" x="303" y="-464">
     <field name="NAME">THERMOMETER</field>
     <statement name="BLOCKS">
       <block type="hio_climate_publish_temperature" id="S6B:Kdm3-H_r*A-wAvb]"></block>
     </statement>
   </block>
-  <block type="hio_climate_event" id="*46$W+_W6nHT+]|=.]du" x="-101" y="-469">
+  <block type="hio_climate_event" id="*46$W+_W6nHT+]|=.]du" x="56" y="-308">
     <field name="NAME">HYGROMETER</field>
     <statement name="BLOCKS">
       <block type="hio_climate_publish_humidity" id="Pd9MmB{cj3wyk6hwkk*/"></block>
     </statement>
   </block>
-  <block type="hio_climate_event" id="~Hn7Knk:[.OtT/m+)?sD" x="-103" y="-316">
-    <field name="NAME">LUX_METER</field>
+  <block type="hio_button_event" id="cL,{Fv!ETFiq)ly*JUG?" x="-448" y="-176">
+    <field name="NAME">PRESS</field>
     <statement name="BLOCKS">
-      <block type="hio_climate_publish_luminosity" id=",Xdr.W_M66}]PPguaB;L"></block>
+      <block type="hio_led_pulse" id="!yhE%p;]Ycd1@cp3g`_5">
+        <value name="DURATION">
+          <block type="math_number" id="34:@?3dDW^cx1%uzz/if">
+            <field name="NUM">500</field>
+          </block>
+        </value>
+      </block>
     </statement>
   </block>
-  <block type="hio_climate_event" id="jDvSqv:K.s9dAC0^kneK" x="-101" y="-159">
+  <block type="hio_climate_event" id="jDvSqv:K.s9dAC0^kneK" x="60" y="-165">
     <field name="NAME">BAROMETER</field>
     <statement name="BLOCKS">
       <block type="hio_climate_publish_barometer" id="!6Fz,NTFl$[dIlwad0UG"></block>
     </statement>
   </block>
-  <block type="hio_button_event" id="cL,{Fv!ETFiq)ly*JUG?" x="-102" y="-8">
-    <field name="NAME">PRESS</field>
+  <block type="hio_climate_event" id="~Hn7Knk:[.OtT/m+)?sD" x="60" y="-21">
+    <field name="NAME">LUX_METER</field>
     <statement name="BLOCKS">
-      <block type="hio_led_pulse" id="!yhE%p;]Ycd1@cp3g`_5">
-        <field name="DURATION">100</field>
-      </block>
+      <block type="hio_climate_publish_luminosity" id=",Xdr.W_M66}]PPguaB;L"></block>
     </statement>
   </block>
 </xml>

@@ -2,7 +2,22 @@
   <variables>
     <variable id="1h4XEs!uj]o~Q3f#Bh~;">i</variable>
   </variables>
-  <block type="hio_button_event" id="wk_jQO/mmrIaq]30v/v-" x="601" y="-249">
+  <block type="hio_application_initialize" id="8w+V^WP`$4cL]2k,[Ygl" x="-89" y="-381">
+    <statement name="BLOCKS">
+      <block type="hio_button_initialize" id="I$!IafZWSj0Tn(+!Z@w#">
+        <field name="GPIO">TWR_GPIO_BUTTON</field>
+        <field name="PULL">TWR_GPIO_PULL_DOWN</field>
+        <field name="DEFAULT_STATE">TRUE</field>
+        <next>
+          <block type="hio_radio_initialize" id="t9_F}-/Jm|dH9@3tA2.y">
+            <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>
+            <field name="FIRMWARE_NAME">twr-blockly-firmware</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="hio_button_event" id="wk_jQO/mmrIaq]30v/v-" x="-87" y="-162">
     <field name="NAME">PRESS</field>
     <statement name="BLOCKS">
       <block type="controls_repeat_ext" id="[+1A-aa|_H;yVmEqLHL*">
@@ -32,8 +47,16 @@
         </value>
         <statement name="DO">
           <block type="hio_radio_send_string" id="?ECckZlO~7Wki{k(VU,E">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="uB?L%*HxXz]tR8=fR.91">
+                <field name="TEXT">STRING</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="L#5i4+u^l#d^QfKfLZ(b">
+                <field name="TEXT">string</field>
+              </block>
+            </value>
           </block>
         </statement>
         <next>
@@ -46,8 +69,16 @@
             </value>
             <statement name="DO">
               <block type="hio_radio_send_string" id="15+sAoKhsk+Qa1Atz0On">
-                <field name="STRING_TO_BE_SEND">STRING</field>
-                <field name="SUBTOPIC">string</field>
+                <value name="STRING_TO_BE_SEND">
+                  <block type="text" id="BpZ@@rJKrcvws(6Z*^{$">
+                    <field name="TEXT">STRING</field>
+                  </block>
+                </value>
+                <value name="SUBTOPIC">
+                  <block type="text" id="kxX4|aF+-HNt%#:lh/XY">
+                    <field name="TEXT">string</field>
+                  </block>
+                </value>
               </block>
             </statement>
             <next>
@@ -79,27 +110,20 @@
                 </value>
                 <statement name="DO">
                   <block type="hio_radio_send_string" id="]I(o~Bkhl9?y`WvVghd_">
-                    <field name="STRING_TO_BE_SEND">STRING</field>
-                    <field name="SUBTOPIC">string</field>
+                    <value name="STRING_TO_BE_SEND">
+                      <block type="text" id="v]uF7SFo=[TaDs)WfQvU">
+                        <field name="TEXT">STRING</field>
+                      </block>
+                    </value>
+                    <value name="SUBTOPIC">
+                      <block type="text" id="~]yG0Ly4PFhfk4P4e=uZ">
+                        <field name="TEXT">string</field>
+                      </block>
+                    </value>
                   </block>
                 </statement>
               </block>
             </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="hio_application_initialize" id="8w+V^WP`$4cL]2k,[Ygl" x="77" y="-213">
-    <statement name="BLOCKS">
-      <block type="hio_button_initialize" id="I$!IafZWSj0Tn(+!Z@w#">
-        <field name="GPIO">TWR_GPIO_BUTTON</field>
-        <field name="PULL">TWR_GPIO_PULL_DOWN</field>
-        <field name="DEFAULT_STATE">TRUE</field>
-        <next>
-          <block type="hio_radio_initialize" id="t9_F}-/Jm|dH9@3tA2.y">
-            <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>
-            <field name="FIRMWARE_NAME">twr-blockly-firmware</field>
           </block>
         </next>
       </block>

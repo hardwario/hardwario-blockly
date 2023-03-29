@@ -1,4 +1,16 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="hio_coreTmp112_event" id="WP$4;oJ`@,@];rB+UeWt" x="-346" y="-702">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_coreTmp112_publish_temperature_value" id="V|z@}OqvKi!0r,=,Uw)t"></block>
+    </statement>
+  </block>
+  <block type="hio_battery_event" id="[:OT+:ky$Sl~cj~(3a}=" x="29" y="-698">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_battery_publish_voltage" id="i5~]#DbCgC/r?3u5f:{W"></block>
+    </statement>
+  </block>
   <block type="hio_application_initialize" id="iV*t1gIOKs`d4-COFMT-" x="-688" y="-633">
     <statement name="BLOCKS">
       <block type="hio_logging_initialize" id="1$]uU!F~ZytDvud]xk45">
@@ -11,10 +23,18 @@
                 <field name="DEFAULT_STATE">TRUE</field>
                 <next>
                   <block type="hio_battery_initialize" id="VCpU6ogd*~Gpu#GYplsV">
-                    <field name="UPDATE_INTERVAL">5000</field>
+                    <value name="UPDATE_INTERVAL">
+                      <block type="math_number" id="Yq`K.mi=,nN*fZP.S%k`">
+                        <field name="NUM">5000</field>
+                      </block>
+                    </value>
                     <next>
                       <block type="hio_coreTmp112_initialize" id="X}Z,|Xb8v^A?]n6ozt~p">
-                        <field name="UPDATE_INTERVAL">5000</field>
+                        <value name="UPDATE_INTERVAL">
+                          <block type="math_number" id="bGQ`m:{akSaq8?fE`;_D">
+                            <field name="NUM">5000</field>
+                          </block>
+                        </value>
                         <next>
                           <block type="hio_radio_initialize" id="-a6;7aesSwh,(HT:j?_.">
                             <field name="RADIO_MODE">TWR_RADIO_MODE_NODE_SLEEPING</field>
@@ -32,34 +52,30 @@
       </block>
     </statement>
   </block>
-  <block type="hio_coreTmp112_event" id="WP$4;oJ`@,@];rB+UeWt" x="-235" y="-639">
-    <field name="NAME">UPDATE</field>
-    <statement name="BLOCKS">
-      <block type="hio_coreTmp112_publish_temperature_value" id="V|z@}OqvKi!0r,=,Uw)t"></block>
-    </statement>
-  </block>
-  <block type="hio_battery_event" id="[:OT+:ky$Sl~cj~(3a}=" x="-236" y="-505">
-    <field name="NAME">UPDATE</field>
-    <statement name="BLOCKS">
-      <block type="hio_battery_publish_voltage" id="i5~]#DbCgC/r?3u5f:{W"></block>
-    </statement>
-  </block>
-  <block type="hio_button_event" id="I^?,q(U]lR5dtYT8}dEX" x="-236" y="-359">
+  <block type="hio_button_event" id="I^?,q(U]lR5dtYT8}dEX" x="74" y="-502">
     <field name="NAME">CLICK</field>
     <statement name="BLOCKS">
       <block type="hio_led_pulse" id="}!MI9s0=B}tZQI/N4HoZ">
-        <field name="DURATION">100</field>
+        <value name="DURATION">
+          <block type="math_number" id="h6atO,M,{!L{(^JWtgGu">
+            <field name="NUM">100</field>
+          </block>
+        </value>
         <next>
           <block type="hio_button_publish_click_count" id="L.0%6xk7qmxN;TF+7$Bf"></block>
         </next>
       </block>
     </statement>
   </block>
-  <block type="hio_button_event" id="~s)%@Ye.t+_Pg0=tlaQm" x="-237" y="-163">
+  <block type="hio_button_event" id="~s)%@Ye.t+_Pg0=tlaQm" x="27" y="-303">
     <field name="NAME">HOLD</field>
     <statement name="BLOCKS">
       <block type="hio_led_pulse" id="{}-xgF$xM~+0mSJZ)FZd">
-        <field name="DURATION">250</field>
+        <value name="DURATION">
+          <block type="math_number" id="Th4urPACDXN9FU!Jl;v=">
+            <field name="NUM">250</field>
+          </block>
+        </value>
         <next>
           <block type="hio_button_publish_hold_count" id=";EUV`CQHyV2QIQb9/O~*"></block>
         </next>

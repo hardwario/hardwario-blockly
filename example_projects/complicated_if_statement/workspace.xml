@@ -1,5 +1,5 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
-  <block type="hio_button_event" id="wk_jQO/mmrIaq]30v/v-" x="497" y="-202">
+  <block type="hio_button_event" id="wk_jQO/mmrIaq]30v/v-" x="783" y="-314">
     <field name="NAME">PRESS</field>
     <statement name="BLOCKS">
       <block type="controls_if" id="92wv4YWN2QZy7QgJD=)x">
@@ -21,8 +21,16 @@
         </value>
         <statement name="DO0">
           <block type="hio_radio_send_string" id="b#IYgIS,EYX+[n:v|ECy">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="8k[34t6pSjM{*!?,J6YI">
+                <field name="TEXT">equals</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="450f:mRo)~a[]#1LE}?.">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF1">
@@ -42,8 +50,16 @@
         </value>
         <statement name="DO1">
           <block type="hio_radio_send_string" id="*_1c=sZ%uVFDCa$w$kg:">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="~Dh}2(w:QWIMFAeqWhlm">
+                <field name="TEXT">not equals</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="_~%HXpk~(4gIVs5JpGS~">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF2">
@@ -63,8 +79,16 @@
         </value>
         <statement name="DO2">
           <block type="hio_radio_send_string" id="D*90@V?!UsH6WDayM0uI">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="Z*!V0cC-P~0FMra2Rz2x">
+                <field name="TEXT">less than</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="!YNU88e5T}Y9@nUwwl1g">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF3">
@@ -84,8 +108,16 @@
         </value>
         <statement name="DO3">
           <block type="hio_radio_send_string" id="w~:Ft]|$C{;(r!ee%m[l">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="Pq?$`Vc#(aU9q9~dvCeF">
+                <field name="TEXT">less equal</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="tj^JhfJ,Q3]tKK9]$-E,">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF4">
@@ -105,8 +137,16 @@
         </value>
         <statement name="DO4">
           <block type="hio_radio_send_string" id=":.Lh@-sDpMyCkqkv+I?B">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="Laf!zphLKw{bFH|P,Y=Y">
+                <field name="TEXT">greater</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="?q(x]FH~DF_U$Uk!p,/O">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF5">
@@ -126,8 +166,16 @@
         </value>
         <statement name="DO5">
           <block type="hio_radio_send_string" id="80x(X*r:Rh^FNTtq|pM@">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="vN%-uTgU:u^(Qo1hqVh!">
+                <field name="TEXT">greater equal</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="~a{Y8s05#H4k4LO)P[sX">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF6">
@@ -147,8 +195,16 @@
         </value>
         <statement name="DO6">
           <block type="hio_radio_send_string" id="D/]L0/rB2!o(e}~K+8=7">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="p}q2Nl+OH=7GU!!nq~^{">
+                <field name="TEXT">and</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="px[g7{=%=3pf:vbm4J6|">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF7">
@@ -168,8 +224,16 @@
         </value>
         <statement name="DO7">
           <block type="hio_radio_send_string" id="Qpk%J[2Zg9rjH7vj.3vL">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="moZlLixT9{};G2P^=OzP">
+                <field name="TEXT">or</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="7c/kugcgC-.)x|H$KIw6">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF8">
@@ -193,8 +257,16 @@
         </value>
         <statement name="DO8">
           <block type="hio_radio_send_string" id="d4gOe~`8B4p^I!=42ctO">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="CC_x#X3$;_T/ul]i4|en">
+                <field name="TEXT">not</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="i[U;ec.M$^.tIx^I9BIz">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF9">
@@ -250,8 +322,16 @@
         </value>
         <statement name="DO9">
           <block type="hio_radio_send_string" id="WhvCBNwQrXPPS.zed2U!">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="uy@NBc-j|KdAAznKo1!7">
+                <field name="TEXT">not equals complicated</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="7k*[z4AD$^Q_S5KY)BFn">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF10">
@@ -303,8 +383,16 @@
         </value>
         <statement name="DO10">
           <block type="hio_radio_send_string" id="AgxClyO)J)QS8lKJ-p[`">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="$B9wH?`aQ-PO:]y`^J~u">
+                <field name="TEXT">equals complicated</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="#?]204)g*Az,%I#QD@d:">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <value name="IF11">
@@ -356,14 +444,30 @@
         </value>
         <statement name="DO11">
           <block type="hio_radio_send_string" id=":^h;FH*ix%q1c(3F40k[">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id="#)EabEB}/rO`6y4$@6~~">
+                <field name="TEXT">pow equals</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="KD9?;?=WC`M4os|n9c_-">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
         <statement name="ELSE">
           <block type="hio_radio_send_string" id="ai8JQCOT?fs+U6g$oFfj">
-            <field name="STRING_TO_BE_SEND">STRING</field>
-            <field name="SUBTOPIC">string</field>
+            <value name="STRING_TO_BE_SEND">
+              <block type="text" id=":pkC,+E.|8OLudVCmO4)">
+                <field name="TEXT">else</field>
+              </block>
+            </value>
+            <value name="SUBTOPIC">
+              <block type="text" id="UhS%kHqgig0p/bMUTbK3">
+                <field name="TEXT">if_statement</field>
+              </block>
+            </value>
           </block>
         </statement>
       </block>

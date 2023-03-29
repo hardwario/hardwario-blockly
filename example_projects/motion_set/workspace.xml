@@ -1,4 +1,22 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="hio_battery_event" id=";o@+/,{prETxdpxvCrO." x="-71" y="-839">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_battery_publish_voltage" id="0.z@/H6!@E.DXD``QFn}"></block>
+    </statement>
+  </block>
+  <block type="hio_pir_event" id="i-(Y[|R8m+Um/oH2Gzkt" x="279" y="-842">
+    <field name="NAME">MOTION</field>
+    <statement name="BLOCKS">
+      <block type="hio_pir_publish_motion_count" id="?Hy~L?D#g$f=xv3nt2u:"></block>
+    </statement>
+  </block>
+  <block type="hio_coreTmp112_event" id="Q,+s|L2HTe7^ZYAaJX|H" x="665" y="-842">
+    <field name="NAME">UPDATE</field>
+    <statement name="BLOCKS">
+      <block type="hio_coreTmp112_publish_temperature_value" id="9m)AhuvW_rz?-nQF7Xmj"></block>
+    </statement>
+  </block>
   <block type="hio_application_initialize" id="?7}tRHXkri+W-uh`coM1" x="-320" y="-741">
     <statement name="BLOCKS">
       <block type="hio_led_initialize" id=";7NX;gAsjst2Sz3wz!PE">
@@ -13,10 +31,18 @@
                 <field name="DEFAULT_STATE">TRUE</field>
                 <next>
                   <block type="hio_battery_initialize" id="#pQt#LU8tBH3]YXCP.Z!">
-                    <field name="UPDATE_INTERVAL">5000</field>
+                    <value name="UPDATE_INTERVAL">
+                      <block type="math_number" id="Q6Z6I.b5Y~7#{JtaGpa!">
+                        <field name="NUM">5000</field>
+                      </block>
+                    </value>
                     <next>
                       <block type="hio_coreTmp112_initialize" id="m6sa5Mp/Sy)u,?0T/Z.x">
-                        <field name="UPDATE_INTERVAL">5000</field>
+                        <value name="UPDATE_INTERVAL">
+                          <block type="math_number" id="oCv$@oPvQQ}p9Z,deBi4">
+                            <field name="NUM">5000</field>
+                          </block>
+                        </value>
                         <next>
                           <block type="hio_pir_initialize" id="T{F212Ow4/@Iu7)@wKg8">
                             <field name="SENSITIVITY">TWR_MODULE_PIR_SENSITIVITY_MEDIUM</field>
@@ -31,24 +57,6 @@
           </block>
         </next>
       </block>
-    </statement>
-  </block>
-  <block type="hio_pir_event" id="i-(Y[|R8m+Um/oH2Gzkt" x="148" y="-714">
-    <field name="NAME">MOTION</field>
-    <statement name="BLOCKS">
-      <block type="hio_pir_publish_motion_count" id="?Hy~L?D#g$f=xv3nt2u:"></block>
-    </statement>
-  </block>
-  <block type="hio_coreTmp112_event" id="Q,+s|L2HTe7^ZYAaJX|H" x="147" y="-567">
-    <field name="NAME">UPDATE</field>
-    <statement name="BLOCKS">
-      <block type="hio_coreTmp112_publish_temperature_value" id="9m)AhuvW_rz?-nQF7Xmj"></block>
-    </statement>
-  </block>
-  <block type="hio_battery_event" id=";o@+/,{prETxdpxvCrO." x="147" y="-421">
-    <field name="NAME">UPDATE</field>
-    <statement name="BLOCKS">
-      <block type="hio_battery_publish_voltage" id="0.z@/H6!@E.DXD``QFn}"></block>
     </statement>
   </block>
 </xml>
