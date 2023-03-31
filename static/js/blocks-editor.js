@@ -37,6 +37,7 @@ setInterval(function () {
 
 
 var projectLoaded = false;
+var initializationDuplicate = false;
 
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
@@ -402,6 +403,7 @@ function onBlockEvent(event) {
   if (event.type == Blockly.Events.BLOCK_CREATE) {
     if (event.json.type.includes('init')) {
       if (checkUniqueBlock(event.json.type, event)) {
+        initializationDuplicate = true;
         return;
       }
       else {
@@ -413,7 +415,12 @@ function onBlockEvent(event) {
   }
   else if (event.type == Blockly.Events.BLOCK_DELETE) {
     checkCategories();
-    checkInitializations(event.oldJson.type, event);
+    if(initializationDuplicate === false) {
+      checkInitializations(event.oldJson.type, event);
+    }
+    else {
+      initializationDuplicate = false;
+    }
   }
   if (event.type == Blockly.Events.BLOCK_CREATE || event.type == Blockly.Events.BLOCK_DELETE ||
     event.type == Blockly.Events.BLOCK_CHANGE || event.type == Blockly.Events.BLOCK_MOVE ||
