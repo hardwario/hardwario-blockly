@@ -2089,5 +2089,25 @@ Blockly.defineBlocksWithJsonArray([
         "tooltip": "",
         "helpUrl": "",
         "inputsInline": true
+    },
+    {
+        "type": "hio_test_publish_voltage",
+        "message0": "Publish Battery Voltage Over the Radio",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#000000",
+        "tooltip": "",
+        "helpUrl": "",
+        "inputsInline": true
+    },
+    {
+        "type": "hio_test_publish_percentage",
+        "message0": "Publish Battery Percentage Over the Radio",
+        "previousStatement": "null",
+        "nextStatement": "null",
+        "colour": "#000000",
+        "tooltip": "",
+        "helpUrl": "",
+        "inputsInline": true
     }
 ]);

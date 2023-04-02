@@ -59,6 +59,7 @@ var onresize = function (e) {
   blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
   Blockly.svgResize(workspace);
 };
+
 window.addEventListener('resize', onresize, false);
 onresize();
 
@@ -432,6 +433,11 @@ function onBlockEvent(event) {
 }
 
 function checkInitializations(block, event) {
+  var initializationBlocks = toolbox.getElementsByTagName('category')[0].innerHTML;
+  var blockType = block.split('_')[1];
+  if(!initializationBlocks.includes('hio_' + blockType + '_initialize')) {
+    return;
+  }
   if (!block.includes('hio_')) {
     return;
   }
