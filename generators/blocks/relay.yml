@@ -37,7 +37,7 @@ relay:
               - ['TRUE', 'true']
               - ['FALSE', 'false']
       code:
-        - twr_module_relay_set_state (&relay, {STATE})
+        - twr_module_relay_set_state (&relay, {STATE});
     pulse:
       block:
         text:
@@ -56,10 +56,10 @@ relay:
             check: Number
             value: 100
       code:
-        - twr_module_relay_pulse (&relay, {DIRECTION}, {DURATION})
+        - twr_module_relay_pulse (&relay, {DIRECTION}, {DURATION});
     toggle:
       block:
         text:
           - Relay Toggle
       code:
-        - twr_module_relay_toggle (&relay)
+        - twr_module_relay_toggle (&relay);
