@@ -1,3 +1,5 @@
+"use strict";
+
 Blockly.Blocks['hio_application_initialize'] = {
   init: function () {
     this.appendDummyInput()

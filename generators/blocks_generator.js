@@ -1,3 +1,5 @@
+"use strict";
+
 const path = require('path');
 const fs = require('fs');
 const yaml = require('js-yaml');
@@ -72,14 +74,12 @@ class BlockGenerator {
         }
 
         let user_categories = yaml.load(fs.readFileSync(path.join(this.user_categories_folder_path, 'categories.yml'), 'utf8'));
-        try {
+        if(user_categories !== null && user_categories !== undefined && user_categories['categories'] !== null && user_categories['categories'] !== undefined)
+        {
             for (const [category, _] of Object.entries(user_categories['categories'])) {
                 this.categories[category] = { 'configuration': user_categories['categories'][category], 'blocks': [] };
                 this.user_categories[category] = null;
             }
-        }
-        catch (e) {
-            console.log(e);
         }
     }
 
@@ -105,7 +105,7 @@ class BlockGenerator {
             else if (category == 'Task') {
                 xml += `<category name="${category}" colour="${colour}" custom="TASK">`;
             }
-            else if(category == 'Text') {
+            else if (category == 'Text') {
                 xml += `<category name="${category}" colour="${colour}" custom="TEXT">`;
             }
 

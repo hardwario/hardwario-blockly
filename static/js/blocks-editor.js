@@ -1,3 +1,5 @@
+"use strict";
+
 var toolbox = document.getElementById("toolbox");
 
 var options = {

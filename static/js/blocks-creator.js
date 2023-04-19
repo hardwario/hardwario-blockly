@@ -1,3 +1,4 @@
+"use strict";
 
 window.addEventListener('load', load_saved_blocks);
 window.addEventListener('load', load_pre_made_blocks);

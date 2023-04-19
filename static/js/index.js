@@ -1,3 +1,5 @@
+"use strict";
+
 window.addEventListener('load', load_user_projects);
 window.addEventListener('load', load_examples);
 window.addEventListener('load', set_form);
