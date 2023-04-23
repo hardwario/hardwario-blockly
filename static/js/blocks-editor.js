@@ -548,7 +548,22 @@ function parse_code() {
   }).done(function (data) {
     document.getElementById("loader").style.display = "none";
     document.getElementById("compileAndDownload").style.display = "inline-block";
-    window.parent.postMessage({ path: data }, '*');
+    if(data.startsWith("Error")) {
+      var errorView = document.getElementById("errorView");
+      var message = document.getElementById("errorMessage");
+      message.innerHTML = data;
+      errorView.style.display = "block";
+      setTimeout(function () {
+        errorView.style.display = "none";
+        message.innerHTML = "";
+      }
+
+        , 30 * 1000); 
+    }
+    else {
+      window.parent.postMessage({ path: data }, '*');
+    }
+
   });
 }
 

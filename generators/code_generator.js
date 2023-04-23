@@ -61,90 +61,100 @@ class CodeGenerator {
     }
 
     async generate_code(data, compile = false) {
-        data = JSON.parse(data);
+        return new Promise(async (resolve, reject) => {
 
-        this.global_variable = []
-        this.variables = {}
-        this.application_init = []
-        this.application_task = []
-        this.event_handlers = {}
-        this.tasks = {}
-        this.functions = {}
-
-        if ('variables' in data) {
-            this.generate_variables(data['variables'])
-        }
-
-        if ('blocks' in data) {
-            for (let block in data['blocks']['blocks']) {
-                block = data['blocks']['blocks'][block]
-                if (block['type'] == 'hio_application_initialize') {
-                    if ('inputs' in block) {
-                        this.indent = 1
-                        this.next(block['inputs']['BLOCKS'], this.application_init)
+            data = JSON.parse(data);
+    
+            this.global_variable = []
+            this.variables = {}
+            this.application_init = []
+            this.application_task = []
+            this.event_handlers = {}
+            this.tasks = {}
+            this.functions = {}
+    
+            if ('variables' in data) {
+                this.generate_variables(data['variables'])
+            }
+    
+            if ('blocks' in data) {
+                for (let block in data['blocks']['blocks']) {
+                    block = data['blocks']['blocks'][block]
+                    if (block['type'] == 'hio_application_initialize') {
+                        if ('inputs' in block) {
+                            this.indent = 1
+                            this.next(block['inputs']['BLOCKS'], this.application_init)
+                        }
                     }
                 }
             }
-        }
-
-        if ('blocks' in data) {
-            for (let block in data['blocks']['blocks']) {
-                block = data['blocks']['blocks'][block]
-                if (block['type'] === 'hio_application_task') {
-                    if ('inputs' in block) {
-                        this.indent = 1
-                        this.application_init.push('\ttwr_scheduler_plan_from_now(0, {TASK_INTERVAL});'.format(block['fields']))
-                        this.next(block['inputs']['BLOCKS'], this.application_task)
-                        this.application_task.push('\ttwr_scheduler_plan_current_relative({TASK_INTERVAL});'.format(block['fields']))
+    
+            if ('blocks' in data) {
+                for (let block in data['blocks']['blocks']) {
+                    block = data['blocks']['blocks'][block]
+                    if (block['type'] === 'hio_application_task') {
+                        if ('inputs' in block) {
+                            this.indent = 1
+                            this.application_init.push('\ttwr_scheduler_plan_from_now(0, {TASK_INTERVAL});'.format(block['fields']))
+                            this.next(block['inputs']['BLOCKS'], this.application_task)
+                            this.application_task.push('\ttwr_scheduler_plan_current_relative({TASK_INTERVAL});'.format(block['fields']))
+                        }
+                        this.indent = 0
                     }
-                    this.indent = 0
-                }
-
-                if (block['type'].includes('event')) {
-                    let name = block['type'].substring("hio_".length, block['type'].length - "_event".length)
-                    let full_event_name = this.blocks[name]['handler']['events']['prefix'] + block['fields']['NAME']
-                    if ('inputs' in block) {
-                        this.indent = 2
-                        this.next(block['inputs']['BLOCKS'], this.event_handlers[name + '_handler'][full_event_name])
+    
+                    if (block['type'].includes('event')) {
+                        let name = block['type'].substring("hio_".length, block['type'].length - "_event".length)
+                        let full_event_name = this.blocks[name]['handler']['events']['prefix'] + block['fields']['NAME']
+                        if ('inputs' in block) {
+                            this.indent = 2
+                            this.next(block['inputs']['BLOCKS'], this.event_handlers[name + '_handler'][full_event_name])
+                        }
+                        this.indent = 0;
                     }
-                    this.indent = 0;
-                }
-
-                if (block['type'] === 'hio_task_do') {
-                    let task = this.variables[block['fields']['TASK_NAME']['id']]['name'] + '_task';
-                    if (!(task in this.tasks)) {
-                        this.tasks[task] = [];
+    
+                    if (block['type'] === 'hio_task_do') {
+                        let task = this.variables[block['fields']['TASK_NAME']['id']]['name'] + '_task';
+                        if (!(task in this.tasks)) {
+                            this.tasks[task] = [];
+                        }
+                        if ('inputs' in block) {
+                            this.indent = 1;
+                            this.next(block['inputs']['BLOCKS'], this.tasks[task]);
+                        }
+                        this.indent = 0;
                     }
-                    if ('inputs' in block) {
-                        this.indent = 1;
-                        this.next(block['inputs']['BLOCKS'], this.tasks[task]);
+    
+                    if (block['type'] === 'procedures_defnoreturn') {
+                        let name = block['fields']['NAME'].replace(/ /g, '_');
+                        if (!(name in this.functions)) {
+                            this.functions[name] = [];
+                        }
+                        if ('inputs' in block) {
+                            this.indent = 1;
+                            this.next(block['inputs']['STACK'], this.functions[name]);
+                        }
+                        this.indent = 0;
                     }
-                    this.indent = 0;
-                }
-
-                if (block['type'] === 'procedures_defnoreturn') {
-                    let name = block['fields']['NAME'].replace(/ /g, '_');
-                    if (!(name in this.functions)) {
-                        this.functions[name] = [];
-                    }
-                    if ('inputs' in block) {
-                        this.indent = 1;
-                        this.next(block['inputs']['STACK'], this.functions[name]);
-                    }
-                    this.indent = 0;
                 }
             }
-        }
-
-        let output = this.print_code();
-
-        if (compile) {
-            await this.compile_code(output);
-            console.log('done');
-        }
-        else {
-            return output;
-        }
+    
+            let output = this.print_code();
+    
+            if (compile) {
+                await this.compile_code(output).then((output) => {
+                    resolve("DONE");
+                    return "done";
+                }).catch((error) => {
+                    console.log(error);
+                    reject(error);
+                    return;
+                });
+            }
+            else {
+                resolve(output);
+                return;
+            }
+        })
     }
 
     compile_code(output) {
@@ -153,7 +163,9 @@ class CodeGenerator {
             if (!fs.existsSync((path.join(this.user_folder, 'skeleton')))) {
                 shell.exec('git clone --recursive https://github.com/hardwario/twr-skeleton.git skeleton', (error, stdout, stderr) => {
                     if (error) {
+                        reject("Error while cloning skeleton");
                         console.warn(error);
+                        return;
                     }
                     console.log(stdout ? stdout : stderr);
                     fs.writeFileSync(path.join(this.user_folder, 'skeleton', 'src', 'application.c'), output, 'utf8');
@@ -161,11 +173,13 @@ class CodeGenerator {
 
                     shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug', (error, stdout, stderr) => {
                         if (error) {
+                            reject("Error while compiling");
                             console.warn(error);
                         }
                         console.log(stdout ? stdout : stderr);
                         shell.exec('ninja -C obj/debug', (error, stdout, stderr) => {
                             if (error) {
+                                reject("Error while compiling");
                                 console.warn(error);
                             }
                             console.log(stdout ? stdout : stderr);
@@ -179,12 +193,14 @@ class CodeGenerator {
                 shell.cd(path.join(this.user_folder, 'skeleton'));
                 shell.exec('cmake -Bobj/debug . -G Ninja -DCMAKE_TOOLCHAIN_FILE=sdk/toolchain/toolchain.cmake -DTYPE=debug', (error, stdout, stderr) => {
                     if (error) {
+                        reject("Error while compiling");
                         console.warn(error);
                     }
                     console.log(stdout ? stdout : stderr);
 
                     shell.exec('ninja -C obj/debug', (error, stdout, stderr) => {
                         if (error) {
+                            reject("Error while compiling");
                             console.warn(error);
                         }
                         console.log(stdout ? stdout : stderr);

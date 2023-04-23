@@ -60,8 +60,12 @@ const init = () => {
       res.send("No code to parse");
     }
     else {
-      await code_generator.generate_code(req.body.Code, true);
-      res.send(path.join(user_folder, 'skeleton', 'firmware.bin'));
+      await code_generator.generate_code(req.body.Code, true).then((result) => {
+        res.send(path.join(user_folder, 'skeleton', 'firmware.bin'));
+      }).catch((e) => {
+        console.log(e);
+        res.send("Error while building the code, please check that you have all the required tools installed (CMake, Ninja, GCC, Git)");
+      });
     }
   });
 
@@ -84,14 +88,12 @@ const init = () => {
   });
 
   app.post('/update_code', async (req, res) => {
-    try {
-      let code = await code_generator.generate_code(req.body.Code, false);
-      res.send(code);
-    }
-    catch (e) {
+    await code_generator.generate_code(req.body.Code, false).then((result) => {
+      res.send(result);
+    }).catch((e) => {
       console.log(e);
       res.send("Parsing code error.\nTry fixing the latest added block");
-    }
+    });
   });
 
   app.get('/examples_list', (req, res) => {
